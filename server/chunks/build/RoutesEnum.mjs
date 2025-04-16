@@ -7,6 +7,8 @@ const ClientBase = "/C";
 var ClientRoutes = ((ClientRoutes2) => {
   ClientRoutes2["Home"] = `${ClientBase}/`;
   ClientRoutes2["LandingPage"] = `${ClientBase}/landingPage`;
+  ClientRoutes2["LandingPageEditor"] = `${ClientBase}/landingPage/editor`;
+  ClientRoutes2["Blending"] = `${ClientBase}/blending`;
   return ClientRoutes2;
 })(ClientRoutes || {});
 

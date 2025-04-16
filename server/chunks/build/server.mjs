@@ -414,12 +414,16 @@ function encodeURL(location2, isExternalHost = false) {
   return url.toString();
 }
 
-const __nuxt_page_meta$1 = {
+const __nuxt_page_meta$2 = {
   layout: "dashboard"
 };
 
-const __nuxt_page_meta = {
+const __nuxt_page_meta$1 = {
   layout: "default"
+};
+
+const __nuxt_page_meta = {
+  layout: "none"
 };
 
 var _a$6;
@@ -427,9 +431,9 @@ function handleHotUpdate(_router, _generateRoutes) {
 }
 const _routes = [
   {
-    name: (_a$6 = __nuxt_page_meta$1) == null ? void 0 : _a$6.name,
+    name: (_a$6 = __nuxt_page_meta$2) == null ? void 0 : _a$6.name,
     path: "/C",
-    meta: __nuxt_page_meta$1 || {},
+    meta: __nuxt_page_meta$2 || {},
     component: () => import('./C.vue.mjs'),
     children: [
       {
@@ -438,13 +442,18 @@ const _routes = [
         component: () => import('./index.vue.mjs')
       },
       {
-        name: "C-landingPage",
-        path: "landingPage",
-        component: () => import('./landingPage.vue.mjs')
+        name: "C-blending",
+        path: "blending",
+        component: () => import('./blending.vue.mjs')
       },
       {
-        name: "C-landingPageEditor-id",
-        path: "landingPageEditor/:id()",
+        name: "C-landingPage",
+        path: "landingPage",
+        component: () => import('./index.vue2.mjs')
+      },
+      {
+        name: "C-landingPage-editor-id",
+        path: "landingPage/editor/:id()",
         component: () => import('./_id_.vue.mjs')
       }
     ]
@@ -452,8 +461,8 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    meta: __nuxt_page_meta || {},
-    component: () => import('./index.vue2.mjs')
+    meta: __nuxt_page_meta$1 || {},
+    component: () => import('./index.vue3.mjs')
   },
   {
     name: "login",
@@ -464,6 +473,12 @@ const _routes = [
     name: "all",
     path: "/:all(.*)*",
     component: () => import('./_...all_.vue.mjs')
+  },
+  {
+    name: "lands-id",
+    path: "/lands/:id()",
+    meta: __nuxt_page_meta || {},
+    component: () => import('./_id_.vue2.mjs')
   }
 ];
 
@@ -1361,26 +1376,6 @@ setSSRHandler("getDefaultStorage", () => {
 const ssr_plugin_n8Ofa7k6SxmgiSADVKaiSb_8nUHr_m8ZzFMQg4okkfM = defineNuxtPlugin(() => {
 });
 
-var PublicApiUrl = /* @__PURE__ */ ((PublicApiUrl2) => {
-  PublicApiUrl2["Dev"] = "/dev";
-  PublicApiUrl2["Login"] = "/auth/login";
-  PublicApiUrl2["UserRegister"] = "/auth/userRegister";
-  return PublicApiUrl2;
-})(PublicApiUrl || {});
-var PrivateApiUrl = /* @__PURE__ */ ((PrivateApiUrl2) => {
-  PrivateApiUrl2["Dev"] = "/dev";
-  PrivateApiUrl2["CheckValidToken"] = "/auth/checkValidToken";
-  PrivateApiUrl2["SendOTP"] = "/auth/sendOTP";
-  PrivateApiUrl2["BindOTPEmail"] = "/auth/bindOTPEmail";
-  PrivateApiUrl2["UserShowMe"] = "/users/showMe";
-  PrivateApiUrl2["LandingPageCreate"] = "/landingPage/create";
-  PrivateApiUrl2["LandingPageSetUrlPath"] = "/landingPage/setUrlPath";
-  PrivateApiUrl2["LandingPageGetALL"] = "/landingPage/all";
-  PrivateApiUrl2["LandingPageGetInfoById"] = "/landingPage/getLandingPageInfoById";
-  PrivateApiUrl2["LandingPageEditInfoById"] = "/landingPage/editPageInfoById";
-  return PrivateApiUrl2;
-})(PrivateApiUrl || {});
-
 var CookieEnums = /* @__PURE__ */ ((CookieEnums2) => {
   CookieEnums2["AccessToken"] = "accessToken";
   CookieEnums2["RefreshToken"] = "refreshToken";
@@ -1388,11 +1383,33 @@ var CookieEnums = /* @__PURE__ */ ((CookieEnums2) => {
   return CookieEnums2;
 })(CookieEnums || {});
 
+var PublicRequestUrl = /* @__PURE__ */ ((PublicRequestUrl2) => {
+  PublicRequestUrl2["Dev"] = "/dev";
+  PublicRequestUrl2["Login"] = "/auth/login";
+  PublicRequestUrl2["UserRegister"] = "/auth/userRegister";
+  PublicRequestUrl2["LandingPageGetInfoById"] = "/landingPage/getLandingPageInfoById";
+  return PublicRequestUrl2;
+})(PublicRequestUrl || {});
+var UserRequestUrl = /* @__PURE__ */ ((UserRequestUrl2) => {
+  UserRequestUrl2["Dev"] = "/dev";
+  UserRequestUrl2["CheckValidToken"] = "/auth/checkValidToken";
+  UserRequestUrl2["SendOTP"] = "/auth/sendOTP";
+  UserRequestUrl2["BindOTPEmail"] = "/auth/bindOTPEmail";
+  UserRequestUrl2["UserShowMe"] = "/users/showMe";
+  UserRequestUrl2["LandingPageCreate"] = "/landingPage/create";
+  UserRequestUrl2["LandingPageSetUrlPath"] = "/landingPage/setUrlPath";
+  UserRequestUrl2["LandingPageGetALL"] = "/landingPage/all";
+  UserRequestUrl2["LandingPageEditInfoById"] = "/landingPage/editPageInfoById";
+  UserRequestUrl2["BlendingCreateFromSheet"] = "/blending/createFromSheet";
+  UserRequestUrl2["BlendingGetAll"] = "/blending/getAll";
+  return UserRequestUrl2;
+})(UserRequestUrl || {});
+
 const Fetch_QkuBTWVsFvkT75X0VAWJWOBFptpb_L7wK_BUtKx_hWQ = defineNuxtPlugin(() => {
   const $Fetch = $fetch.create({
     async onRequest({ options, request }) {
       const config = useRuntimeConfig();
-      const PrivateApiUrls = Object.values(PrivateApiUrl).map(
+      const PrivateApiUrls = Object.values(UserRequestUrl).map(
         (url) => `${config.public.API_URL}${url}`
       );
       if (PrivateApiUrls.includes(request)) {
@@ -1509,7 +1526,8 @@ const __nuxt_component_0$3 = defineComponent({
 const layouts = {
   dashboard: defineAsyncComponent(() => import('./Dashboard.vue.mjs').then((m) => m.default || m)),
   default: defineAsyncComponent(() => import('./default.vue.mjs').then((m) => m.default || m)),
-  home: defineAsyncComponent(() => import('./home.vue.mjs').then((m) => m.default || m))
+  home: defineAsyncComponent(() => import('./home.vue.mjs').then((m) => m.default || m)),
+  none: defineAsyncComponent(() => import('./none.vue.mjs').then((m) => m.default || m))
 };
 
 const LayoutLoader = defineComponent({
@@ -4948,7 +4966,7 @@ function normalizeSlot(slot, data) {
   return slotContent.length === 1 ? h(slotContent[0]) : h(Fragment, void 0, slotContent);
 }
 
-const appName = "Vitesse for Nuxt 3";
+const appName = "We Sheep";
 
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "App",
@@ -5108,5 +5126,5 @@ const server = /*#__PURE__*/Object.freeze({
   default: entry$1
 });
 
-export { fetchDefaults as A, useAsyncData as B, CookieEnums as C, useRequestFetch as D, useRuntimeConfig as E, useNuxtApp as F, useRouter as G, ULink as H, pickLinkProps as I, ULinkBase as J, useState as K, createSharedComposable as L, omit as M, makeDestructurable as N, camelize as O, PrivateApiUrl as P, server as Q, UIcon as U, __nuxt_component_0$1 as _, __nuxt_component_0 as a, _appConfig as b, useLocale as c, useAppConfig as d, __nuxt_component_2$1 as e, reactiveOmit as f, useToast as g, useRoute as h, PublicApiUrl as i, UAvatar as j, get as k, useCookie as l, formBusInjectionKey as m, navigateTo as n, formInputsInjectionKey as o, formLoadingInjectionKey as p, formOptionsInjectionKey as q, reactivePick as r, inputIdInjectionKey as s, tv as t, useHead as u, formFieldInjectionKey as v, useFormField as w, useButtonGroup as x, useComponentIcons as y, looseToNumber as z };
+export { useRouter as A, fetchDefaults as B, CookieEnums as C, useAsyncData as D, useRequestFetch as E, useRuntimeConfig as F, useNuxtApp as G, ULink as H, pickLinkProps as I, ULinkBase as J, useState as K, createSharedComposable as L, omit as M, makeDestructurable as N, camelize as O, PublicRequestUrl as P, server as Q, UserRequestUrl as U, __nuxt_component_0$1 as _, __nuxt_component_0 as a, _appConfig as b, useLocale as c, useAppConfig as d, __nuxt_component_2$1 as e, reactiveOmit as f, useRoute as g, UIcon as h, UAvatar as i, get as j, useToast as k, useCookie as l, formBusInjectionKey as m, navigateTo as n, formInputsInjectionKey as o, formLoadingInjectionKey as p, formOptionsInjectionKey as q, reactivePick as r, inputIdInjectionKey as s, tv as t, useHead as u, formFieldInjectionKey as v, useFormField as w, useButtonGroup as x, useComponentIcons as y, looseToNumber as z };
 //# sourceMappingURL=server.mjs.map
