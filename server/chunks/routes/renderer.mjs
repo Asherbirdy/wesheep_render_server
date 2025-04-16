@@ -71,7 +71,7 @@ function createHead(options = {}) {
   return head;
 }
 
-const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"description","content":"Vitesse for Nuxt 3"},{"name":"apple-mobile-web-app-status-bar-style","content":"black-translucent"}],"link":[{"rel":"icon","href":"/favicon.ico","sizes":"any"},{"rel":"icon","type":"image/svg+xml","href":"/nuxt.svg"},{"rel":"apple-touch-icon","href":"/apple-touch-icon.png"}],"style":[],"script":[],"noscript":[],"viewport":"width=device-width,initial-scale=1"};
+const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"name":"description","content":"We Sheep"},{"name":"apple-mobile-web-app-status-bar-style","content":"black-translucent"}],"link":[{"rel":"icon","href":"/favicon.ico","sizes":"any"},{"rel":"icon","type":"image/svg+xml","href":"/nuxt.svg"},{"rel":"apple-touch-icon","href":"/apple-touch-icon.png"}],"style":[],"script":[],"noscript":[],"viewport":"width=device-width,initial-scale=1"};
 
 const appRootTag = "div";
 
@@ -98,7 +98,7 @@ const getEntryIds = () => getClientManifest().then((r) => Object.values(r).filte
     r2._globalCSS
   )
 ).map((r2) => r2.src));
-const getServerEntry = () => import('../build/server.mjs').then(function (n) { return n.y; }).then((r) => r.default || r);
+const getServerEntry = () => import('../build/server.mjs').then(function (n) { return n.Q; }).then((r) => r.default || r);
 const getSSRStyles = lazyCachedFunction(() => import('../build/styles.mjs').then((r) => r.default || r));
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();

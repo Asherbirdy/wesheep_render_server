@@ -67,17 +67,17 @@ const _sfc_main = {
       ]
     });
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "antialiased bg-white dark:bg-black dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-black" }, _attrs))} data-v-c5826d12><div class="-bottom-1/2 fixed h-1/2 left-0 right-0 spotlight" data-v-c5826d12></div><div class="max-w-520px text-center" data-v-c5826d12><h1 class="font-medium mb-8 sm:text-10xl text-8xl" data-v-c5826d12>${ssrInterpolate(__props.statusCode)}</h1><p class="font-light leading-tight mb-16 px-8 sm:px-0 sm:text-4xl text-xl" data-v-c5826d12>${ssrInterpolate(__props.description)}</p></div></div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "antialiased bg-white dark:bg-black dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-black" }, _attrs))} data-v-7f6d83f9><div class="-bottom-1/2 fixed h-1/2 left-0 right-0 spotlight" data-v-7f6d83f9></div><div class="max-w-520px text-center" data-v-7f6d83f9><h1 class="font-medium mb-8 sm:text-10xl text-8xl" data-v-7f6d83f9>${ssrInterpolate(__props.statusCode)}</h1><p class="font-light leading-tight mb-16 px-8 sm:px-0 sm:text-4xl text-xl" data-v-7f6d83f9>${ssrInterpolate(__props.description)}</p></div></div>`);
     };
   }
 };
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/nuxt@3.16.1_@parcel+watcher@2.5.1_@types+node@22.13.12_db0@0.3.1_eslint@9.21.0_jiti@2.4.2__io_ozcytxfme67gkkq4t7woekci24/node_modules/nuxt/dist/app/components/error-500.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/nuxt@3.16.1_@parcel+watcher@2.5.1_@types+node@22.13.12_db0@0.3.1_eslint@9.21.0_jiti@2.4_4a73d30cb8a6e3c615f757b8a3593728/node_modules/nuxt/dist/app/components/error-500.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const error500 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-c5826d12"]]);
+const error500 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-7f6d83f9"]]);
 
 export { error500 as default };
 //# sourceMappingURL=error-500.vue.mjs.map

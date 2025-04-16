@@ -1,7 +1,8 @@
-import { _ as __nuxt_component_0, o as __nuxt_component_2 } from './server.mjs';
+import { _ as __nuxt_component_0, e as __nuxt_component_2 } from './server.mjs';
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
 import { defineComponent, ref, mergeProps, withCtx, createTextVNode, toDisplayString, unref, createVNode, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderList, ssrRenderComponent, ssrInterpolate, ssrRenderSlot } from 'vue/server-renderer';
+import { P as PublicRoutes } from './RoutesEnum.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -26,23 +27,17 @@ import 'reka-ui';
 import '@iconify/utils/lib/css/icon';
 import 'tailwind-variants';
 import 'reka-ui/namespaced';
-
-var PublicRoutes = /* @__PURE__ */ ((PublicRoutes2) => {
-  PublicRoutes2["Home"] = "/";
-  PublicRoutes2["News"] = "/news";
-  PublicRoutes2["Login"] = "/login";
-  return PublicRoutes2;
-})(PublicRoutes || {});
+import './index.mjs';
 
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "default",
   __ssrInlineRender: true,
   setup(__props) {
     const routes = [
-      {
-        label: "表單教學",
-        to: PublicRoutes.News
-      },
+      // {
+      //   label: '表單教學',
+      //   to: PublicRoutes.News,
+      // },
       {
         label: "登入",
         to: PublicRoutes.Login

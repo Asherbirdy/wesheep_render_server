@@ -1,49 +1,10 @@
-import { shallowRef, defineComponent, computed, reactive, unref, mergeProps, withCtx, renderSlot, createTextVNode, toDisplayString, useSSRContext, useSlots, createVNode, createBlock, createCommentVNode, openBlock, Fragment, renderList, resolveDynamicComponent, createSlots, toRef } from 'vue';
+import { computed, reactive, defineComponent, unref, mergeProps, withCtx, renderSlot, createTextVNode, toDisplayString, useSSRContext, useSlots, createVNode, createBlock, createCommentVNode, openBlock, Fragment, renderList, resolveDynamicComponent, createSlots, toRef } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrInterpolate, ssrRenderClass, ssrRenderList, ssrRenderVNode } from 'vue/server-renderer';
 import { l as defu } from '../nitro/nitro.mjs';
 import { Primitive, useForwardPropsEmits, DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuArrow } from 'reka-ui';
-import { q as makeDestructurable, s as camelize, v as createSharedComposable, t as tv, j as _appConfig, k as useAppConfig, w as reactiveOmit, x as omit, U as UIcon, i as UAvatar, l as get, m as ULink, p as pickLinkProps, n as ULinkBase, r as reactivePick } from './server.mjs';
+import { L as createSharedComposable, t as tv, b as _appConfig, d as useAppConfig, f as reactiveOmit, M as omit, h as UIcon, i as UAvatar, j as get, H as ULink, I as pickLinkProps, J as ULinkBase, r as reactivePick } from './server.mjs';
 import { DropdownMenu } from 'reka-ui/namespaced';
-
-function createReusableTemplate(options = {}) {
-  const {
-    inheritAttrs = true
-  } = options;
-  const render = shallowRef();
-  const define = /* @__PURE__ */ defineComponent({
-    setup(_, { slots }) {
-      return () => {
-        render.value = slots.default;
-      };
-    }
-  });
-  const reuse = /* @__PURE__ */ defineComponent({
-    inheritAttrs,
-    props: options.props,
-    setup(props, { attrs, slots }) {
-      return () => {
-        var _a;
-        if (!render.value && "production" !== "production")
-          ;
-        const vnode = (_a = render.value) == null ? void 0 : _a.call(render, {
-          ...options.props == null ? keysToCamelKebabCase(attrs) : props,
-          $slots: slots
-        });
-        return inheritAttrs && (vnode == null ? void 0 : vnode.length) === 1 ? vnode[0] : vnode;
-      };
-    }
-  });
-  return makeDestructurable(
-    { define, reuse },
-    [define, reuse]
-  );
-}
-function keysToCamelKebabCase(obj) {
-  const newObj = {};
-  for (const key in obj)
-    newObj[camelize(key)] = obj[key];
-  return newObj;
-}
+import { c as createReusableTemplate } from './index.mjs';
 
 const kbdKeysMap = {
   meta: "",
@@ -154,7 +115,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_ioredis_pdgpfikhwlaae6yc6wirvs2lnq/node_modules/@nuxt/ui/dist/runtime/components/Kbd.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Kbd.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const UKbd = Object.assign(_sfc_main$2, { __name: "UKbd" });
@@ -1300,7 +1261,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_ioredis_pdgpfikhwlaae6yc6wirvs2lnq/node_modules/@nuxt/ui/dist/runtime/components/DropdownMenuContent.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/DropdownMenuContent.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
 const UDropdownMenuContent = Object.assign(_sfc_main$1, { __name: "UDropdownMenuContent" });
@@ -1468,10 +1429,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_ioredis_pdgpfikhwlaae6yc6wirvs2lnq/node_modules/@nuxt/ui/dist/runtime/components/DropdownMenu.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/DropdownMenu.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 const __nuxt_component_1 = Object.assign(_sfc_main, { __name: "UDropdownMenu" });
 
-export { __nuxt_component_1 as _, createReusableTemplate as c };
+export { __nuxt_component_1 as _ };
 //# sourceMappingURL=DropdownMenu.vue.mjs.map

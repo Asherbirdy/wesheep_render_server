@@ -72,7 +72,7 @@ const _sfc_main = {
     });
     return (_ctx, _push, _parent, _attrs) => {
       const _component_NuxtLink = __nuxt_component_0;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "antialiased bg-white dark:bg-black dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-black" }, _attrs))} data-v-12d6f34c><div class="fixed left-0 right-0 spotlight z-10" data-v-12d6f34c></div><div class="max-w-520px text-center z-20" data-v-12d6f34c><h1 class="font-medium mb-8 sm:text-10xl text-8xl" data-v-12d6f34c>${ssrInterpolate(__props.statusCode)}</h1><p class="font-light leading-tight mb-16 px-8 sm:px-0 sm:text-4xl text-xl" data-v-12d6f34c>${ssrInterpolate(__props.description)}</p><div class="flex items-center justify-center w-full" data-v-12d6f34c>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "antialiased bg-white dark:bg-black dark:text-white font-sans grid min-h-screen overflow-hidden place-content-center text-black" }, _attrs))} data-v-4a0f7b39><div class="fixed left-0 right-0 spotlight z-10" data-v-4a0f7b39></div><div class="max-w-520px text-center z-20" data-v-4a0f7b39><h1 class="font-medium mb-8 sm:text-10xl text-8xl" data-v-4a0f7b39>${ssrInterpolate(__props.statusCode)}</h1><p class="font-light leading-tight mb-16 px-8 sm:px-0 sm:text-4xl text-xl" data-v-4a0f7b39>${ssrInterpolate(__props.description)}</p><div class="flex items-center justify-center w-full" data-v-4a0f7b39>`);
       _push(ssrRenderComponent(_component_NuxtLink, {
         to: "/",
         class: "cursor-pointer gradient-border px-4 py-2 sm:px-6 sm:py-3 sm:text-xl text-md"
@@ -95,10 +95,10 @@ const _sfc_main = {
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/nuxt@3.16.1_@parcel+watcher@2.5.1_@types+node@22.13.12_db0@0.3.1_eslint@9.21.0_jiti@2.4.2__io_ozcytxfme67gkkq4t7woekci24/node_modules/nuxt/dist/app/components/error-404.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/nuxt@3.16.1_@parcel+watcher@2.5.1_@types+node@22.13.12_db0@0.3.1_eslint@9.21.0_jiti@2.4_4a73d30cb8a6e3c615f757b8a3593728/node_modules/nuxt/dist/app/components/error-404.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const error404 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-12d6f34c"]]);
+const error404 = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-4a0f7b39"]]);
 
 export { error404 as default };
 //# sourceMappingURL=error-404.vue.mjs.map
