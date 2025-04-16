@@ -1,5 +1,5 @@
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
-import { r as reactivePick, t as tv, b as _appConfig, d as useAppConfig, i as UAvatar, h as UIcon, j as get, H as ULink, I as pickLinkProps, J as ULinkBase, K as useState, e as __nuxt_component_2$1 } from './server.mjs';
+import { r as reactivePick, t as tv, b as _appConfig, d as useAppConfig, j as UAvatar, U as UIcon, k as get, H as ULink, I as pickLinkProps, J as ULinkBase, K as useState, e as __nuxt_component_2$1 } from './server.mjs';
 import { defineComponent, useSlots, unref, mergeProps, withCtx, renderSlot, createBlock, createCommentVNode, createVNode, openBlock, useSSRContext, computed, toRef, createTextVNode, toDisplayString, resolveDynamicComponent, createSlots, Fragment, renderList, ref } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
 import { useForwardPropsEmits, CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuRoot, NavigationMenuList, NavigationMenuIndicator, NavigationMenuViewport, Primitive } from 'reka-ui';
@@ -1834,11 +1834,6 @@ function useMenuStore() {
       label: "Landing Page",
       icon: "i-lucide-circle-help",
       to: ClientRoutes.LandingPage
-    },
-    {
-      label: "Blending",
-      icon: "i-lucide-circle-help",
-      to: ClientRoutes.Blending
     }
   ]);
   const getMenu = () => menu.value;

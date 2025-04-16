@@ -1,0 +1,1 @@
+import{e as a,a4 as t,c as s,a as o,t as n,k as r,o as c}from"./BW18UFj7.js";const _=a({__name:"[id]",setup(u){const e=t();return(l,p)=>(c(),s("div",null,[o("h1",null,n(r(e).params.id),1)]))}});export{_ as default};

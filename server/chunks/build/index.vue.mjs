@@ -1,7 +1,7 @@
 import { defineComponent, useSlots, computed, unref, mergeProps, withCtx, createBlock, createCommentVNode, openBlock, renderSlot, useSSRContext, toRef, toHandlers, createTextVNode, toDisplayString, createVNode, ref, withAsyncContext, watch } from 'vue';
 import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrInterpolate, ssrRenderAttrs } from 'vue/server-renderer';
 import { Primitive, useForwardPropsEmits, DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, VisuallyHidden, DialogTitle, DialogDescription, DialogClose } from 'reka-ui';
-import { t as tv, b as _appConfig, c as useLocale, d as useAppConfig, r as reactivePick, e as __nuxt_component_2, U as UserRequestUrl } from './server.mjs';
+import { t as tv, b as _appConfig, c as useLocale, d as useAppConfig, r as reactivePick, e as __nuxt_component_2, P as PrivateApiUrl } from './server.mjs';
 import { u as useAuthApi, _ as __nuxt_component_0$1, a as __nuxt_component_1$1, b as __nuxt_component_2$1 } from './useAuthApi.mjs';
 import { u as useRequestApi } from './useRequestApi.mjs';
 import '../nitro/nitro.mjs';
@@ -821,7 +821,7 @@ const __nuxt_component_1 = Object.assign(_sfc_main$1, { __name: "UModal" });
 
 const useUserApi = {
   showMe: async () => {
-    return useRequestApi(UserRequestUrl.UserShowMe, {
+    return useRequestApi(PrivateApiUrl.UserShowMe, {
       method: "GET",
       server: false,
       lazy: true
