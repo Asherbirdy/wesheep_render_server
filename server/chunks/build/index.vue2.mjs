@@ -622,7 +622,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             {
               label: "前往編輯",
               onSelect() {
-                navigateTo(`/C/landingPageEditor/${row.original._id}`);
+                navigateTo(`/C/landingPage/editor/${row.original._id}`);
               }
             }
             // {
