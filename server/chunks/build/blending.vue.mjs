@@ -78,6 +78,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       var _a;
       return ((_a = data.value) == null ? void 0 : _a.filter((item) => item.ageRange === ageRange).map((item) => item)) || [];
     };
+    const filterOneDay = computed(() => {
+      var _a;
+      return ((_a = data.value) == null ? void 0 : _a.filter((item) => item.selectSchedule === "週六_單日行程").map((item) => item)) || [];
+    });
     const filterList = computed(() => [
       { title: "年長報名", data: filterAgeRange(
         "年長"
@@ -110,7 +114,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     ]);
     const tabs = [
       { label: "報名名單", slot: "join" },
-      { label: "福音朋友", slot: "gospel" }
+      { label: "福音朋友", slot: "gospel" },
+      { label: "單日報名", slot: "oneDay" }
     ];
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UButton = __nuxt_component_2;
@@ -232,6 +237,49 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   }, {
                     default: withCtx(() => [
                       createTextVNode(toDisplayString(nameData.name) + " (" + toDisplayString(nameData.ageRange) + ") ", 1)
+                    ]),
+                    _: 2
+                  }, 1024);
+                }), 128))
+              ])
+            ];
+          }
+        }),
+        oneDay: withCtx((_, _push2, _parent2, _scopeId) => {
+          var _a, _b;
+          if (_push2) {
+            _push2(`<p${_scopeId}>週六單日報名${ssrInterpolate((_a = unref(filterOneDay)) == null ? void 0 : _a.length)}位</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            ssrRenderList(unref(filterOneDay), (nameData) => {
+              _push2(ssrRenderComponent(_component_UBadge, {
+                key: nameData._id,
+                color: "info",
+                variant: "soft"
+              }, {
+                default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                  if (_push3) {
+                    _push3(`${ssrInterpolate(nameData.name)}`);
+                  } else {
+                    return [
+                      createTextVNode(toDisplayString(nameData.name), 1)
+                    ];
+                  }
+                }),
+                _: 2
+              }, _parent2, _scopeId));
+            });
+            _push2(`<!--]--></div>`);
+          } else {
+            return [
+              createVNode("p", null, "週六單日報名" + toDisplayString((_b = unref(filterOneDay)) == null ? void 0 : _b.length) + "位", 1),
+              createVNode("div", { class: "flex flex-wrap gap-2" }, [
+                (openBlock(true), createBlock(Fragment, null, renderList(unref(filterOneDay), (nameData) => {
+                  return openBlock(), createBlock(_component_UBadge, {
+                    key: nameData._id,
+                    color: "info",
+                    variant: "soft"
+                  }, {
+                    default: withCtx(() => [
+                      createTextVNode(toDisplayString(nameData.name), 1)
                     ]),
                     _: 2
                   }, 1024);
