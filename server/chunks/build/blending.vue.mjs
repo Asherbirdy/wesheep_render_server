@@ -76,7 +76,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     const filterAgeRange = (ageRange) => {
       var _a;
-      return ((_a = data.value) == null ? void 0 : _a.filter((item) => item.ageRange === ageRange).map((item) => item.name)) || [];
+      return ((_a = data.value) == null ? void 0 : _a.filter((item) => item.ageRange === ageRange).map((item) => item)) || [];
     };
     const filterList = computed(() => [
       { title: "年長報名", data: filterAgeRange(
@@ -150,16 +150,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               _push2(`<div class="mb-4"${_scopeId}><p${_scopeId}>${ssrInterpolate(nameSet.title)} (${ssrInterpolate(nameSet.data.length)}位):</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
               ssrRenderList(nameSet.data, (name) => {
                 _push2(ssrRenderComponent(_component_UBadge, {
-                  key: name,
+                  key: name._id,
                   color: "info",
                   variant: "soft"
                 }, {
                   default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(`${ssrInterpolate(name)}`);
+                      _push3(`${ssrInterpolate(name.name)}`);
                     } else {
                       return [
-                        createTextVNode(toDisplayString(name), 1)
+                        createTextVNode(toDisplayString(name.name), 1)
                       ];
                     }
                   }),
@@ -181,12 +181,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   createVNode("div", { class: "flex flex-wrap gap-2" }, [
                     (openBlock(true), createBlock(Fragment, null, renderList(nameSet.data, (name) => {
                       return openBlock(), createBlock(_component_UBadge, {
-                        key: name,
+                        key: name._id,
                         color: "info",
                         variant: "soft"
                       }, {
                         default: withCtx(() => [
-                          createTextVNode(toDisplayString(name), 1)
+                          createTextVNode(toDisplayString(name.name), 1)
                         ]),
                         _: 2
                       }, 1024);
@@ -209,10 +209,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`${ssrInterpolate(nameData.name)}`);
+                    _push3(`${ssrInterpolate(nameData.name)} (${ssrInterpolate(nameData.ageRange)}) `);
                   } else {
                     return [
-                      createTextVNode(toDisplayString(nameData.name), 1)
+                      createTextVNode(toDisplayString(nameData.name) + " (" + toDisplayString(nameData.ageRange) + ") ", 1)
                     ];
                   }
                 }),
@@ -231,7 +231,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     variant: "soft"
                   }, {
                     default: withCtx(() => [
-                      createTextVNode(toDisplayString(nameData.name), 1)
+                      createTextVNode(toDisplayString(nameData.name) + " (" + toDisplayString(nameData.ageRange) + ") ", 1)
                     ]),
                     _: 2
                   }, 1024);

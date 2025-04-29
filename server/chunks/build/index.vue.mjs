@@ -840,11 +840,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           otp: ""
         }
       },
-      emailCountdown: {
-        status: false,
-        time: 60,
-        countdown: 0
-      }
+      feature: {
+        emailCountdown: {
+          status: false,
+          time: 60,
+          countdown: 0
+        }
+      },
+      api: null,
+      query: null
     });
     const { data: UserInfoResponse } = ([__temp, __restore] = withAsyncContext(() => useUserApi.showMe()), __temp = await __temp, __restore(), __temp);
     const { execute: executeEmailRequest } = ([__temp, __restore] = withAsyncContext(() => useAuthApi.sendOTP()), __temp = await __temp, __restore(), __temp);
@@ -852,7 +856,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       OTP: state.value.data.emailVerifiedModal.otp
     })), __temp = await __temp, __restore(), __temp);
     const onEmailRequest = async () => {
-      const { emailCountdown } = state.value;
+      const { emailCountdown } = state.value.feature;
       await executeEmailRequest();
       emailCountdown.status = true;
       emailCountdown.countdown = emailCountdown.time;
@@ -860,15 +864,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const onEmailVerify = async () => {
       await emailVerifyRequest();
     };
-    watch(state.value.emailCountdown, (value) => {
+    watch(state.value.feature.emailCountdown, (value) => {
       if (value.countdown > 0) {
         setTimeout(() => {
-          state.value.emailCountdown.countdown--;
+          state.value.feature.emailCountdown.countdown--;
         }, 1e3);
         return;
       }
-      state.value.emailCountdown.status = false;
-      state.value.emailCountdown.countdown = state.value.emailCountdown.time;
+      state.value.feature.emailCountdown.status = false;
+      state.value.feature.emailCountdown.countdown = state.value.feature.emailCountdown.time;
     });
     const validate = (state2) => {
       const errors = [];
@@ -911,9 +915,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         title: "Email驗證"
       }, {
         body: withCtx((_, _push2, _parent2, _scopeId) => {
+          var _a, _b;
           if (_push2) {
             _push2(ssrRenderComponent(_component_UForm, {
-              state: unref(state).data.emailVerifiedModal,
+              state: (_a = unref(state).data) == null ? void 0 : _a.emailVerifiedModal,
               validate
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
@@ -934,8 +939,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           placeholder: "請輸入驗證碼"
                         }, null, _parent4, _scopeId3));
                         _push4(ssrRenderComponent(_component_UButton, {
-                          disabled: unref(state).emailCountdown.status,
-                          label: unref(state).emailCountdown.status ? `${unref(state).emailCountdown.countdown}秒` : "寄送 Email 驗證",
+                          disabled: unref(state).feature.emailCountdown.status,
+                          label: unref(state).feature.emailCountdown.status ? `${unref(state).feature.emailCountdown.countdown}秒` : "寄送 Email 驗證",
                           variant: "soft",
                           class: "inline-block",
                           onClick: onEmailRequest
@@ -950,8 +955,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             placeholder: "請輸入驗證碼"
                           }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                           createVNode(_component_UButton, {
-                            disabled: unref(state).emailCountdown.status,
-                            label: unref(state).emailCountdown.status ? `${unref(state).emailCountdown.countdown}秒` : "寄送 Email 驗證",
+                            disabled: unref(state).feature.emailCountdown.status,
+                            label: unref(state).feature.emailCountdown.status ? `${unref(state).feature.emailCountdown.countdown}秒` : "寄送 Email 驗證",
                             variant: "soft",
                             class: "inline-block",
                             onClick: onEmailRequest
@@ -979,8 +984,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                             placeholder: "請輸入驗證碼"
                           }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                           createVNode(_component_UButton, {
-                            disabled: unref(state).emailCountdown.status,
-                            label: unref(state).emailCountdown.status ? `${unref(state).emailCountdown.countdown}秒` : "寄送 Email 驗證",
+                            disabled: unref(state).feature.emailCountdown.status,
+                            label: unref(state).feature.emailCountdown.status ? `${unref(state).feature.emailCountdown.countdown}秒` : "寄送 Email 驗證",
                             variant: "soft",
                             class: "inline-block",
                             onClick: onEmailRequest
@@ -1002,7 +1007,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           } else {
             return [
               createVNode(_component_UForm, {
-                state: unref(state).data.emailVerifiedModal,
+                state: (_b = unref(state).data) == null ? void 0 : _b.emailVerifiedModal,
                 validate
               }, {
                 default: withCtx(() => [
@@ -1021,8 +1026,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                           placeholder: "請輸入驗證碼"
                         }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                         createVNode(_component_UButton, {
-                          disabled: unref(state).emailCountdown.status,
-                          label: unref(state).emailCountdown.status ? `${unref(state).emailCountdown.countdown}秒` : "寄送 Email 驗證",
+                          disabled: unref(state).feature.emailCountdown.status,
+                          label: unref(state).feature.emailCountdown.status ? `${unref(state).feature.emailCountdown.countdown}秒` : "寄送 Email 驗證",
                           variant: "soft",
                           class: "inline-block",
                           onClick: onEmailRequest

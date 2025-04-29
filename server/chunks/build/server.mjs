@@ -271,7 +271,7 @@ const payloadPlugin = definePayloadPlugin(() => {
   );
 });
 
-const unhead_pThjYu97ibjIA2ev1YHTkl_ph2tvlz1Mg23it7f1Z_A = defineNuxtPlugin({
+const unhead_TMkQyMjVrCapAP0pm_1ZEKgfDPVLAVjPcyETwZkbHg0 = defineNuxtPlugin({
   name: "nuxt:head",
   enforce: "pre",
   setup(nuxtApp) {
@@ -808,7 +808,7 @@ const reducers = [
   ["Ref", (data) => isRef(data) && data.value],
   ["Reactive", (data) => isReactive(data) && toRaw(data)]
 ];
-const revive_payload_server_HPi4f5HpraU9kAoV_x3C0VXm_SdjP990QPurK3ocHzo = defineNuxtPlugin({
+const revive_payload_server_TeP94Xh9kWlM_Iq0SbKIR_6voYdZ5_epjdBve4Uosrk = defineNuxtPlugin({
   name: "nuxt:revive-payload:server",
   setup() {
     for (const [reducer, fn] of reducers) {
@@ -1373,7 +1373,7 @@ setSSRHandler("getDefaultStorage", () => {
     }
   });
 }
-const ssr_plugin_n8Ofa7k6SxmgiSADVKaiSb_8nUHr_m8ZzFMQg4okkfM = defineNuxtPlugin(() => {
+const ssr_plugin_g0GbHKxMpg2bE2_kr4wTD6jW_DC32aJ__SbwMpurFL0 = defineNuxtPlugin(() => {
 });
 
 var CookieEnums = /* @__PURE__ */ ((CookieEnums2) => {
@@ -1488,16 +1488,16 @@ async function getAuthHeaders() {
 
 const plugins = [
   payloadPlugin,
-  unhead_pThjYu97ibjIA2ev1YHTkl_ph2tvlz1Mg23it7f1Z_A,
+  unhead_TMkQyMjVrCapAP0pm_1ZEKgfDPVLAVjPcyETwZkbHg0,
   plugin$1,
-  revive_payload_server_HPi4f5HpraU9kAoV_x3C0VXm_SdjP990QPurK3ocHzo,
+  revive_payload_server_TeP94Xh9kWlM_Iq0SbKIR_6voYdZ5_epjdBve4Uosrk,
   plugin,
   components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8,
   colors_gH0y7Gvt11LW0oMp0VCGQPt2ChDLdbvfJT2t4z56_9M,
   plugin_xrL_NJYDIf86z_D10PJ7xlYb5vDs9BseY0nWWhv8N5g,
   pwa_icons_plugin_OtOZ6CGly_Vz5_PCGGLA9qHLz2Y5_d5czYAX7q_3Lug,
   plugin_server_LlmVocchW81w0V5SsaJLemsIvF2IHoteTyzHWZjumlg,
-  ssr_plugin_n8Ofa7k6SxmgiSADVKaiSb_8nUHr_m8ZzFMQg4okkfM,
+  ssr_plugin_g0GbHKxMpg2bE2_kr4wTD6jW_DC32aJ__SbwMpurFL0,
   Fetch_QkuBTWVsFvkT75X0VAWJWOBFptpb_L7wK_BUtKx_hWQ
 ];
 
@@ -5047,7 +5047,7 @@ const _sfc_main$1 = {
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/nuxt@3.16.1_@parcel+watcher@2.5.1_@types+node@22.13.12_db0@0.3.1_eslint@9.21.0_jiti@2.4_4a73d30cb8a6e3c615f757b8a3593728/node_modules/nuxt/dist/app/components/nuxt-error-page.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/nuxt@3.16.1_@parcel+watcher@2.5.1_@types+node@22.13.12_db0@0.3.1_eslint@9.21.0_jiti@2.4_f6e5c8a7b204e2516ae528d5a20e17df/node_modules/nuxt/dist/app/components/nuxt-error-page.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
 
@@ -5096,7 +5096,7 @@ const _sfc_main = {
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/nuxt@3.16.1_@parcel+watcher@2.5.1_@types+node@22.13.12_db0@0.3.1_eslint@9.21.0_jiti@2.4_4a73d30cb8a6e3c615f757b8a3593728/node_modules/nuxt/dist/app/components/nuxt-root.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/nuxt@3.16.1_@parcel+watcher@2.5.1_@types+node@22.13.12_db0@0.3.1_eslint@9.21.0_jiti@2.4_f6e5c8a7b204e2516ae528d5a20e17df/node_modules/nuxt/dist/app/components/nuxt-root.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 
