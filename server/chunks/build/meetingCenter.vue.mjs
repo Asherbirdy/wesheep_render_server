@@ -58,6 +58,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       var _a;
       return (_a = MeetingCenterResponse.value) == null ? void 0 : _a.data;
     });
+    const kidData = computed(() => {
+      var _a;
+      return (_a = data.value) == null ? void 0 : _a.filter((item) => item.identity === "兒童");
+    });
+    const adultData = computed(() => {
+      var _a;
+      return (_a = data.value) == null ? void 0 : _a.filter((item) => item.identity !== "兒童");
+    });
     const districtOne = computed(() => {
       var _a;
       return (_a = data.value) == null ? void 0 : _a.filter(
@@ -91,6 +99,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       await MeetingCenterCreateRequest();
       await MeetingCenterRequest();
     };
+    const isGospelFriend = (identity) => {
+      if (identity === "男介朋友" || identity === "女介朋友" || identity === "兒童") {
+        return true;
+      }
+      return false;
+    };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UButton = __nuxt_component_2;
       const _component_UTabs = __nuxt_component_0;
@@ -120,22 +134,22 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         ui: { trigger: "flex-1" }
       }, {
         join: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a, _b;
+          var _a, _b, _c, _d, _e, _f;
           if (_push2) {
-            _push2(`<div${_scopeId}>總報名：${ssrInterpolate((_a = unref(data)) == null ? void 0 : _a.length)}位</div><p class="text-sm text-red-600"${_scopeId}> 請於5/27日前<br${_scopeId}>協助調查是否搭乘遊覽車～謝謝 </p><p${_scopeId}>一區</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            _push2(`<div${_scopeId}>總報名：${ssrInterpolate((_a = unref(data)) == null ? void 0 : _a.length)}位</div><div${_scopeId}>成人${ssrInterpolate((_b = unref(adultData)) == null ? void 0 : _b.length)}位,兒童${ssrInterpolate((_c = unref(kidData)) == null ? void 0 : _c.length)}位</div><p class="text-sm text-red-600"${_scopeId}> 請於5/27日前<br${_scopeId}>協助調查是否搭乘遊覽車～謝謝 </p><p${_scopeId}>一區</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
             ssrRenderList(unref(districtOne), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
-                color: "info",
+                color: isGospelFriend(item.identity) ? "success" : "info",
                 variant: "soft",
                 size: "sm"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`${ssrInterpolate(item.name)}`);
+                    _push3(`${ssrInterpolate(item.name)}${ssrInterpolate(isGospelFriend(item.identity) ? "(福音朋友)" : "")}`);
                   } else {
                     return [
-                      createTextVNode(toDisplayString(item.name), 1)
+                      createTextVNode(toDisplayString(item.name) + toDisplayString(isGospelFriend(item.identity) ? "(福音朋友)" : ""), 1)
                     ];
                   }
                 }),
@@ -146,16 +160,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ssrRenderList(unref(districtTwo), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
-                color: "info",
+                color: isGospelFriend(item.identity) ? "success" : "info",
                 variant: "soft",
                 size: "sm"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`${ssrInterpolate(item.name)}`);
+                    _push3(`${ssrInterpolate(item.name)}${ssrInterpolate(isGospelFriend(item.identity) ? "(福音朋友)" : "")}`);
                   } else {
                     return [
-                      createTextVNode(toDisplayString(item.name), 1)
+                      createTextVNode(toDisplayString(item.name) + toDisplayString(isGospelFriend(item.identity) ? "(福音朋友)" : ""), 1)
                     ];
                   }
                 }),
@@ -166,16 +180,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ssrRenderList(unref(districtThree), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
-                color: "info",
+                color: isGospelFriend(item.identity) ? "success" : "info",
                 variant: "soft",
                 size: "sm"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`${ssrInterpolate(item.name)}`);
+                    _push3(`${ssrInterpolate(item.name)}${ssrInterpolate(isGospelFriend(item.identity) ? "(福音朋友)" : "")}`);
                   } else {
                     return [
-                      createTextVNode(toDisplayString(item.name), 1)
+                      createTextVNode(toDisplayString(item.name) + toDisplayString(isGospelFriend(item.identity) ? "(福音朋友)" : ""), 1)
                     ];
                   }
                 }),
@@ -186,16 +200,16 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             ssrRenderList(unref(districtFour), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
-                color: "info",
+                color: isGospelFriend(item.identity) ? "success" : "info",
                 variant: "soft",
                 size: "sm"
               }, {
                 default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                   if (_push3) {
-                    _push3(`${ssrInterpolate(item.name)}`);
+                    _push3(`${ssrInterpolate(item.name)}${ssrInterpolate(isGospelFriend(item.identity) ? "(福音朋友)" : "")}`);
                   } else {
                     return [
-                      createTextVNode(toDisplayString(item.name), 1)
+                      createTextVNode(toDisplayString(item.name) + toDisplayString(isGospelFriend(item.identity) ? "(福音朋友)" : ""), 1)
                     ];
                   }
                 }),
@@ -205,7 +219,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _push2(`<!--]--></div>`);
           } else {
             return [
-              createVNode("div", null, "總報名：" + toDisplayString((_b = unref(data)) == null ? void 0 : _b.length) + "位", 1),
+              createVNode("div", null, "總報名：" + toDisplayString((_d = unref(data)) == null ? void 0 : _d.length) + "位", 1),
+              createVNode("div", null, "成人" + toDisplayString((_e = unref(adultData)) == null ? void 0 : _e.length) + "位,兒童" + toDisplayString((_f = unref(kidData)) == null ? void 0 : _f.length) + "位", 1),
               createVNode("p", { class: "text-sm text-red-600" }, [
                 createTextVNode(" 請於5/27日前"),
                 createVNode("br"),
@@ -216,15 +231,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 (openBlock(true), createBlock(Fragment, null, renderList(unref(districtOne), (item, index) => {
                   return openBlock(), createBlock(_component_UBadge, {
                     key: index,
-                    color: "info",
+                    color: isGospelFriend(item.identity) ? "success" : "info",
                     variant: "soft",
                     size: "sm"
                   }, {
                     default: withCtx(() => [
-                      createTextVNode(toDisplayString(item.name), 1)
+                      createTextVNode(toDisplayString(item.name) + toDisplayString(isGospelFriend(item.identity) ? "(福音朋友)" : ""), 1)
                     ]),
                     _: 2
-                  }, 1024);
+                  }, 1032, ["color"]);
                 }), 128))
               ]),
               createVNode("p", null, "二區"),
@@ -232,15 +247,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 (openBlock(true), createBlock(Fragment, null, renderList(unref(districtTwo), (item, index) => {
                   return openBlock(), createBlock(_component_UBadge, {
                     key: index,
-                    color: "info",
+                    color: isGospelFriend(item.identity) ? "success" : "info",
                     variant: "soft",
                     size: "sm"
                   }, {
                     default: withCtx(() => [
-                      createTextVNode(toDisplayString(item.name), 1)
+                      createTextVNode(toDisplayString(item.name) + toDisplayString(isGospelFriend(item.identity) ? "(福音朋友)" : ""), 1)
                     ]),
                     _: 2
-                  }, 1024);
+                  }, 1032, ["color"]);
                 }), 128))
               ]),
               createVNode("p", null, "三區"),
@@ -248,15 +263,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 (openBlock(true), createBlock(Fragment, null, renderList(unref(districtThree), (item, index) => {
                   return openBlock(), createBlock(_component_UBadge, {
                     key: index,
-                    color: "info",
+                    color: isGospelFriend(item.identity) ? "success" : "info",
                     variant: "soft",
                     size: "sm"
                   }, {
                     default: withCtx(() => [
-                      createTextVNode(toDisplayString(item.name), 1)
+                      createTextVNode(toDisplayString(item.name) + toDisplayString(isGospelFriend(item.identity) ? "(福音朋友)" : ""), 1)
                     ]),
                     _: 2
-                  }, 1024);
+                  }, 1032, ["color"]);
                 }), 128))
               ]),
               createVNode("p", null, "四區"),
@@ -264,15 +279,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 (openBlock(true), createBlock(Fragment, null, renderList(unref(districtFour), (item, index) => {
                   return openBlock(), createBlock(_component_UBadge, {
                     key: index,
-                    color: "info",
+                    color: isGospelFriend(item.identity) ? "success" : "info",
                     variant: "soft",
                     size: "sm"
                   }, {
                     default: withCtx(() => [
-                      createTextVNode(toDisplayString(item.name), 1)
+                      createTextVNode(toDisplayString(item.name) + toDisplayString(isGospelFriend(item.identity) ? "(福音朋友)" : ""), 1)
                     ]),
                     _: 2
-                  }, 1024);
+                  }, 1032, ["color"]);
                 }), 128))
               ])
             ];
