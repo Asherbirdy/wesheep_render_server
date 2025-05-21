@@ -1,4 +1,4 @@
-import { N as makeDestructurable, O as camelize } from './server.mjs';
+import { V as makeDestructurable, W as camelize } from './server.mjs';
 import { getCurrentScope, shallowRef, defineComponent } from 'vue';
 
 function createReusableTemplate(options = {}) {

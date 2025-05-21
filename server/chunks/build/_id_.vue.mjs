@@ -3,7 +3,7 @@ import { ssrRenderAttrs, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRender
 import { EditorContent } from '@tiptap/vue-3';
 import { TextHeader124Filled, TextHeader220Filled, TextHeader324Filled, TextParagraph16Filled, TextBold24Filled, TextItalic24Filled, TextStrikethrough24Filled, Code24Filled, TextQuote20Filled, TextBulletListLtr16Filled, TextNumberListLtr16Filled, TextAlignLeft16Filled, TextAlignJustify20Filled, TextAlignRight16Filled, ArrowUndo16Filled, ArrowRedo16Filled } from '@vicons/fluent';
 import { u as useLandingPageApi } from './useLandingPageApi.mjs';
-import { g as useRoute } from './server.mjs';
+import { v as useRoute } from './server.mjs';
 import './useRequestApi.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';

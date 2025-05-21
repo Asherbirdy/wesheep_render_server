@@ -1,5 +1,5 @@
 import { shallowReactive, reactive, effectScope, getCurrentScope, hasInjectionContext, getCurrentInstance, toRef as toRef$1, inject, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, computed, ref, defineComponent, unref, h, Suspense, nextTick, mergeProps, provide, onScopeDispose, toRefs, toValue, readonly, customRef, onServerPrefetch, useSSRContext, watch, withCtx, createVNode, resolveDynamicComponent, createBlock, renderSlot, openBlock, toDisplayString, resolveComponent, useSlots, createCommentVNode, Fragment, createTextVNode, withModifiers, renderList, markRaw, useId, onErrorCaptured, createApp } from 'vue';
-import { i as createHooks, j as getContext, c as createError$1, t as toRouteMatcher, k as createRouter, l as defu, m as hasProtocol, n as joinURL, w as withQuery, s as sanitizeStatusCode, o as isScriptProtocol, q as executeAsync, r as defuFn, v as klona, x as destr, y as parse, z as getRequestHeader, A as isEqual, B as setCookie, C as getCookie, D as deleteCookie, E as parseQuery, F as withTrailingSlash, G as withoutTrailingSlash, H as serialize } from '../nitro/nitro.mjs';
+import { i as createHooks, j as getContext, c as createError$1, t as toRouteMatcher, k as createRouter, l as defu, m as hasProtocol, n as joinURL, w as withQuery, s as sanitizeStatusCode, o as isScriptProtocol, q as executeAsync, r as defuFn, v as klona, x as destr, y as parse, z as getRequestHeader, A as isEqual, B as setCookie, C as getCookie, D as deleteCookie, E as serialize, F as parseQuery, G as withTrailingSlash, H as withoutTrailingSlash } from '../nitro/nitro.mjs';
 import { shouldHydrate, createPinia, setActivePinia } from 'pinia';
 import { START_LOCATION, createMemoryHistory, createRouter as createRouter$1, useRoute as useRoute$1, RouterView } from 'vue-router';
 import colors from 'tailwindcss/colors';
@@ -442,9 +442,24 @@ const _routes = [
         component: () => import('./index.vue.mjs')
       },
       {
+        name: "C-sheet",
+        path: "sheet",
+        component: () => import('./sheet.vue.mjs')
+      },
+      {
         name: "C-blending",
         path: "blending",
         component: () => import('./blending.vue.mjs')
+      },
+      {
+        name: "C-serialNumber",
+        path: "serialNumber",
+        component: () => import('./serialNumber.vue.mjs')
+      },
+      {
+        name: "C-meetingCenter",
+        path: "meetingCenter",
+        component: () => import('./meetingCenter.vue.mjs')
       },
       {
         name: "C-landingPage",
@@ -1402,8 +1417,34 @@ var UserRequestUrl = /* @__PURE__ */ ((UserRequestUrl2) => {
   UserRequestUrl2["LandingPageEditInfoById"] = "/landingPage/editPageInfoById";
   UserRequestUrl2["BlendingCreateFromSheet"] = "/blending/createFromSheet";
   UserRequestUrl2["BlendingGetAll"] = "/blending/getAll";
+  UserRequestUrl2["SheetCreate"] = "/sheet/create";
+  UserRequestUrl2["SheetAll"] = "/sheet/all";
+  UserRequestUrl2["SheetEdit"] = "/sheet/edit";
+  UserRequestUrl2["SheetDelete"] = "/sheet/delete";
+  UserRequestUrl2["SerialNumberGetAll"] = "/userSerialNumber/getAll";
+  UserRequestUrl2["SerialNumberCreate"] = "/userSerialNumber/create";
+  UserRequestUrl2["SerialNumberDelete"] = "/userSerialNumber/delete";
+  UserRequestUrl2["District"] = "/district";
+  UserRequestUrl2["MeetingCenter"] = "/meetingCenter/";
   return UserRequestUrl2;
 })(UserRequestUrl || {});
+
+var PublicRoutes = /* @__PURE__ */ ((PublicRoutes2) => {
+  PublicRoutes2["Home"] = "/";
+  PublicRoutes2["Login"] = "/login";
+  return PublicRoutes2;
+})(PublicRoutes || {});
+const ClientBase = "/C";
+var ClientRoutes = ((ClientRoutes2) => {
+  ClientRoutes2["Home"] = `${ClientBase}/`;
+  ClientRoutes2["LandingPage"] = `${ClientBase}/landingPage`;
+  ClientRoutes2["LandingPageEditor"] = `${ClientBase}/landingPage/editor`;
+  ClientRoutes2["Blending"] = `${ClientBase}/blending`;
+  ClientRoutes2["Sheet"] = `${ClientBase}/sheet`;
+  ClientRoutes2["SerialNumber"] = `${ClientBase}/serialNumber`;
+  ClientRoutes2["MeetingCenter"] = `${ClientBase}/meetingCenter`;
+  return ClientRoutes2;
+})(ClientRoutes || {});
 
 const Fetch_QkuBTWVsFvkT75X0VAWJWOBFptpb_L7wK_BUtKx_hWQ = defineNuxtPlugin(() => {
   const $Fetch = $fetch.create({
@@ -1427,6 +1468,9 @@ const Fetch_QkuBTWVsFvkT75X0VAWJWOBFptpb_L7wK_BUtKx_hWQ = defineNuxtPlugin(() =>
           break;
         case 401:
           errorMessage = "[ Client Error: 401 ] 身份認證未通過! 請重新登入！";
+          if ((void 0).location.pathname !== PublicRoutes.Login) {
+            navigateTo("/login");
+          }
           break;
         case 403:
           errorMessage = "[ Client Error: 403 ] 用戶已獲得授權，但訪問被禁止！";
@@ -1443,7 +1487,9 @@ const Fetch_QkuBTWVsFvkT75X0VAWJWOBFptpb_L7wK_BUtKx_hWQ = defineNuxtPlugin(() =>
         default:
           errorMessage = "[ Unknown Error ] 未知錯誤！";
       }
-      console.error(errorMessage, response);
+      if ((void 0).location.pathname !== PublicRoutes.Login) {
+        console.error(errorMessage, response);
+      }
     }
   });
   return {
@@ -1632,6 +1678,94 @@ const LayoutProvider = defineComponent({
   }
 });
 
+function diff(obj1, obj2) {
+  const h1 = _toHashedObject(obj1);
+  const h2 = _toHashedObject(obj2);
+  return _diff(h1, h2);
+}
+function _diff(h1, h2) {
+  const diffs = [];
+  const allProps = /* @__PURE__ */ new Set([
+    ...Object.keys(h1.props || {}),
+    ...Object.keys(h2.props || {})
+  ]);
+  if (h1.props && h2.props) {
+    for (const prop of allProps) {
+      const p1 = h1.props[prop];
+      const p2 = h2.props[prop];
+      if (p1 && p2) {
+        diffs.push(..._diff(h1.props?.[prop], h2.props?.[prop]));
+      } else if (p1 || p2) {
+        diffs.push(
+          new DiffEntry((p2 || p1).key, p1 ? "removed" : "added", p2, p1)
+        );
+      }
+    }
+  }
+  if (allProps.size === 0 && h1.hash !== h2.hash) {
+    diffs.push(new DiffEntry((h2 || h1).key, "changed", h2, h1));
+  }
+  return diffs;
+}
+function _toHashedObject(obj, key = "") {
+  if (obj && typeof obj !== "object") {
+    return new DiffHashedObject(key, obj, serialize(obj));
+  }
+  const props = {};
+  const hashes = [];
+  for (const _key in obj) {
+    props[_key] = _toHashedObject(obj[_key], key ? `${key}.${_key}` : _key);
+    hashes.push(props[_key].hash);
+  }
+  return new DiffHashedObject(key, obj, `{${hashes.join(":")}}`, props);
+}
+class DiffEntry {
+  constructor(key, type, newValue, oldValue) {
+    this.key = key;
+    this.type = type;
+    this.newValue = newValue;
+    this.oldValue = oldValue;
+  }
+  toString() {
+    return this.toJSON();
+  }
+  toJSON() {
+    switch (this.type) {
+      case "added": {
+        return `Added   \`${this.key}\``;
+      }
+      case "removed": {
+        return `Removed \`${this.key}\``;
+      }
+      case "changed": {
+        return `Changed \`${this.key}\` from \`${this.oldValue?.toString() || "-"}\` to \`${this.newValue.toString()}\``;
+      }
+    }
+  }
+}
+class DiffHashedObject {
+  constructor(key, value, hash, props) {
+    this.key = key;
+    this.value = value;
+    this.hash = hash;
+    this.props = props;
+  }
+  toString() {
+    if (this.props) {
+      return `{${Object.keys(this.props).join(",")}}`;
+    } else {
+      return JSON.stringify(this.value);
+    }
+  }
+  toJSON() {
+    const k = this.key || ".";
+    if (this.props) {
+      return `${k}({${Object.keys(this.props).join(",")}})`;
+    }
+    return `${k}(${this.value})`;
+  }
+}
+
 function omit(data, keys) {
   const result = { ...data };
   for (const key of keys) {
@@ -1658,6 +1792,15 @@ function get(object, path, defaultValue) {
 function looseToNumber(val) {
   const n = Number.parseFloat(val);
   return Number.isNaN(n) ? val : n;
+}
+function compare(value, currentValue, comparator) {
+  if (value === void 0 || currentValue === void 0) {
+    return false;
+  }
+  if (typeof value === "string") {
+    return value === currentValue;
+  }
+  return isEqual(value, currentValue);
 }
 
 function buildTranslator(locale) {
@@ -2211,6 +2354,32 @@ function useAsyncData(...args) {
   Object.assign(asyncDataPromise, asyncData);
   return asyncDataPromise;
 }
+function useNuxtData(key) {
+  const nuxtApp = useNuxtApp();
+  if (!(key in nuxtApp.payload.data)) {
+    nuxtApp.payload.data[key] = asyncDataDefaults.value;
+  }
+  return {
+    data: computed({
+      get() {
+        var _a;
+        return ((_a = nuxtApp._asyncData[key]) == null ? void 0 : _a.data.value) ?? nuxtApp.payload.data[key];
+      },
+      set(value) {
+        if (nuxtApp._asyncData[key]) {
+          nuxtApp._asyncData[key].data.value = value;
+        } else {
+          nuxtApp.payload.data[key] = value;
+        }
+      }
+    })
+  };
+}
+async function refreshNuxtData(keys) {
+  {
+    return Promise.resolve();
+  }
+}
 function clearNuxtDataByKey(nuxtApp, key) {
   if (key in nuxtApp.payload.data) {
     nuxtApp.payload.data[key] = void 0;
@@ -2609,7 +2778,7 @@ function useFormField(props, opts) {
   }
   const emitFormInput = useDebounceFn(
     () => {
-      emitFormEvent("input", formField == null ? void 0 : formField.value.name, formField == null ? void 0 : formField.value.eagerValidation);
+      emitFormEvent("input", formField == null ? void 0 : formField.value.name, !(opts == null ? void 0 : opts.deferInputValidation) || (formField == null ? void 0 : formField.value.eagerValidation));
     },
     (formField == null ? void 0 : formField.value.validateOnInputDelay) ?? (formOptions == null ? void 0 : formOptions.value.validateOnInputDelay) ?? 0
   );
@@ -2910,94 +3079,6 @@ function applyTrailingSlashBehavior(to, trailingSlash) {
     return to;
   }
   return normalizeFn(to, true);
-}
-
-function diff(obj1, obj2) {
-  const h1 = _toHashedObject(obj1);
-  const h2 = _toHashedObject(obj2);
-  return _diff(h1, h2);
-}
-function _diff(h1, h2) {
-  const diffs = [];
-  const allProps = /* @__PURE__ */ new Set([
-    ...Object.keys(h1.props || {}),
-    ...Object.keys(h2.props || {})
-  ]);
-  if (h1.props && h2.props) {
-    for (const prop of allProps) {
-      const p1 = h1.props[prop];
-      const p2 = h2.props[prop];
-      if (p1 && p2) {
-        diffs.push(..._diff(h1.props?.[prop], h2.props?.[prop]));
-      } else if (p1 || p2) {
-        diffs.push(
-          new DiffEntry((p2 || p1).key, p1 ? "removed" : "added", p2, p1)
-        );
-      }
-    }
-  }
-  if (allProps.size === 0 && h1.hash !== h2.hash) {
-    diffs.push(new DiffEntry((h2 || h1).key, "changed", h2, h1));
-  }
-  return diffs;
-}
-function _toHashedObject(obj, key = "") {
-  if (obj && typeof obj !== "object") {
-    return new DiffHashedObject(key, obj, serialize(obj));
-  }
-  const props = {};
-  const hashes = [];
-  for (const _key in obj) {
-    props[_key] = _toHashedObject(obj[_key], key ? `${key}.${_key}` : _key);
-    hashes.push(props[_key].hash);
-  }
-  return new DiffHashedObject(key, obj, `{${hashes.join(":")}}`, props);
-}
-class DiffEntry {
-  constructor(key, type, newValue, oldValue) {
-    this.key = key;
-    this.type = type;
-    this.newValue = newValue;
-    this.oldValue = oldValue;
-  }
-  toString() {
-    return this.toJSON();
-  }
-  toJSON() {
-    switch (this.type) {
-      case "added": {
-        return `Added   \`${this.key}\``;
-      }
-      case "removed": {
-        return `Removed \`${this.key}\``;
-      }
-      case "changed": {
-        return `Changed \`${this.key}\` from \`${this.oldValue?.toString() || "-"}\` to \`${this.newValue.toString()}\``;
-      }
-    }
-  }
-}
-class DiffHashedObject {
-  constructor(key, value, hash, props) {
-    this.key = key;
-    this.value = value;
-    this.hash = hash;
-    this.props = props;
-  }
-  toString() {
-    if (this.props) {
-      return `{${Object.keys(this.props).join(",")}}`;
-    } else {
-      return JSON.stringify(this.value);
-    }
-  }
-  toJSON() {
-    const k = this.key || ".";
-    if (this.props) {
-      return `${k}({${Object.keys(this.props).join(",")}})`;
-    }
-    return `${k}(${this.value})`;
-  }
 }
 
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
@@ -5126,5 +5207,5 @@ const server = /*#__PURE__*/Object.freeze({
   default: entry$1
 });
 
-export { useRouter as A, fetchDefaults as B, CookieEnums as C, useAsyncData as D, useRequestFetch as E, useRuntimeConfig as F, useNuxtApp as G, ULink as H, pickLinkProps as I, ULinkBase as J, useState as K, createSharedComposable as L, omit as M, makeDestructurable as N, camelize as O, PublicRequestUrl as P, server as Q, UserRequestUrl as U, __nuxt_component_0$1 as _, __nuxt_component_0 as a, _appConfig as b, useLocale as c, useAppConfig as d, __nuxt_component_2$1 as e, reactiveOmit as f, useRoute as g, useToast as h, useCookie as i, formBusInjectionKey as j, formInputsInjectionKey as k, formLoadingInjectionKey as l, formOptionsInjectionKey as m, navigateTo as n, inputIdInjectionKey as o, formFieldInjectionKey as p, useFormField as q, reactivePick as r, useButtonGroup as s, tv as t, useHead as u, useComponentIcons as v, UIcon as w, UAvatar as x, looseToNumber as y, get as z };
+export { formInputsInjectionKey as A, formLoadingInjectionKey as B, ClientRoutes as C, formOptionsInjectionKey as D, inputIdInjectionKey as E, formFieldInjectionKey as F, looseToNumber as G, useRouter as H, fetchDefaults as I, useAsyncData as J, useRequestFetch as K, useRuntimeConfig as L, ULink as M, pickLinkProps as N, ULinkBase as O, PublicRequestUrl as P, useState as Q, PublicRoutes as R, createSharedComposable as S, omit as T, UserRequestUrl as U, makeDestructurable as V, camelize as W, server as X, __nuxt_component_0$1 as _, __nuxt_component_0 as a, __nuxt_component_2$1 as b, useNuxtApp as c, useAvatarGroup as d, _appConfig as e, useAppConfig as f, useFormField as g, useButtonGroup as h, useComponentIcons as i, UIcon as j, UAvatar as k, get as l, compare as m, useNuxtData as n, refreshNuxtData as o, useLocale as p, reactiveOmit as q, reactivePick as r, navigateTo as s, tv as t, useHead as u, useRoute as v, useToast as w, useCookie as x, CookieEnums as y, formBusInjectionKey as z };
 //# sourceMappingURL=server.mjs.map

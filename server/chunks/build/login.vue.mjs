@@ -1,9 +1,9 @@
 import { _ as __nuxt_component_0$1 } from './Tabs.vue.mjs';
-import { h as useToast, e as __nuxt_component_2$1, i as useCookie, n as navigateTo, C as CookieEnums } from './server.mjs';
+import { w as useToast, b as __nuxt_component_2$1, x as useCookie, s as navigateTo, C as ClientRoutes, y as CookieEnums } from './server.mjs';
 import { defineComponent, useModel, mergeProps, withCtx, createVNode, ref, withAsyncContext, unref, useSSRContext } from 'vue';
 import { ssrRenderComponent } from 'vue/server-renderer';
-import { _ as __nuxt_component_0, a as __nuxt_component_1, b as __nuxt_component_2, u as useAuthApi } from './useAuthApi.mjs';
-import { C as ClientRoutes } from './RoutesEnum.mjs';
+import { u as useAuthApi } from './useAuthApi.mjs';
+import { _ as __nuxt_component_0, a as __nuxt_component_1, b as __nuxt_component_2 } from './Input.vue.mjs';
 import 'reka-ui';
 import '../nitro/nitro.mjs';
 import 'node:http';
@@ -27,8 +27,8 @@ import 'devalue';
 import '@iconify/vue';
 import '@iconify/utils/lib/css/icon';
 import 'tailwind-variants';
-import './index.mjs';
 import './useRequestApi.mjs';
+import './index.mjs';
 
 const regex = {
   email: /^[^\s@]+@[^\s@][^\s.@]*\.[^\s@]+$/
@@ -490,8 +490,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         login.password = "";
         return;
       }
-      useCookie(CookieEnums.AccessToken).value = (_a = LoginResponse.value) == null ? void 0 : _a.token.accessTokenJWT;
-      useCookie(CookieEnums.RefreshToken).value = (_b = LoginResponse.value) == null ? void 0 : _b.token.refreshTokenJWT;
+      const accessToken = useCookie(CookieEnums.AccessToken);
+      const refreshToken = useCookie(CookieEnums.RefreshToken);
+      accessToken.value = ((_a = LoginResponse.value) == null ? void 0 : _a.token.accessTokenJWT) || "";
+      refreshToken.value = ((_b = LoginResponse.value) == null ? void 0 : _b.token.refreshTokenJWT) || "";
       navigateTo(ClientRoutes.Home);
     };
     const onRegister = async () => {

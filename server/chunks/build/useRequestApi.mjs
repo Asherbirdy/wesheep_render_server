@@ -1,4 +1,4 @@
-import { B as fetchDefaults, D as useAsyncData, E as useRequestFetch, F as useRuntimeConfig, G as useNuxtApp } from './server.mjs';
+import { I as fetchDefaults, J as useAsyncData, K as useRequestFetch, L as useRuntimeConfig, c as useNuxtApp } from './server.mjs';
 import { computed, toValue, reactive } from 'vue';
 import { J as hash } from '../nitro/nitro.mjs';
 

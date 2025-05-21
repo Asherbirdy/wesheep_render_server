@@ -1,13 +1,11 @@
-import { resolveComponent, mergeProps, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrRenderSlot, ssrRenderComponent } from 'vue/server-renderer';
+import { mergeProps, useSSRContext } from 'vue';
+import { ssrRenderAttrs, ssrRenderSlot } from 'vue/server-renderer';
 import { _ as _export_sfc } from './_plugin-vue_export-helper.mjs';
 
 const _sfc_main = {};
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  const _component_Footer = resolveComponent("Footer");
   _push(`<main${ssrRenderAttrs(mergeProps({ class: "px-10 py-20 text-center" }, _attrs))}>`);
   ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
-  _push(ssrRenderComponent(_component_Footer, null, null, _parent));
   _push(`<div class="text-sm mx-auto mt-5 text-center opacity-25"> [Home Layout] </div></main>`);
 }
 const _sfc_setup = _sfc_main.setup;

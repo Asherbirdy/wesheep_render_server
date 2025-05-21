@@ -1,8 +1,7 @@
-import { _ as __nuxt_component_0, e as __nuxt_component_2 } from './server.mjs';
+import { R as PublicRoutes, _ as __nuxt_component_0, b as __nuxt_component_2 } from './server.mjs';
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
 import { defineComponent, ref, mergeProps, withCtx, createTextVNode, toDisplayString, unref, createVNode, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderList, ssrRenderComponent, ssrInterpolate, ssrRenderSlot } from 'vue/server-renderer';
-import { P as PublicRoutes } from './RoutesEnum.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';

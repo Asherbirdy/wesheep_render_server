@@ -1,7 +1,7 @@
 import { defineComponent, useSlots, computed, unref, mergeProps, withCtx, renderSlot, createBlock, createCommentVNode, openBlock, createTextVNode, toDisplayString, createVNode, Fragment, renderList, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderList, ssrRenderSlot, ssrRenderClass, ssrInterpolate } from 'vue/server-renderer';
 import { useForwardPropsEmits, TabsRoot, TabsList, TabsIndicator, TabsTrigger, TabsContent } from 'reka-ui';
-import { r as reactivePick, t as tv, w as UIcon, x as UAvatar, z as get, b as _appConfig } from './server.mjs';
+import { r as reactivePick, t as tv, j as UIcon, k as UAvatar, l as get, e as _appConfig } from './server.mjs';
 
 const theme = {
   "slots": {

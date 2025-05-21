@@ -1,11 +1,10 @@
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
-import { r as reactivePick, t as tv, b as _appConfig, d as useAppConfig, x as UAvatar, w as UIcon, z as get, H as ULink, I as pickLinkProps, J as ULinkBase, K as useState, e as __nuxt_component_2$1 } from './server.mjs';
-import { defineComponent, useSlots, unref, mergeProps, withCtx, renderSlot, createBlock, createCommentVNode, createVNode, openBlock, useSSRContext, computed, toRef, createTextVNode, toDisplayString, resolveDynamicComponent, createSlots, Fragment, renderList, ref } from 'vue';
+import { r as reactivePick, t as tv, e as _appConfig, f as useAppConfig, k as UAvatar, j as UIcon, l as get, M as ULink, N as pickLinkProps, O as ULinkBase, Q as useState, C as ClientRoutes, b as __nuxt_component_2$1 } from './server.mjs';
+import { defineComponent, useSlots, unref, mergeProps, withCtx, renderSlot, createBlock, createCommentVNode, createVNode, openBlock, useSSRContext, computed, toRef, createTextVNode, toDisplayString, resolveDynamicComponent, createSlots, Fragment, renderList } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
 import { useForwardPropsEmits, CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuRoot, NavigationMenuList, NavigationMenuIndicator, NavigationMenuViewport, Primitive } from 'reka-ui';
 import { c as createReusableTemplate } from './index.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
-import { C as ClientRoutes } from './RoutesEnum.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -1832,19 +1831,32 @@ function useMenuStore() {
     },
     {
       label: "Landing Page",
-      icon: "i-lucide-circle-help",
+      icon: "fluent-mdl2:page",
       to: ClientRoutes.LandingPage
     },
     {
       label: "Blending",
-      icon: "i-lucide-circle-help",
+      icon: "material-symbols-light:blender",
       to: ClientRoutes.Blending
+    },
+    {
+      label: "Sheet",
+      icon: "i-lucide-file-spreadsheet",
+      to: ClientRoutes.Sheet
+    },
+    {
+      label: "Serial Number",
+      icon: "i-lucide-barcode",
+      to: ClientRoutes.SerialNumber
+    },
+    {
+      label: "港湖集中主日",
+      icon: "i-lucide-video",
+      to: ClientRoutes.MeetingCenter
     }
   ]);
-  const getMenu = () => menu.value;
-  return {
-    getMenu
-  };
+  const getMenu = computed(() => menu.value);
+  return { getMenu };
 }
 
 const _sfc_main = /* @__PURE__ */ defineComponent({
@@ -1852,7 +1864,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   setup(__props) {
     const menuStore = useMenuStore();
-    const items = ref(menuStore.getMenu());
+    const { getMenu } = menuStore;
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UDropdownMenu = __nuxt_component_1;
       const _component_UButton = __nuxt_component_2$1;
@@ -1860,7 +1872,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UContainer = __nuxt_component_3;
       _push(`<div${ssrRenderAttrs(_attrs)}><header class="flex items-center justify-between bg-gray-100"><h1 class="p-5"> LOGO </h1><div class="md:hidden">`);
       _push(ssrRenderComponent(_component_UDropdownMenu, {
-        items: unref(items),
+        items: unref(getMenu),
         ui: {
           content: "w-48"
         }
@@ -1885,7 +1897,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       _push(`</div></header><div class="flex h-[calc(100vh-64px)]">`);
       _push(ssrRenderComponent(_component_UNavigationMenu, {
         orientation: "vertical",
-        items: unref(items),
+        items: unref(getMenu),
         class: "data-[orientation=vertical]:w-48 m-3 md:block hidden"
       }, null, _parent));
       _push(ssrRenderComponent(_component_UContainer, { class: "flex-1 m-3" }, {
