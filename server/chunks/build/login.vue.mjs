@@ -1,5 +1,5 @@
 import { _ as __nuxt_component_0$1 } from './Tabs.vue.mjs';
-import { w as useToast, b as __nuxt_component_2$1, x as useCookie, s as navigateTo, C as ClientRoutes, y as CookieEnums } from './server.mjs';
+import { x as useToast, b as __nuxt_component_2$1, y as useCookie, s as navigateTo, C as ClientRoutes, z as CookieEnums } from './server.mjs';
 import { defineComponent, useModel, mergeProps, withCtx, createVNode, ref, withAsyncContext, unref, useSSRContext } from 'vue';
 import { ssrRenderComponent } from 'vue/server-renderer';
 import { u as useAuthApi } from './useAuthApi.mjs';

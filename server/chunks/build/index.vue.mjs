@@ -1,5 +1,4 @@
-import { _ as __nuxt_component_4 } from './Card.vue.mjs';
-import { _ as __nuxt_component_1 } from './Modal.vue.mjs';
+import { _ as __nuxt_component_4, a as __nuxt_component_1 } from './Modal.vue.mjs';
 import { U as UserRequestUrl, b as __nuxt_component_2 } from './server.mjs';
 import { _ as __nuxt_component_0, a as __nuxt_component_1$1, b as __nuxt_component_2$1 } from './Input.vue.mjs';
 import { defineComponent, ref, withAsyncContext, watch, mergeProps, withCtx, unref, createVNode, toDisplayString, createBlock, createCommentVNode, openBlock, useSSRContext } from 'vue';

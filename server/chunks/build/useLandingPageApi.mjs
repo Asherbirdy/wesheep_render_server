@@ -1,5 +1,5 @@
 import { u as useRequestApi } from './useRequestApi.mjs';
-import { U as UserRequestUrl, P as PublicRequestUrl } from './server.mjs';
+import { U as UserRequestUrl, w as PublicRequestUrl, c as useNuxtApp } from './server.mjs';
 
 const useLandingPageApi = {
   /*
@@ -16,10 +16,15 @@ const useLandingPageApi = {
   /*
     * GET
   */
-  getAll: async () => await useRequestApi(UserRequestUrl.LandingPageGetALL, {
-    method: "GET",
-    server: false
-  }),
+  getAll: async () => {
+    const nuxtApp = useNuxtApp();
+    return await useRequestApi(UserRequestUrl.LandingPageGetALL, {
+      method: "GET",
+      server: false,
+      key: UserRequestUrl.LandingPageGetALL,
+      getCachedData: (key) => nuxtApp.payload.data[key] || nuxtApp.static.data[key]
+    });
+  },
   /*
     * GET
   */
@@ -44,6 +49,18 @@ const useLandingPageApi = {
       watch: false,
       body: payload.body
     }
+  ),
+  /*
+    * EDIT
+  */
+  editHtmlById: async (payload) => await useRequestApi(
+    `${UserRequestUrl.LandingPageEditHtmlById}/?landingPageId=${payload.query.landingPageId}`
+  ),
+  /*
+    * DELETE
+  */
+  deleteById: async (payload) => await useRequestApi(
+    `${UserRequestUrl.LandingPage}/?landingPageId=${payload.query.landingPageId}`
   )
 };
 

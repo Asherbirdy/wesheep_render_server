@@ -1,5 +1,5 @@
 import { u as useRequestApi } from './useRequestApi.mjs';
-import { U as UserRequestUrl, P as PublicRequestUrl } from './server.mjs';
+import { U as UserRequestUrl, w as PublicRequestUrl } from './server.mjs';
 
 const useAuthApi = {
   /*

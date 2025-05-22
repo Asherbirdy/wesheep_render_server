@@ -1,14 +1,15 @@
-import { p as useLocale, t as tv, q as reactiveOmit, e as _appConfig, b as __nuxt_component_2, s as navigateTo } from './server.mjs';
+import { b as __nuxt_component_2, o as refreshNuxtData, U as UserRequestUrl, p as useLocale, t as tv, q as reactiveOmit, e as _appConfig, P as PublicRoutes, s as navigateTo, C as ClientRoutes } from './server.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
-import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
-import { defineComponent, mergeModels, useSlots, computed, useModel, unref, mergeProps, withCtx, createVNode, createBlock, createCommentVNode, openBlock, renderSlot, createTextVNode, toDisplayString, Fragment, renderList, useSSRContext, useTemplateRef, withAsyncContext, h } from 'vue';
+import { _ as __nuxt_component_1$2 } from './DropdownMenu.vue.mjs';
+import { defineComponent, ref, withAsyncContext, unref, withCtx, createVNode, mergeModels, useSlots, computed, useModel, mergeProps, createBlock, createCommentVNode, openBlock, renderSlot, createTextVNode, toDisplayString, Fragment, renderList, useSSRContext, useTemplateRef, h } from 'vue';
 import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderAttrs } from 'vue/server-renderer';
 import { Primitive } from 'reka-ui';
 import { I as upperFirst } from '../nitro/nitro.mjs';
 import { useVueTable, getExpandedRowModel, getSortedRowModel, getFilteredRowModel, getCoreRowModel, FlexRender } from '@tanstack/vue-table';
-import { _ as __nuxt_component_4 } from './Card.vue.mjs';
+import { a as __nuxt_component_1, _ as __nuxt_component_4 } from './Modal.vue.mjs';
 import { u as useLandingPageApi } from './useLandingPageApi.mjs';
 import { u as useWindowSize$1 } from './index.mjs';
+import { _ as __nuxt_component_0, a as __nuxt_component_1$1, b as __nuxt_component_2$1 } from './Input.vue.mjs';
 import 'pinia';
 import 'vue-router';
 import 'tailwindcss/colors';
@@ -32,6 +33,158 @@ import 'node:url';
 import '@iconify/utils';
 import 'consola';
 import './useRequestApi.mjs';
+
+const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+  __name: "AddLandingPageComponent",
+  __ssrInlineRender: true,
+  async setup(__props) {
+    let __temp, __restore;
+    const state = ref({
+      data: {
+        title: ""
+      },
+      feature: {
+        modal: {
+          open: false
+        }
+      }
+    });
+    const {
+      execute: CreateLandingPageRequest,
+      status: CreateLandingPageStatus
+    } = ([__temp, __restore] = withAsyncContext(() => useLandingPageApi.create({
+      title: state.value.data.title
+    })), __temp = await __temp, __restore(), __temp);
+    const handleSubmit = async () => {
+      await CreateLandingPageRequest();
+      await refreshNuxtData(UserRequestUrl.LandingPageGetALL);
+      state.value.feature.modal.open = false;
+    };
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_UButton = __nuxt_component_2;
+      const _component_UModal = __nuxt_component_1;
+      const _component_UForm = __nuxt_component_0;
+      const _component_UFormField = __nuxt_component_1$1;
+      const _component_UInput = __nuxt_component_2$1;
+      _push(`<!--[-->`);
+      _push(ssrRenderComponent(_component_UButton, {
+        label: "新增頁面",
+        onClick: ($event) => unref(state).feature.modal.open = true
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_UModal, {
+        open: unref(state).feature.modal.open,
+        "onUpdate:open": ($event) => unref(state).feature.modal.open = $event,
+        title: "新增頁面",
+        ui: { footer: "justify-end" }
+      }, {
+        body: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_UForm, {
+              ui: { root: "space-y-4" },
+              onSubmit: handleSubmit
+            }, {
+              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(ssrRenderComponent(_component_UFormField, {
+                    label: "名稱",
+                    name: "title"
+                  }, {
+                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(ssrRenderComponent(_component_UInput, {
+                          modelValue: unref(state).data.title,
+                          "onUpdate:modelValue": ($event) => unref(state).data.title = $event,
+                          label: "標題",
+                          ui: { root: "w-full" }
+                        }, null, _parent4, _scopeId3));
+                      } else {
+                        return [
+                          createVNode(_component_UInput, {
+                            modelValue: unref(state).data.title,
+                            "onUpdate:modelValue": ($event) => unref(state).data.title = $event,
+                            label: "標題",
+                            ui: { root: "w-full" }
+                          }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                } else {
+                  return [
+                    createVNode(_component_UFormField, {
+                      label: "名稱",
+                      name: "title"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(_component_UInput, {
+                          modelValue: unref(state).data.title,
+                          "onUpdate:modelValue": ($event) => unref(state).data.title = $event,
+                          label: "標題",
+                          ui: { root: "w-full" }
+                        }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                      ]),
+                      _: 1
+                    })
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_UForm, {
+                ui: { root: "space-y-4" },
+                onSubmit: handleSubmit
+              }, {
+                default: withCtx(() => [
+                  createVNode(_component_UFormField, {
+                    label: "名稱",
+                    name: "title"
+                  }, {
+                    default: withCtx(() => [
+                      createVNode(_component_UInput, {
+                        modelValue: unref(state).data.title,
+                        "onUpdate:modelValue": ($event) => unref(state).data.title = $event,
+                        label: "標題",
+                        ui: { root: "w-full" }
+                      }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                    ]),
+                    _: 1
+                  })
+                ]),
+                _: 1
+              })
+            ];
+          }
+        }),
+        footer: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_UButton, {
+              label: "送出",
+              variant: "outline",
+              disabled: !unref(state).data.title,
+              loading: unref(CreateLandingPageStatus) === "pending",
+              onClick: handleSubmit
+            }, null, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_UButton, {
+                label: "送出",
+                variant: "outline",
+                disabled: !unref(state).data.title,
+                loading: unref(CreateLandingPageStatus) === "pending",
+                onClick: handleSubmit
+              }, null, 8, ["disabled", "loading"])
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`<!--]-->`);
+    };
+  }
+});
 
 const theme = {
   "slots": {
@@ -578,9 +731,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const table = useTemplateRef("table");
     const UButton = __nuxt_component_2;
     const UBadge$1 = UBadge;
-    const UDropdownMenu = __nuxt_component_1;
+    const UDropdownMenu = __nuxt_component_1$2;
     const { data: LandingPageResponse } = ([__temp, __restore] = withAsyncContext(() => useLandingPageApi.getAll()), __temp = await __temp, __restore(), __temp);
     const { isMdSize } = useWindowSize();
+    const urlBase = computed(() => (void 0).location.origin);
     const columns = [
       {
         accessorKey: "isActive",
@@ -625,43 +779,40 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               label: "Actions"
             },
             {
-              label: "前往頁面",
+              label: "文字編輯器",
               onSelect() {
-                navigateTo(`/lands/${row.original._id}`);
-              }
-            },
-            {
-              label: "前往編輯",
-              onSelect() {
-                navigateTo(`/C/landingPage/editor/${row.original._id}`);
+                navigateTo(`${ClientRoutes.LandingPageEditor}/${row.original._id}`);
               }
             }
-            // {
-            //   label: !row.original.isActive ? '使網站上線' : '使網站下線',
-            //   onSelect() {
-            //   },
-            // }
           ];
-          return h("div", { class: "text-right" }, h(UDropdownMenu, {
-            "content": { align: "end" },
-            items,
-            "aria-label": "Actions dropdown"
-          }, () => h(UButton, {
-            "icon": "i-lucide-ellipsis-vertical",
-            "color": "neutral",
-            "variant": "ghost",
-            "class": "ml-auto",
-            "aria-label": "Actions dropdown"
-          })));
+          return h(
+            "div",
+            { class: "text-right" },
+            h(UDropdownMenu, {
+              "content": { align: "end" },
+              items,
+              "aria-label": "Actions dropdown"
+            }, () => h(
+              UButton,
+              {
+                "icon": "i-lucide-ellipsis-vertical",
+                "color": "neutral",
+                "variant": "ghost",
+                "class": "ml-auto",
+                "aria-label": "Actions dropdown"
+              }
+            ))
+          );
         }
       }
     ];
-    const urlBase = computed(() => (void 0).location.origin);
     return (_ctx, _push, _parent, _attrs) => {
       var _a, _b;
       const _component_UTable = __nuxt_component_3;
       const _component_UCard = __nuxt_component_4;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex-1 divide-y divide-(--ui-border-accented) w-full" }, _attrs))}>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex-1 w-full" }, _attrs))}><div class="flex justify-between mb-3"><p class="text-lg font-bold"> Landing Page </p>`);
+      _push(ssrRenderComponent(unref(_sfc_main$2), null, null, _parent));
+      _push(`</div>`);
       if (!unref(isMdSize)) {
         _push(ssrRenderComponent(_component_UTable, {
           ref_key: "table",
@@ -683,11 +834,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           _: 1
         }, _parent));
       } else {
-        _push(`<div><!--[-->`);
+        _push(`<div class="flex flex-col justify-center items-center"><!--[-->`);
         ssrRenderList((_b = unref(LandingPageResponse)) == null ? void 0 : _b.data, (row) => {
           _push(ssrRenderComponent(_component_UCard, {
             key: row._id,
-            class: "mb-3 max-h-48"
+            class: "mb-3 max-h-48 max-w-[320px]"
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
@@ -722,36 +873,33 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   }),
                   _: 2
                 }, _parent2, _scopeId));
-                _push2(`</div><h2 class="text-lg font-bold"${_scopeId}>${ssrInterpolate(row.title)}</h2><p${_scopeId}> ID: ${ssrInterpolate(row.urlPathId)}</p><p${_scopeId}> 網址: ${ssrInterpolate(`${unref(urlBase)}/lands/${row._id}`)}</p><div class="flex gap-2"${_scopeId}>`);
+                _push2(`</div><h2 class="text-lg font-bold"${_scopeId}>${ssrInterpolate(row.title)}</h2><p${_scopeId}> ID: ${ssrInterpolate(row.urlPathId)}</p><p class="text-sm break-words"${_scopeId}> 網址: ${ssrInterpolate(`${unref(urlBase)}${unref(PublicRoutes).LandingPage}/${row._id}`)}</p><div class="flex gap-2 justify-end"${_scopeId}>`);
                 _push2(ssrRenderComponent(unref(UButton), {
-                  block: "",
                   variant: "soft",
-                  size: "sm",
-                  onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(urlBase)}/lands/${row._id}`)
+                  size: "sm"
                 }, {
                   default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(` 前往頁面 `);
+                      _push3(` 編輯標題 `);
                     } else {
                       return [
-                        createTextVNode(" 前往頁面 ")
+                        createTextVNode(" 編輯標題 ")
                       ];
                     }
                   }),
                   _: 2
                 }, _parent2, _scopeId));
                 _push2(ssrRenderComponent(unref(UButton), {
-                  block: "",
                   variant: "soft",
                   size: "sm",
-                  onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`/C/landingPage/editor/${row._id}`)
+                  onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(ClientRoutes).LandingPageEditor}/${row._id}`)
                 }, {
                   default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
-                      _push3(` 前往編輯 `);
+                      _push3(` 文字編輯器 `);
                     } else {
                       return [
-                        createTextVNode(" 前往編輯 ")
+                        createTextVNode(" 文字編輯器 ")
                       ];
                     }
                   }),
@@ -782,27 +930,24 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   ]),
                   createVNode("h2", { class: "text-lg font-bold" }, toDisplayString(row.title), 1),
                   createVNode("p", null, " ID: " + toDisplayString(row.urlPathId), 1),
-                  createVNode("p", null, " 網址: " + toDisplayString(`${unref(urlBase)}/lands/${row._id}`), 1),
-                  createVNode("div", { class: "flex gap-2" }, [
+                  createVNode("p", { class: "text-sm break-words" }, " 網址: " + toDisplayString(`${unref(urlBase)}${unref(PublicRoutes).LandingPage}/${row._id}`), 1),
+                  createVNode("div", { class: "flex gap-2 justify-end" }, [
                     createVNode(unref(UButton), {
-                      block: "",
                       variant: "soft",
-                      size: "sm",
-                      onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(urlBase)}/lands/${row._id}`)
+                      size: "sm"
                     }, {
                       default: withCtx(() => [
-                        createTextVNode(" 前往頁面 ")
+                        createTextVNode(" 編輯標題 ")
                       ]),
-                      _: 2
-                    }, 1032, ["onClick"]),
+                      _: 1
+                    }),
                     createVNode(unref(UButton), {
-                      block: "",
                       variant: "soft",
                       size: "sm",
-                      onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`/C/landingPage/editor/${row._id}`)
+                      onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(ClientRoutes).LandingPageEditor}/${row._id}`)
                     }, {
                       default: withCtx(() => [
-                        createTextVNode(" 前往編輯 ")
+                        createTextVNode(" 文字編輯器 ")
                       ]),
                       _: 2
                     }, 1032, ["onClick"])

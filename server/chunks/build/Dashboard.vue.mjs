@@ -1,5 +1,5 @@
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
-import { r as reactivePick, t as tv, e as _appConfig, f as useAppConfig, k as UAvatar, j as UIcon, l as get, M as ULink, N as pickLinkProps, O as ULinkBase, v as useRoute, Q as useState, C as ClientRoutes, b as __nuxt_component_2$1 } from './server.mjs';
+import { r as reactivePick, t as tv, e as _appConfig, f as useAppConfig, k as UAvatar, j as UIcon, l as get, N as ULink, O as pickLinkProps, Q as ULinkBase, v as useRoute, R as useState, C as ClientRoutes, b as __nuxt_component_2$1 } from './server.mjs';
 import { defineComponent, useSlots, unref, mergeProps, withCtx, renderSlot, createBlock, createCommentVNode, createVNode, openBlock, useSSRContext, computed, toRef, createTextVNode, toDisplayString, resolveDynamicComponent, createSlots, Fragment, renderList } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
 import { useForwardPropsEmits, CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuRoot, NavigationMenuList, NavigationMenuIndicator, NavigationMenuViewport, Primitive } from 'reka-ui';
@@ -1832,6 +1832,12 @@ function useMenuStore() {
       active: computed(() => route.path === ClientRoutes.Home)
     },
     {
+      label: "Serial Number",
+      icon: "i-lucide-barcode",
+      to: ClientRoutes.SerialNumber,
+      active: computed(() => route.path === ClientRoutes.SerialNumber)
+    },
+    {
       label: "Landing Page",
       icon: "fluent-mdl2:page",
       to: ClientRoutes.LandingPage,
@@ -1843,18 +1849,12 @@ function useMenuStore() {
       to: ClientRoutes.Blending,
       active: computed(() => route.path === ClientRoutes.Blending)
     },
-    {
-      label: "Sheet",
-      icon: "i-lucide-file-spreadsheet",
-      to: ClientRoutes.Sheet,
-      active: computed(() => route.path === ClientRoutes.Sheet)
-    },
-    {
-      label: "Serial Number",
-      icon: "i-lucide-barcode",
-      to: ClientRoutes.SerialNumber,
-      active: computed(() => route.path === ClientRoutes.SerialNumber)
-    },
+    // {
+    //   label: 'Sheet',
+    //   icon: 'i-lucide-file-spreadsheet',
+    //   to: ClientRoutes.Sheet,
+    //   active: computed(() => route.path === ClientRoutes.Sheet),
+    // },
     {
       label: "港湖集中主日",
       icon: "i-lucide-video",

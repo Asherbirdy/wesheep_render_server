@@ -1415,6 +1415,8 @@ var UserRequestUrl = /* @__PURE__ */ ((UserRequestUrl2) => {
   UserRequestUrl2["LandingPageSetUrlPath"] = "/landingPage/setUrlPath";
   UserRequestUrl2["LandingPageGetALL"] = "/landingPage/all";
   UserRequestUrl2["LandingPageEditInfoById"] = "/landingPage/editPageInfoById";
+  UserRequestUrl2["LandingPageEditHtmlById"] = "/landingPage/editHtmlById";
+  UserRequestUrl2["LandingPage"] = "/landingPage";
   UserRequestUrl2["BlendingCreateFromSheet"] = "/blending/createFromSheet";
   UserRequestUrl2["BlendingGetAll"] = "/blending/getAll";
   UserRequestUrl2["SheetCreate"] = "/sheet/create";
@@ -1432,6 +1434,7 @@ var UserRequestUrl = /* @__PURE__ */ ((UserRequestUrl2) => {
 var PublicRoutes = /* @__PURE__ */ ((PublicRoutes2) => {
   PublicRoutes2["Home"] = "/";
   PublicRoutes2["Login"] = "/login";
+  PublicRoutes2["LandingPage"] = "/lands";
   return PublicRoutes2;
 })(PublicRoutes || {});
 const ClientBase = "/C";
@@ -1453,7 +1456,7 @@ const Fetch_QkuBTWVsFvkT75X0VAWJWOBFptpb_L7wK_BUtKx_hWQ = defineNuxtPlugin(() =>
       const PrivateApiUrls = Object.values(UserRequestUrl).map(
         (url) => `${config.public.API_URL}${url}`
       );
-      if (PrivateApiUrls.includes(request)) {
+      if (PrivateApiUrls.some((url) => request.startsWith(url))) {
         const headers = await getAuthHeaders();
         options.headers = { ...options.headers, ...headers };
         return;
@@ -5248,5 +5251,5 @@ const server = /*#__PURE__*/Object.freeze({
   default: entry$1
 });
 
-export { injectLocal as $, formInputsInjectionKey as A, formLoadingInjectionKey as B, ClientRoutes as C, formOptionsInjectionKey as D, inputIdInjectionKey as E, formFieldInjectionKey as F, looseToNumber as G, useRouter as H, fetchDefaults as I, useAsyncData as J, useRequestFetch as K, useRuntimeConfig as L, ULink as M, pickLinkProps as N, ULinkBase as O, PublicRequestUrl as P, useState as Q, PublicRoutes as R, createSharedComposable as S, omit as T, UserRequestUrl as U, tryOnMounted as V, toArray as W, watchImmediate as X, tryOnScopeDispose as Y, pxValue as Z, __nuxt_component_0$1 as _, __nuxt_component_0 as a, isObject as a0, makeDestructurable as a1, camelize as a2, server as a3, __nuxt_component_2$1 as b, useNuxtApp as c, useAvatarGroup as d, _appConfig as e, useAppConfig as f, useFormField as g, useButtonGroup as h, useComponentIcons as i, UIcon as j, UAvatar as k, get as l, compare as m, useNuxtData as n, refreshNuxtData as o, useLocale as p, reactiveOmit as q, reactivePick as r, navigateTo as s, tv as t, useHead as u, useRoute as v, useToast as w, useCookie as x, CookieEnums as y, formBusInjectionKey as z };
+export { injectLocal as $, formBusInjectionKey as A, formInputsInjectionKey as B, ClientRoutes as C, formLoadingInjectionKey as D, formOptionsInjectionKey as E, inputIdInjectionKey as F, formFieldInjectionKey as G, looseToNumber as H, useRouter as I, fetchDefaults as J, useAsyncData as K, useRequestFetch as L, useRuntimeConfig as M, ULink as N, pickLinkProps as O, PublicRoutes as P, ULinkBase as Q, useState as R, createSharedComposable as S, omit as T, UserRequestUrl as U, tryOnMounted as V, toArray as W, watchImmediate as X, tryOnScopeDispose as Y, pxValue as Z, __nuxt_component_0$1 as _, __nuxt_component_0 as a, isObject as a0, makeDestructurable as a1, camelize as a2, server as a3, __nuxt_component_2$1 as b, useNuxtApp as c, useAvatarGroup as d, _appConfig as e, useAppConfig as f, useFormField as g, useButtonGroup as h, useComponentIcons as i, UIcon as j, UAvatar as k, get as l, compare as m, useNuxtData as n, refreshNuxtData as o, useLocale as p, reactiveOmit as q, reactivePick as r, navigateTo as s, tv as t, useHead as u, useRoute as v, PublicRequestUrl as w, useToast as x, useCookie as y, CookieEnums as z };
 //# sourceMappingURL=server.mjs.map
