@@ -1,6 +1,6 @@
 import { defineComponent, useId, inject, provide, ref, readonly, computed, createVNode, resolveDynamicComponent, unref, mergeProps, withCtx, renderSlot, useSSRContext, useSlots, createTextVNode, toDisplayString, createBlock, createCommentVNode, openBlock, mergeModels, useModel } from 'vue';
 import { ssrRenderVNode, ssrRenderSlot, ssrRenderComponent, ssrRenderClass, ssrInterpolate, ssrRenderAttr, ssrRenderAttrs } from 'vue/server-renderer';
-import { u as useEventBus } from './index.mjs';
+import { a as useEventBus } from './index.mjs';
 import { z as formBusInjectionKey, A as formInputsInjectionKey, B as formLoadingInjectionKey, D as formOptionsInjectionKey, t as tv, e as _appConfig, E as inputIdInjectionKey, F as formFieldInjectionKey, g as useFormField, h as useButtonGroup, i as useComponentIcons, j as UIcon, k as UAvatar, G as looseToNumber } from './server.mjs';
 import { Primitive, Label } from 'reka-ui';
 

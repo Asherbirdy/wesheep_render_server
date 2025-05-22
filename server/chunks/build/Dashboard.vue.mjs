@@ -1,5 +1,5 @@
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
-import { r as reactivePick, t as tv, e as _appConfig, f as useAppConfig, k as UAvatar, j as UIcon, l as get, M as ULink, N as pickLinkProps, O as ULinkBase, Q as useState, C as ClientRoutes, b as __nuxt_component_2$1 } from './server.mjs';
+import { r as reactivePick, t as tv, e as _appConfig, f as useAppConfig, k as UAvatar, j as UIcon, l as get, M as ULink, N as pickLinkProps, O as ULinkBase, v as useRoute, Q as useState, C as ClientRoutes, b as __nuxt_component_2$1 } from './server.mjs';
 import { defineComponent, useSlots, unref, mergeProps, withCtx, renderSlot, createBlock, createCommentVNode, createVNode, openBlock, useSSRContext, computed, toRef, createTextVNode, toDisplayString, resolveDynamicComponent, createSlots, Fragment, renderList } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
 import { useForwardPropsEmits, CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuRoot, NavigationMenuList, NavigationMenuIndicator, NavigationMenuViewport, Primitive } from 'reka-ui';
@@ -1823,36 +1823,43 @@ _sfc_main$1.setup = (props, ctx) => {
 const __nuxt_component_3 = Object.assign(_sfc_main$1, { __name: "UContainer" });
 
 function useMenuStore() {
+  const route = useRoute();
   const menu = useState("menu", () => [
     {
       label: "Home",
       icon: "i-lucide-home",
-      to: ClientRoutes.Home
+      to: ClientRoutes.Home,
+      active: computed(() => route.path === ClientRoutes.Home)
     },
     {
       label: "Landing Page",
       icon: "fluent-mdl2:page",
-      to: ClientRoutes.LandingPage
+      to: ClientRoutes.LandingPage,
+      active: computed(() => route.path.startsWith(ClientRoutes.LandingPage))
     },
     {
       label: "Blending",
       icon: "material-symbols-light:blender",
-      to: ClientRoutes.Blending
+      to: ClientRoutes.Blending,
+      active: computed(() => route.path === ClientRoutes.Blending)
     },
     {
       label: "Sheet",
       icon: "i-lucide-file-spreadsheet",
-      to: ClientRoutes.Sheet
+      to: ClientRoutes.Sheet,
+      active: computed(() => route.path === ClientRoutes.Sheet)
     },
     {
       label: "Serial Number",
       icon: "i-lucide-barcode",
-      to: ClientRoutes.SerialNumber
+      to: ClientRoutes.SerialNumber,
+      active: computed(() => route.path === ClientRoutes.SerialNumber)
     },
     {
       label: "港湖集中主日",
       icon: "i-lucide-video",
-      to: ClientRoutes.MeetingCenter
+      to: ClientRoutes.MeetingCenter,
+      active: computed(() => route.path === ClientRoutes.MeetingCenter)
     }
   ]);
   const getMenu = computed(() => menu.value);

@@ -1,5 +1,5 @@
-import { shallowReactive, reactive, effectScope, getCurrentScope, hasInjectionContext, getCurrentInstance, toRef as toRef$1, inject, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, computed, ref, defineComponent, unref, h, Suspense, nextTick, mergeProps, provide, onScopeDispose, toRefs, toValue, readonly, customRef, onServerPrefetch, useSSRContext, watch, withCtx, createVNode, resolveDynamicComponent, createBlock, renderSlot, openBlock, toDisplayString, resolveComponent, useSlots, createCommentVNode, Fragment, createTextVNode, withModifiers, renderList, markRaw, useId, onErrorCaptured, createApp } from 'vue';
-import { i as createHooks, j as getContext, c as createError$1, t as toRouteMatcher, k as createRouter, l as defu, m as hasProtocol, n as joinURL, w as withQuery, s as sanitizeStatusCode, o as isScriptProtocol, q as executeAsync, r as defuFn, v as klona, x as destr, y as parse, z as getRequestHeader, A as isEqual, B as setCookie, C as getCookie, D as deleteCookie, E as serialize, F as parseQuery, G as withTrailingSlash, H as withoutTrailingSlash } from '../nitro/nitro.mjs';
+import { shallowReactive, reactive, effectScope, getCurrentScope, hasInjectionContext, getCurrentInstance, toRef as toRef$1, inject, shallowRef, isReadonly, isRef, isShallow, isReactive, toRaw, defineAsyncComponent, computed, ref, defineComponent, unref, h, Suspense, nextTick, mergeProps, provide, onScopeDispose, watch, toRefs, toValue, readonly, customRef, onServerPrefetch, useSSRContext, withCtx, createVNode, resolveDynamicComponent, createBlock, renderSlot, openBlock, toDisplayString, resolveComponent, useSlots, createCommentVNode, Fragment, createTextVNode, withModifiers, renderList, markRaw, useId, onErrorCaptured, createApp } from 'vue';
+import { i as createHooks, j as getContext, c as createError$1, t as toRouteMatcher, k as createRouter, l as defu, m as hasProtocol, n as isScriptProtocol, o as joinURL, w as withQuery, s as sanitizeStatusCode, q as executeAsync, r as defuFn, v as klona, x as destr, y as parse, z as getRequestHeader, A as isEqual, B as setCookie, C as getCookie, D as deleteCookie, E as serialize, F as parseQuery, G as withTrailingSlash, H as withoutTrailingSlash } from '../nitro/nitro.mjs';
 import { shouldHydrate, createPinia, setActivePinia } from 'pinia';
 import { START_LOCATION, createMemoryHistory, createRouter as createRouter$1, useRoute as useRoute$1, RouterView } from 'vue-router';
 import colors from 'tailwindcss/colors';
@@ -297,7 +297,7 @@ const generateRouteKey$1 = (routeProps, override) => {
   const source = override ?? (matchedRoute == null ? void 0 : matchedRoute.meta.key) ?? (matchedRoute && interpolatePath(routeProps.route, matchedRoute));
   return typeof source === "function" ? source(routeProps.route) : source;
 };
-function toArray(value) {
+function toArray$1(value) {
   return Array.isArray(value) ? value : [value];
 }
 
@@ -739,7 +739,7 @@ const plugin$1 = defineNuxtPlugin({
           if (!componentMiddleware) {
             continue;
           }
-          for (const entry of toArray(componentMiddleware)) {
+          for (const entry of toArray$1(componentMiddleware)) {
             middlewareEntries.add(entry);
           }
         }
@@ -1893,6 +1893,17 @@ function tryOnScopeDispose(fn) {
   }
   return false;
 }
+const localProvidedStateMap = /* @__PURE__ */ new WeakMap();
+const injectLocal = (...args) => {
+  var _a;
+  const key = args[0];
+  const instance = (_a = getCurrentInstance()) == null ? void 0 : _a.proxy;
+  if (instance == null && !hasInjectionContext())
+    throw new Error("injectLocal must be called in setup");
+  if (instance && localProvidedStateMap.has(instance) && key in localProvidedStateMap.get(instance))
+    return localProvidedStateMap.get(instance)[key];
+  return inject(...args);
+};
 function createSharedComposable(composable) {
   let subscribers = 0;
   let state;
@@ -1976,6 +1987,8 @@ function reactiveOmit(obj, ...keys) {
   return reactiveComputed(() => typeof predicate === "function" ? Object.fromEntries(Object.entries(toRefs(obj)).filter(([k, v]) => !predicate(toValue(v), k))) : Object.fromEntries(Object.entries(toRefs(obj)).filter((e) => !flatKeys.includes(e[0]))));
 }
 typeof WorkerGlobalScope !== "undefined" && globalThis instanceof WorkerGlobalScope;
+const toString = Object.prototype.toString;
+const isObject = (val) => toString.call(val) === "[object Object]";
 const noop = () => {
 };
 function toRef(...args) {
@@ -2040,6 +2053,12 @@ function debounceFilter(ms, options = {}) {
   };
   return filter;
 }
+function pxValue(px) {
+  return px.endsWith("rem") ? Number.parseFloat(px) * 16 : Number.parseFloat(px);
+}
+function toArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
 function cacheStringFunction(fn) {
   const cache = /* @__PURE__ */ Object.create(null);
   return (str) => {
@@ -2051,10 +2070,32 @@ const camelizeRE = /-(\w)/g;
 const camelize = cacheStringFunction((str) => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : "");
 });
+function getLifeCycleTarget(target) {
+  return getCurrentInstance();
+}
 function useDebounceFn(fn, ms = 200, options = {}) {
   return createFilterWrapper(
     debounceFilter(ms, options),
     fn
+  );
+}
+function tryOnMounted(fn, sync = true, target) {
+  const instance = getLifeCycleTarget();
+  if (instance)
+    ;
+  else if (sync)
+    fn();
+  else
+    nextTick(fn);
+}
+function watchImmediate(source, cb, options) {
+  return watch(
+    source,
+    cb,
+    {
+      ...options,
+      immediate: true
+    }
   );
 }
 
@@ -5207,5 +5248,5 @@ const server = /*#__PURE__*/Object.freeze({
   default: entry$1
 });
 
-export { formInputsInjectionKey as A, formLoadingInjectionKey as B, ClientRoutes as C, formOptionsInjectionKey as D, inputIdInjectionKey as E, formFieldInjectionKey as F, looseToNumber as G, useRouter as H, fetchDefaults as I, useAsyncData as J, useRequestFetch as K, useRuntimeConfig as L, ULink as M, pickLinkProps as N, ULinkBase as O, PublicRequestUrl as P, useState as Q, PublicRoutes as R, createSharedComposable as S, omit as T, UserRequestUrl as U, makeDestructurable as V, camelize as W, server as X, __nuxt_component_0$1 as _, __nuxt_component_0 as a, __nuxt_component_2$1 as b, useNuxtApp as c, useAvatarGroup as d, _appConfig as e, useAppConfig as f, useFormField as g, useButtonGroup as h, useComponentIcons as i, UIcon as j, UAvatar as k, get as l, compare as m, useNuxtData as n, refreshNuxtData as o, useLocale as p, reactiveOmit as q, reactivePick as r, navigateTo as s, tv as t, useHead as u, useRoute as v, useToast as w, useCookie as x, CookieEnums as y, formBusInjectionKey as z };
+export { injectLocal as $, formInputsInjectionKey as A, formLoadingInjectionKey as B, ClientRoutes as C, formOptionsInjectionKey as D, inputIdInjectionKey as E, formFieldInjectionKey as F, looseToNumber as G, useRouter as H, fetchDefaults as I, useAsyncData as J, useRequestFetch as K, useRuntimeConfig as L, ULink as M, pickLinkProps as N, ULinkBase as O, PublicRequestUrl as P, useState as Q, PublicRoutes as R, createSharedComposable as S, omit as T, UserRequestUrl as U, tryOnMounted as V, toArray as W, watchImmediate as X, tryOnScopeDispose as Y, pxValue as Z, __nuxt_component_0$1 as _, __nuxt_component_0 as a, isObject as a0, makeDestructurable as a1, camelize as a2, server as a3, __nuxt_component_2$1 as b, useNuxtApp as c, useAvatarGroup as d, _appConfig as e, useAppConfig as f, useFormField as g, useButtonGroup as h, useComponentIcons as i, UIcon as j, UAvatar as k, get as l, compare as m, useNuxtData as n, refreshNuxtData as o, useLocale as p, reactiveOmit as q, reactivePick as r, navigateTo as s, tv as t, useHead as u, useRoute as v, useToast as w, useCookie as x, CookieEnums as y, formBusInjectionKey as z };
 //# sourceMappingURL=server.mjs.map

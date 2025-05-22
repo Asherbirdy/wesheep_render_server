@@ -1,9 +1,10 @@
-import { a as __nuxt_component_1, _ as __nuxt_component_0$1 } from './Modal.vue.mjs';
+import { _ as __nuxt_component_4 } from './Card.vue.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
 import { defineComponent, mergeModels, useModel, computed, unref, mergeProps, withCtx, renderSlot, createVNode, createBlock, createCommentVNode, openBlock, createTextVNode, toDisplayString, useSSRContext, useSlots, toRef, Fragment, renderList, ref, toRefs, withAsyncContext } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
 import { u as useRequestApi } from './useRequestApi.mjs';
 import { U as UserRequestUrl, c as useNuxtApp, d as useAvatarGroup, t as tv, e as _appConfig, f as useAppConfig, r as reactivePick, g as useFormField, h as useButtonGroup, i as useComponentIcons, j as UIcon, k as UAvatar, l as get, m as compare, n as useNuxtData, b as __nuxt_component_2, o as refreshNuxtData } from './server.mjs';
+import { _ as __nuxt_component_1 } from './Modal.vue.mjs';
 import { _ as __nuxt_component_0, a as __nuxt_component_1$1, b as __nuxt_component_2$1 } from './Input.vue.mjs';
 import { Primitive, Slot, useForwardPropsEmits, SelectRoot, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectGroup, SelectLabel, SelectSeparator, SelectItem, SelectItemText, SelectItemIndicator, SelectArrow } from 'reka-ui';
 import { l as defu } from '../nitro/nitro.mjs';
@@ -2209,7 +2210,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     [__temp, __restore] = withAsyncContext(() => useDistrictApi.getAll()), await __temp, __restore();
     return (_ctx, _push, _parent, _attrs) => {
       var _a;
-      const _component_UCard = __nuxt_component_0$1;
+      const _component_UCard = __nuxt_component_4;
       const _component_UBadge = UBadge;
       _push(`<div${ssrRenderAttrs(_attrs)}><div class="flex items-center gap-2 justify-between mb-4"><p class="text-md font-bold"> 序號列表 </p>`);
       _push(ssrRenderComponent(unref(_sfc_main$2), null, null, _parent));

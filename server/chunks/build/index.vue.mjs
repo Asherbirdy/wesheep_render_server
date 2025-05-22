@@ -1,7 +1,8 @@
-import { _ as __nuxt_component_0, a as __nuxt_component_1 } from './Modal.vue.mjs';
+import { _ as __nuxt_component_4 } from './Card.vue.mjs';
+import { _ as __nuxt_component_1 } from './Modal.vue.mjs';
 import { U as UserRequestUrl, b as __nuxt_component_2 } from './server.mjs';
-import { _ as __nuxt_component_0$1, a as __nuxt_component_1$1, b as __nuxt_component_2$1 } from './Input.vue.mjs';
-import { defineComponent, ref, withAsyncContext, watch, mergeProps, withCtx, unref, createVNode, toDisplayString, useSSRContext } from 'vue';
+import { _ as __nuxt_component_0, a as __nuxt_component_1$1, b as __nuxt_component_2$1 } from './Input.vue.mjs';
+import { defineComponent, ref, withAsyncContext, watch, mergeProps, withCtx, unref, createVNode, toDisplayString, createBlock, createCommentVNode, openBlock, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate } from 'vue/server-renderer';
 import { u as useAuthApi } from './useAuthApi.mjs';
 import { u as useRequestApi } from './useRequestApi.mjs';
@@ -94,10 +95,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return errors;
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_UCard = __nuxt_component_0;
+      const _component_UCard = __nuxt_component_4;
       const _component_UModal = __nuxt_component_1;
       const _component_UButton = __nuxt_component_2;
-      const _component_UForm = __nuxt_component_0$1;
+      const _component_UForm = __nuxt_component_0;
       const _component_UFormField = __nuxt_component_1$1;
       const _component_UInput = __nuxt_component_2$1;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex flex-col justify-between gap-4 h-full" }, _attrs))}>`);
@@ -105,15 +106,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l;
           if (_push2) {
-            _push2(`<h2${_scopeId}>姓名：${ssrInterpolate((_a = unref(UserInfoResponse)) == null ? void 0 : _a.user.name)}</h2><h2${_scopeId}>電子信箱：${ssrInterpolate((_b = unref(UserInfoResponse)) == null ? void 0 : _b.user.email)}</h2><h2${_scopeId}>區域：${ssrInterpolate((_c = unref(UserInfoResponse)) == null ? void 0 : _c.user.district.name)}</h2><h2${_scopeId}>Email驗證：${ssrInterpolate((_d = unref(UserInfoResponse)) == null ? void 0 : _d.user.emailVerified)}</h2><h2${_scopeId}>權限：${ssrInterpolate((_e = unref(UserInfoResponse)) == null ? void 0 : _e.user.role)}</h2><h2${_scopeId}>網頁權限：${ssrInterpolate((_f = unref(UserInfoResponse)) == null ? void 0 : _f.user.landingPageAccess)}</h2>`);
+            _push2(`<h2${_scopeId}>姓名：${ssrInterpolate((_a = unref(UserInfoResponse)) == null ? void 0 : _a.user.name)}</h2><h2${_scopeId}>電子信箱：${ssrInterpolate((_b = unref(UserInfoResponse)) == null ? void 0 : _b.user.email)}</h2><h2${_scopeId}>區域：${ssrInterpolate((_c = unref(UserInfoResponse)) == null ? void 0 : _c.user.district.name)}</h2><h2${_scopeId}>Email驗證：${ssrInterpolate(((_d = unref(UserInfoResponse)) == null ? void 0 : _d.user.emailVerified) ? "已驗證" : "未驗證")}</h2><h2${_scopeId}>權限：${ssrInterpolate((_e = unref(UserInfoResponse)) == null ? void 0 : _e.user.role)}</h2><h2${_scopeId}>部落格權限：${ssrInterpolate((_f = unref(UserInfoResponse)) == null ? void 0 : _f.user.landingPageAccess)}</h2>`);
           } else {
             return [
               createVNode("h2", null, "姓名：" + toDisplayString((_g = unref(UserInfoResponse)) == null ? void 0 : _g.user.name), 1),
               createVNode("h2", null, "電子信箱：" + toDisplayString((_h = unref(UserInfoResponse)) == null ? void 0 : _h.user.email), 1),
               createVNode("h2", null, "區域：" + toDisplayString((_i = unref(UserInfoResponse)) == null ? void 0 : _i.user.district.name), 1),
-              createVNode("h2", null, "Email驗證：" + toDisplayString((_j = unref(UserInfoResponse)) == null ? void 0 : _j.user.emailVerified), 1),
+              createVNode("h2", null, "Email驗證：" + toDisplayString(((_j = unref(UserInfoResponse)) == null ? void 0 : _j.user.emailVerified) ? "已驗證" : "未驗證"), 1),
               createVNode("h2", null, "權限：" + toDisplayString((_k = unref(UserInfoResponse)) == null ? void 0 : _k.user.role), 1),
-              createVNode("h2", null, "網頁權限：" + toDisplayString((_l = unref(UserInfoResponse)) == null ? void 0 : _l.user.landingPageAccess), 1)
+              createVNode("h2", null, "部落格權限：" + toDisplayString((_l = unref(UserInfoResponse)) == null ? void 0 : _l.user.landingPageAccess), 1)
             ];
           }
         }),
@@ -257,17 +258,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           }
         }),
         default: withCtx((_, _push2, _parent2, _scopeId) => {
+          var _a, _b;
           if (_push2) {
-            _push2(ssrRenderComponent(_component_UButton, {
-              label: "Email 驗證",
-              block: ""
-            }, null, _parent2, _scopeId));
-          } else {
-            return [
-              createVNode(_component_UButton, {
+            if (!((_a = unref(UserInfoResponse)) == null ? void 0 : _a.user.emailVerified)) {
+              _push2(ssrRenderComponent(_component_UButton, {
                 label: "Email 驗證",
                 block: ""
-              })
+              }, null, _parent2, _scopeId));
+            } else {
+              _push2(`<!---->`);
+            }
+          } else {
+            return [
+              !((_b = unref(UserInfoResponse)) == null ? void 0 : _b.user.emailVerified) ? (openBlock(), createBlock(_component_UButton, {
+                key: 0,
+                label: "Email 驗證",
+                block: ""
+              })) : createCommentVNode("", true)
             ];
           }
         }),

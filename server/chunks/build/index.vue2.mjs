@@ -6,7 +6,9 @@ import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrInterpolate, ssrR
 import { Primitive } from 'reka-ui';
 import { I as upperFirst } from '../nitro/nitro.mjs';
 import { useVueTable, getExpandedRowModel, getSortedRowModel, getFilteredRowModel, getCoreRowModel, FlexRender } from '@tanstack/vue-table';
+import { _ as __nuxt_component_4 } from './Card.vue.mjs';
 import { u as useLandingPageApi } from './useLandingPageApi.mjs';
+import { u as useWindowSize$1 } from './index.mjs';
 import 'pinia';
 import 'vue-router';
 import 'tailwindcss/colors';
@@ -19,7 +21,6 @@ import '@iconify/vue';
 import '@iconify/utils/lib/css/icon';
 import 'tailwind-variants';
 import 'reka-ui/namespaced';
-import './index.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -560,6 +561,15 @@ _sfc_main$1.setup = (props, ctx) => {
 };
 const __nuxt_component_3 = Object.assign(_sfc_main$1, { __name: "UTable" });
 
+const useWindowSize = () => {
+  const { width } = useWindowSize$1();
+  const mdWidth = 768;
+  const lgWidth = 1024;
+  const isMdSize = computed(() => width.value < mdWidth);
+  const isLgSize = computed(() => width.value < lgWidth);
+  return { isMdSize, isLgSize };
+};
+
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
   __ssrInlineRender: true,
@@ -570,6 +580,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const UBadge$1 = UBadge;
     const UDropdownMenu = __nuxt_component_1;
     const { data: LandingPageResponse } = ([__temp, __restore] = withAsyncContext(() => useLandingPageApi.getAll()), __temp = await __temp, __restore(), __temp);
+    const { isMdSize } = useWindowSize();
     const columns = [
       {
         accessorKey: "isActive",
@@ -645,29 +656,165 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }
       }
     ];
+    const urlBase = computed(() => (void 0).location.origin);
     return (_ctx, _push, _parent, _attrs) => {
-      var _a;
+      var _a, _b;
       const _component_UTable = __nuxt_component_3;
+      const _component_UCard = __nuxt_component_4;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex-1 divide-y divide-(--ui-border-accented) w-full" }, _attrs))}>`);
-      _push(ssrRenderComponent(_component_UTable, {
-        ref_key: "table",
-        ref: table,
-        data: (_a = unref(LandingPageResponse)) == null ? void 0 : _a.data,
-        columns,
-        sticky: "",
-        class: "h-96"
-      }, {
-        expanded: withCtx(({ row }, _push2, _parent2, _scopeId) => {
-          if (_push2) {
-            _push2(`<pre${_scopeId}>${ssrInterpolate(row.original)}</pre>`);
-          } else {
-            return [
-              createVNode("pre", null, toDisplayString(row.original), 1)
-            ];
-          }
-        }),
-        _: 1
-      }, _parent));
+      if (!unref(isMdSize)) {
+        _push(ssrRenderComponent(_component_UTable, {
+          ref_key: "table",
+          ref: table,
+          data: (_a = unref(LandingPageResponse)) == null ? void 0 : _a.data,
+          columns,
+          sticky: "",
+          class: "h-96"
+        }, {
+          expanded: withCtx(({ row }, _push2, _parent2, _scopeId) => {
+            if (_push2) {
+              _push2(`<pre${_scopeId}>${ssrInterpolate(row.original)}</pre>`);
+            } else {
+              return [
+                createVNode("pre", null, toDisplayString(row.original), 1)
+              ];
+            }
+          }),
+          _: 1
+        }, _parent));
+      } else {
+        _push(`<div><!--[-->`);
+        ssrRenderList((_b = unref(LandingPageResponse)) == null ? void 0 : _b.data, (row) => {
+          _push(ssrRenderComponent(_component_UCard, {
+            key: row._id,
+            class: "mb-3 max-h-48"
+          }, {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(`<div class="flex justify-between"${_scopeId}>`);
+                _push2(ssrRenderComponent(unref(UBadge$1), {
+                  color: row.isActive ? "success" : "info",
+                  variant: "soft"
+                }, {
+                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                    if (_push3) {
+                      _push3(`${ssrInterpolate(row.isActive ? "上線" : "未上線")}`);
+                    } else {
+                      return [
+                        createTextVNode(toDisplayString(row.isActive ? "上線" : "未上線"), 1)
+                      ];
+                    }
+                  }),
+                  _: 2
+                }, _parent2, _scopeId));
+                _push2(ssrRenderComponent(unref(UBadge$1), {
+                  color: "neutral",
+                  variant: "soft"
+                }, {
+                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                    if (_push3) {
+                      _push3(`${ssrInterpolate(row.isCustom ? "客製化" : "公版")}`);
+                    } else {
+                      return [
+                        createTextVNode(toDisplayString(row.isCustom ? "客製化" : "公版"), 1)
+                      ];
+                    }
+                  }),
+                  _: 2
+                }, _parent2, _scopeId));
+                _push2(`</div><h2 class="text-lg font-bold"${_scopeId}>${ssrInterpolate(row.title)}</h2><p${_scopeId}> ID: ${ssrInterpolate(row.urlPathId)}</p><p${_scopeId}> 網址: ${ssrInterpolate(`${unref(urlBase)}/lands/${row._id}`)}</p><div class="flex gap-2"${_scopeId}>`);
+                _push2(ssrRenderComponent(unref(UButton), {
+                  block: "",
+                  variant: "soft",
+                  size: "sm",
+                  onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(urlBase)}/lands/${row._id}`)
+                }, {
+                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                    if (_push3) {
+                      _push3(` 前往頁面 `);
+                    } else {
+                      return [
+                        createTextVNode(" 前往頁面 ")
+                      ];
+                    }
+                  }),
+                  _: 2
+                }, _parent2, _scopeId));
+                _push2(ssrRenderComponent(unref(UButton), {
+                  block: "",
+                  variant: "soft",
+                  size: "sm",
+                  onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`/C/landingPage/editor/${row._id}`)
+                }, {
+                  default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                    if (_push3) {
+                      _push3(` 前往編輯 `);
+                    } else {
+                      return [
+                        createTextVNode(" 前往編輯 ")
+                      ];
+                    }
+                  }),
+                  _: 2
+                }, _parent2, _scopeId));
+                _push2(`</div>`);
+              } else {
+                return [
+                  createVNode("div", { class: "flex justify-between" }, [
+                    createVNode(unref(UBadge$1), {
+                      color: row.isActive ? "success" : "info",
+                      variant: "soft"
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode(toDisplayString(row.isActive ? "上線" : "未上線"), 1)
+                      ]),
+                      _: 2
+                    }, 1032, ["color"]),
+                    createVNode(unref(UBadge$1), {
+                      color: "neutral",
+                      variant: "soft"
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode(toDisplayString(row.isCustom ? "客製化" : "公版"), 1)
+                      ]),
+                      _: 2
+                    }, 1024)
+                  ]),
+                  createVNode("h2", { class: "text-lg font-bold" }, toDisplayString(row.title), 1),
+                  createVNode("p", null, " ID: " + toDisplayString(row.urlPathId), 1),
+                  createVNode("p", null, " 網址: " + toDisplayString(`${unref(urlBase)}/lands/${row._id}`), 1),
+                  createVNode("div", { class: "flex gap-2" }, [
+                    createVNode(unref(UButton), {
+                      block: "",
+                      variant: "soft",
+                      size: "sm",
+                      onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(urlBase)}/lands/${row._id}`)
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode(" 前往頁面 ")
+                      ]),
+                      _: 2
+                    }, 1032, ["onClick"]),
+                    createVNode(unref(UButton), {
+                      block: "",
+                      variant: "soft",
+                      size: "sm",
+                      onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`/C/landingPage/editor/${row._id}`)
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode(" 前往編輯 ")
+                      ]),
+                      _: 2
+                    }, 1032, ["onClick"])
+                  ])
+                ];
+              }
+            }),
+            _: 2
+          }, _parent));
+        });
+        _push(`<!--]--></div>`);
+      }
       _push(`</div>`);
     };
   }

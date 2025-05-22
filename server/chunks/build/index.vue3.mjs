@@ -51,10 +51,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_UButton, { onClick: navigateToLogin }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(` Click me `);
+            _push2(` 登入 `);
           } else {
             return [
-              createTextVNode(" Click me ")
+              createTextVNode(" 登入 ")
             ];
           }
         }),
