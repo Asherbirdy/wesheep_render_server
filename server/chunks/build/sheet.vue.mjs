@@ -1,4 +1,4 @@
-import { _ as __nuxt_component_4, a as __nuxt_component_1 } from './Modal.vue.mjs';
+import { _ as __nuxt_component_4, a as __nuxt_component_5 } from './Modal.vue.mjs';
 import { U as UserRequestUrl, b as __nuxt_component_2 } from './server.mjs';
 import { defineComponent, withAsyncContext, ref, unref, withCtx, createVNode, toDisplayString, createTextVNode, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderList, ssrRenderComponent, ssrInterpolate } from 'vue/server-renderer';
@@ -98,7 +98,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       var _a;
       const _component_UCard = __nuxt_component_4;
       const _component_UButton = __nuxt_component_2;
-      const _component_UModal = __nuxt_component_1;
+      const _component_UModal = __nuxt_component_5;
       _push(`<div${ssrRenderAttrs(_attrs)}><h1>Sheet</h1><!--[-->`);
       ssrRenderList((_a = unref(sheets)) == null ? void 0 : _a.sheets, (sheet) => {
         _push(ssrRenderComponent(_component_UCard, {

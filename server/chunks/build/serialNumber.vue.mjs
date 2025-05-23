@@ -1,10 +1,10 @@
-import { a as __nuxt_component_1, _ as __nuxt_component_4 } from './Modal.vue.mjs';
+import { a as __nuxt_component_5$1, _ as __nuxt_component_4 } from './Modal.vue.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
-import { defineComponent, mergeModels, useModel, computed, unref, mergeProps, withCtx, renderSlot, createVNode, createBlock, createCommentVNode, openBlock, createTextVNode, toDisplayString, useSSRContext, useSlots, toRef, Fragment, renderList, ref, toRefs, withAsyncContext } from 'vue';
+import { defineComponent, mergeModels, useModel, computed, unref, mergeProps, withCtx, renderSlot, createVNode, createBlock, createCommentVNode, openBlock, createTextVNode, toDisplayString, useSSRContext, useSlots, toRef, Fragment, renderList, ref, withAsyncContext, toRefs } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
 import { u as useRequestApi } from './useRequestApi.mjs';
 import { U as UserRequestUrl, c as useNuxtApp, d as useAvatarGroup, t as tv, e as _appConfig, f as useAppConfig, r as reactivePick, g as useFormField, h as useButtonGroup, i as useComponentIcons, j as UIcon, k as UAvatar, l as get, m as compare, n as useNuxtData, b as __nuxt_component_2, o as refreshNuxtData } from './server.mjs';
-import { _ as __nuxt_component_0, a as __nuxt_component_1$1, b as __nuxt_component_2$1 } from './Input.vue.mjs';
+import { _ as __nuxt_component_6, a as __nuxt_component_7, b as __nuxt_component_8 } from './Input.vue.mjs';
 import { Primitive, Slot, useForwardPropsEmits, SelectRoot, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectGroup, SelectLabel, SelectSeparator, SelectItem, SelectItemText, SelectItemIndicator, SelectArrow } from 'reka-ui';
 import { l as defu } from '../nitro/nitro.mjs';
 import 'pinia';
@@ -75,7 +75,7 @@ const useSerialNumberApi = {
     });
   },
   create: async (payload) => {
-    const { execute } = await useRequestApi(UserRequestUrl.SerialNumberCreate, {
+    return await useRequestApi(UserRequestUrl.SerialNumberCreate, {
       method: "POST",
       server: false,
       lazy: true,
@@ -83,7 +83,6 @@ const useSerialNumberApi = {
       watch: false,
       body: payload
     });
-    return { execute };
   },
   delete: async (payload) => await useRequestApi(UserRequestUrl.SerialNumberDelete, {
     method: "DELETE",
@@ -1784,7 +1783,8 @@ const roleOptions = [
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "AddSerialNumberComponent",
   __ssrInlineRender: true,
-  setup(__props) {
+  async setup(__props) {
+    let __temp, __restore;
     const state = ref({
       data: {
         role: Role.user,
@@ -1793,36 +1793,34 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       },
       feature: {
         modal: {
-          open: false,
-          status: false
+          open: false
         }
       }
     });
-    const { data: CachedDistricts } = useNuxtData(UserRequestUrl.District);
+    const {
+      execute: CreateSerialNumberRequest,
+      status: CreateSerialNumberStatus
+    } = ([__temp, __restore] = withAsyncContext(() => useSerialNumberApi.create(state.value.data)), __temp = await __temp, __restore(), __temp);
+    const {
+      data: CachedDistricts
+    } = useNuxtData(UserRequestUrl.District);
     const handleCreateSerialNumber = async () => {
       const { feature, data } = state.value;
-      const { execute } = await useSerialNumberApi.create({
-        role: data.role,
-        districtId: data.districtId,
-        notes: data.notes
-      });
-      feature.modal.status = true;
-      await execute();
-      feature.modal.status = false;
+      await CreateSerialNumberRequest();
       await refreshNuxtData(UserRequestUrl.SerialNumberGetAll);
       feature.modal.open = false;
-      state.value.data.role = Role.user;
-      state.value.data.districtId = "";
-      state.value.data.notes = "";
+      data.role = Role.user;
+      data.districtId = "";
+      data.notes = "";
     };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UButton = __nuxt_component_2;
       const _component_UIcon = UIcon;
-      const _component_UModal = __nuxt_component_1;
-      const _component_UForm = __nuxt_component_0;
-      const _component_UFormField = __nuxt_component_1$1;
+      const _component_UModal = __nuxt_component_5$1;
+      const _component_UForm = __nuxt_component_6;
+      const _component_UFormField = __nuxt_component_7;
       const _component_USelect = __nuxt_component_5;
-      const _component_UInput = __nuxt_component_2$1;
+      const _component_UInput = __nuxt_component_8;
       _push(`<div${ssrRenderAttrs(_attrs)}>`);
       _push(ssrRenderComponent(_component_UButton, {
         onClick: ($event) => unref(state).feature.modal.open = true
@@ -2082,7 +2080,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
               label: "確認",
               variant: "outline",
               disabled: !unref(state).data.role || !unref(state).data.districtId || !unref(state).data.notes,
-              loading: unref(state).feature.modal.status,
+              loading: unref(CreateSerialNumberStatus) === "pending",
               onClick: handleCreateSerialNumber
             }, null, _parent2, _scopeId));
           } else {
@@ -2097,7 +2095,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
                 label: "確認",
                 variant: "outline",
                 disabled: !unref(state).data.role || !unref(state).data.districtId || !unref(state).data.notes,
-                loading: unref(state).feature.modal.status,
+                loading: unref(CreateSerialNumberStatus) === "pending",
                 onClick: handleCreateSerialNumber
               }, null, 8, ["disabled", "loading"])
             ];
@@ -2138,7 +2136,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UIcon = UIcon;
-      const _component_UModal = __nuxt_component_1;
+      const _component_UModal = __nuxt_component_5$1;
       const _component_UButton = __nuxt_component_2;
       _push(`<!--[--><div>`);
       _push(ssrRenderComponent(_component_UIcon, {

@@ -1,10 +1,10 @@
-import { defineComponent, ref, withAsyncContext, unref, createVNode, resolveDynamicComponent, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderClass, ssrIncludeBooleanAttr, ssrRenderVNode, ssrRenderComponent } from 'vue/server-renderer';
+import { v as useRoute, w as useRouter, b as __nuxt_component_2 } from './server.mjs';
+import { defineComponent, ref, withAsyncContext, unref, withCtx, createTextVNode, createVNode, resolveDynamicComponent, nextTick, useSSRContext } from 'vue';
+import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderClass, ssrIncludeBooleanAttr, ssrRenderVNode } from 'vue/server-renderer';
 import { EditorContent } from '@tiptap/vue-3';
 import { TextHeader124Filled, TextHeader220Filled, TextHeader324Filled, TextParagraph16Filled, TextBold24Filled, TextItalic24Filled, TextStrikethrough24Filled, Code24Filled, TextQuote20Filled, TextBulletListLtr16Filled, TextNumberListLtr16Filled, TextAlignLeft16Filled, TextAlignJustify20Filled, TextAlignRight16Filled, ArrowUndo16Filled, ArrowRedo16Filled } from '@vicons/fluent';
 import { u as useLandingPageApi } from './useLandingPageApi.mjs';
-import { v as useRoute } from './server.mjs';
-import './useRequestApi.mjs';
+import { u as useWindowSize } from './useWindowSize.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -28,6 +28,8 @@ import '@iconify/vue';
 import 'reka-ui';
 import '@iconify/utils/lib/css/icon';
 import 'tailwind-variants';
+import './useRequestApi.mjs';
+import './index.mjs';
 
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "[id]",
@@ -35,7 +37,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   async setup(__props) {
     let __temp, __restore;
     const route = useRoute();
+    const router = useRouter();
     const editor = ref();
+    const { isMdSize } = useWindowSize();
     const state = ref({
       data: {
         title: "",
@@ -66,6 +70,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       },
       body: state.value.data
     })), __temp = await __temp, __restore(), __temp);
+    const onSave = async () => {
+      var _a;
+      state.value.data.html = (_a = editor == null ? void 0 : editor.value) == null ? void 0 : _a.getHTML();
+      await nextTick(() => {
+        EditRequest();
+        landingPageRequset();
+      });
+      if (EditStatus.value === "success") {
+        alert("保存成功");
+        return;
+      }
+      if (EditStatus.value === "error") {
+        alert("保存失败");
+      }
+    };
     const feature = [
       {
         type: "feature",
@@ -306,7 +325,31 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     ];
     return (_ctx, _push, _parent, _attrs) => {
       var _a, _b;
-      _push(`<div${ssrRenderAttrs(_attrs)}><p>Title: ${ssrInterpolate((_b = (_a = unref(landingPageResponse)) == null ? void 0 : _a.landingPage) == null ? void 0 : _b.title)}</p><div class="flex flex-wrap gap-[5px] p-[10px] bg-black rounded-t-md"><!--[-->`);
+      const _component_UButton = __nuxt_component_2;
+      _push(`<div${ssrRenderAttrs(_attrs)}><div class="flex justify-between">`);
+      _push(ssrRenderComponent(_component_UButton, {
+        label: "上一頁",
+        variant: "outline",
+        size: "sm",
+        onClick: ($event) => unref(router).back()
+      }, null, _parent));
+      _push(ssrRenderComponent(_component_UButton, {
+        loading: unref(EditStatus) === "pending",
+        size: "sm",
+        onClick: onSave
+      }, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(` 保存 `);
+          } else {
+            return [
+              createTextVNode(" 保存 ")
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</div><p>Title: ${ssrInterpolate((_b = (_a = unref(landingPageResponse)) == null ? void 0 : _a.landingPage) == null ? void 0 : _b.title)}</p><div class="flex flex-wrap gap-[5px] p-[10px] bg-black rounded-t-md"><!--[-->`);
       ssrRenderList(feature, (button) => {
         _push(`<button${ssrIncludeBooleanAttr(button.isDisabled()) ? " disabled" : ""}${ssrRenderAttr("title", button.title)} class="${ssrRenderClass([[
           button.isActive() && "bg-[rgba(103,103,103,0.899)]",
@@ -316,8 +359,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _push(`</button>`);
       });
       _push(`<!--]--></div>`);
-      _push(ssrRenderComponent(unref(EditorContent), { editor: unref(editor) }, null, _parent));
-      _push(`<button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"${ssrRenderAttr("loading", unref(EditStatus) === "pending")}> 保存 </button><div class="mt-2 text-sm text-gray-300 whitespace-pre-wrap">${ssrInterpolate(unref(state).data.html)}</div></div>`);
+      _push(ssrRenderComponent(unref(EditorContent), {
+        editor: unref(editor),
+        class: ["h-[500px] overflow-y-auto", {
+          "h-[500px]": unref(isMdSize),
+          "h-[1000px]": !unref(isMdSize)
+        }]
+      }, null, _parent));
+      _push(`<div class="mt-2 text-sm text-gray-300 whitespace-pre-wrap">${ssrInterpolate(unref(state).data.html)}</div></div>`);
     };
   }
 });

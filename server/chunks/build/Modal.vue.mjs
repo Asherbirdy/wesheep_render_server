@@ -792,7 +792,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Modal.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __nuxt_component_1 = Object.assign(_sfc_main, { __name: "UModal" });
+const __nuxt_component_5 = Object.assign(_sfc_main, { __name: "UModal" });
 
-export { __nuxt_component_4 as _, __nuxt_component_1 as a };
+export { __nuxt_component_4 as _, __nuxt_component_5 as a };
 //# sourceMappingURL=Modal.vue.mjs.map

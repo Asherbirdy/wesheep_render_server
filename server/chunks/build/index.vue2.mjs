@@ -1,15 +1,15 @@
 import { b as __nuxt_component_2, o as refreshNuxtData, U as UserRequestUrl, p as useLocale, t as tv, q as reactiveOmit, e as _appConfig, P as PublicRoutes, s as navigateTo, C as ClientRoutes } from './server.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
-import { _ as __nuxt_component_1$2 } from './DropdownMenu.vue.mjs';
+import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
 import { defineComponent, ref, withAsyncContext, unref, withCtx, createVNode, mergeModels, useSlots, computed, useModel, mergeProps, createBlock, createCommentVNode, openBlock, renderSlot, createTextVNode, toDisplayString, Fragment, renderList, useSSRContext, useTemplateRef, h } from 'vue';
 import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderAttrs } from 'vue/server-renderer';
 import { Primitive } from 'reka-ui';
 import { I as upperFirst } from '../nitro/nitro.mjs';
 import { useVueTable, getExpandedRowModel, getSortedRowModel, getFilteredRowModel, getCoreRowModel, FlexRender } from '@tanstack/vue-table';
-import { a as __nuxt_component_1, _ as __nuxt_component_4 } from './Modal.vue.mjs';
+import { a as __nuxt_component_5, _ as __nuxt_component_4 } from './Modal.vue.mjs';
+import { _ as __nuxt_component_6, a as __nuxt_component_7, b as __nuxt_component_8 } from './Input.vue.mjs';
 import { u as useLandingPageApi } from './useLandingPageApi.mjs';
-import { u as useWindowSize$1 } from './index.mjs';
-import { _ as __nuxt_component_0, a as __nuxt_component_1$1, b as __nuxt_component_2$1 } from './Input.vue.mjs';
+import { u as useWindowSize } from './useWindowSize.mjs';
 import 'pinia';
 import 'vue-router';
 import 'tailwindcss/colors';
@@ -22,6 +22,7 @@ import '@iconify/vue';
 import '@iconify/utils/lib/css/icon';
 import 'tailwind-variants';
 import 'reka-ui/namespaced';
+import './index.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:events';
@@ -62,10 +63,10 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
     return (_ctx, _push, _parent, _attrs) => {
       const _component_UButton = __nuxt_component_2;
-      const _component_UModal = __nuxt_component_1;
-      const _component_UForm = __nuxt_component_0;
-      const _component_UFormField = __nuxt_component_1$1;
-      const _component_UInput = __nuxt_component_2$1;
+      const _component_UModal = __nuxt_component_5;
+      const _component_UForm = __nuxt_component_6;
+      const _component_UFormField = __nuxt_component_7;
+      const _component_UInput = __nuxt_component_8;
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_component_UButton, {
         label: "新增頁面",
@@ -714,15 +715,6 @@ _sfc_main$1.setup = (props, ctx) => {
 };
 const __nuxt_component_3 = Object.assign(_sfc_main$1, { __name: "UTable" });
 
-const useWindowSize = () => {
-  const { width } = useWindowSize$1();
-  const mdWidth = 768;
-  const lgWidth = 1024;
-  const isMdSize = computed(() => width.value < mdWidth);
-  const isLgSize = computed(() => width.value < lgWidth);
-  return { isMdSize, isLgSize };
-};
-
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",
   __ssrInlineRender: true,
@@ -731,10 +723,40 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const table = useTemplateRef("table");
     const UButton = __nuxt_component_2;
     const UBadge$1 = UBadge;
-    const UDropdownMenu = __nuxt_component_1$2;
+    const UDropdownMenu = __nuxt_component_1;
     const { data: LandingPageResponse } = ([__temp, __restore] = withAsyncContext(() => useLandingPageApi.getAll()), __temp = await __temp, __restore(), __temp);
+    const state = ref({
+      data: {
+        modal: {
+          currentData: {
+            _id: "",
+            title: "",
+            isActive: false,
+            isCustom: false,
+            urlPathId: "",
+            updatedAt: "",
+            description: "",
+            isCustomId: "",
+            updatedBy: "",
+            lastEditVisited: "",
+            createdAt: "",
+            lastEditVisitedUser: "",
+            __v: 0
+          }
+        }
+      },
+      feature: {
+        modal: {
+          open: false
+        }
+      }
+    });
     const { isMdSize } = useWindowSize();
     const urlBase = computed(() => (void 0).location.origin);
+    const openModal = (data) => {
+      state.value.data.modal.currentData = data;
+      state.value.feature.modal.open = true;
+    };
     const columns = [
       {
         accessorKey: "isActive",
@@ -783,6 +805,13 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               onSelect() {
                 navigateTo(`${ClientRoutes.LandingPageEditor}/${row.original._id}`);
               }
+            },
+            {
+              label: "編輯標題",
+              type: "Actions",
+              onSelect: () => {
+                openModal(row.original);
+              }
             }
           ];
           return h(
@@ -806,10 +835,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }
       }
     ];
+    const onSubmit = async () => {
+      const { execute } = await useLandingPageApi.editInfoById({
+        query: {
+          landingPageId: state.value.data.modal.currentData._id
+        },
+        body: state.value.data.modal.currentData
+      });
+      await execute();
+      refreshNuxtData(UserRequestUrl.LandingPageGetALL);
+      state.value.feature.modal.open = false;
+    };
     return (_ctx, _push, _parent, _attrs) => {
       var _a, _b;
       const _component_UTable = __nuxt_component_3;
       const _component_UCard = __nuxt_component_4;
+      const _component_UModal = __nuxt_component_5;
+      const _component_UForm = __nuxt_component_6;
+      const _component_UFormField = __nuxt_component_7;
+      const _component_UInput = __nuxt_component_8;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex-1 w-full" }, _attrs))}><div class="flex justify-between mb-3"><p class="text-lg font-bold"> Landing Page </p>`);
       _push(ssrRenderComponent(unref(_sfc_main$2), null, null, _parent));
       _push(`</div>`);
@@ -834,15 +878,15 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           _: 1
         }, _parent));
       } else {
-        _push(`<div class="flex flex-col justify-center items-center"><!--[-->`);
+        _push(`<div class="flex flex-col w-full"><!--[-->`);
         ssrRenderList((_b = unref(LandingPageResponse)) == null ? void 0 : _b.data, (row) => {
           _push(ssrRenderComponent(_component_UCard, {
             key: row._id,
-            class: "mb-3 max-h-48 max-w-[320px]"
+            class: "mb-3 w-full"
           }, {
             default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
-                _push2(`<div class="flex justify-between"${_scopeId}>`);
+                _push2(`<div class="flex flex-wrap gap-2 mb-2"${_scopeId}>`);
                 _push2(ssrRenderComponent(unref(UBadge$1), {
                   color: row.isActive ? "success" : "info",
                   variant: "soft"
@@ -873,10 +917,12 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   }),
                   _: 2
                 }, _parent2, _scopeId));
-                _push2(`</div><h2 class="text-lg font-bold"${_scopeId}>${ssrInterpolate(row.title)}</h2><p${_scopeId}> ID: ${ssrInterpolate(row.urlPathId)}</p><p class="text-sm break-words"${_scopeId}> 網址: ${ssrInterpolate(`${unref(urlBase)}${unref(PublicRoutes).LandingPage}/${row._id}`)}</p><div class="flex gap-2 justify-end"${_scopeId}>`);
+                _push2(`</div><h2 class="text-lg font-bold mb-2"${_scopeId}>${ssrInterpolate(row.title)}</h2><p class="mb-1"${_scopeId}> ID: ${ssrInterpolate(row.urlPathId)}</p><p class="text-sm break-all mb-4"${_scopeId}> 網址: ${ssrInterpolate(`${unref(urlBase)}${unref(PublicRoutes).LandingPage}/${row._id}`)}</p><div class="flex flex-wrap gap-2 justify-center"${_scopeId}>`);
                 _push2(ssrRenderComponent(unref(UButton), {
                   variant: "soft",
-                  size: "sm"
+                  size: "sm",
+                  class: "sm:flex-none",
+                  onClick: ($event) => openModal(row)
                 }, {
                   default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                     if (_push3) {
@@ -892,6 +938,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 _push2(ssrRenderComponent(unref(UButton), {
                   variant: "soft",
                   size: "sm",
+                  class: "sm:flex-none",
                   onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(ClientRoutes).LandingPageEditor}/${row._id}`)
                 }, {
                   default: withCtx((_2, _push3, _parent3, _scopeId2) => {
@@ -908,7 +955,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 _push2(`</div>`);
               } else {
                 return [
-                  createVNode("div", { class: "flex justify-between" }, [
+                  createVNode("div", { class: "flex flex-wrap gap-2 mb-2" }, [
                     createVNode(unref(UBadge$1), {
                       color: row.isActive ? "success" : "info",
                       variant: "soft"
@@ -928,22 +975,25 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       _: 2
                     }, 1024)
                   ]),
-                  createVNode("h2", { class: "text-lg font-bold" }, toDisplayString(row.title), 1),
-                  createVNode("p", null, " ID: " + toDisplayString(row.urlPathId), 1),
-                  createVNode("p", { class: "text-sm break-words" }, " 網址: " + toDisplayString(`${unref(urlBase)}${unref(PublicRoutes).LandingPage}/${row._id}`), 1),
-                  createVNode("div", { class: "flex gap-2 justify-end" }, [
+                  createVNode("h2", { class: "text-lg font-bold mb-2" }, toDisplayString(row.title), 1),
+                  createVNode("p", { class: "mb-1" }, " ID: " + toDisplayString(row.urlPathId), 1),
+                  createVNode("p", { class: "text-sm break-all mb-4" }, " 網址: " + toDisplayString(`${unref(urlBase)}${unref(PublicRoutes).LandingPage}/${row._id}`), 1),
+                  createVNode("div", { class: "flex flex-wrap gap-2 justify-center" }, [
                     createVNode(unref(UButton), {
                       variant: "soft",
-                      size: "sm"
+                      size: "sm",
+                      class: "sm:flex-none",
+                      onClick: ($event) => openModal(row)
                     }, {
                       default: withCtx(() => [
                         createTextVNode(" 編輯標題 ")
                       ]),
-                      _: 1
-                    }),
+                      _: 2
+                    }, 1032, ["onClick"]),
                     createVNode(unref(UButton), {
                       variant: "soft",
                       size: "sm",
+                      class: "sm:flex-none",
                       onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(ClientRoutes).LandingPageEditor}/${row._id}`)
                     }, {
                       default: withCtx(() => [
@@ -960,6 +1010,126 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         });
         _push(`<!--]--></div>`);
       }
+      _push(ssrRenderComponent(_component_UModal, {
+        open: unref(state).feature.modal.open,
+        "onUpdate:open": ($event) => unref(state).feature.modal.open = $event,
+        title: "編輯頁面資訊",
+        ui: { footer: "justify-end" }
+      }, {
+        body: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_UForm, {
+              state: unref(state).data,
+              class: "space-y-4 flex flex-col gap-4"
+            }, {
+              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(ssrRenderComponent(_component_UFormField, {
+                    label: "標題",
+                    name: "title"
+                  }, {
+                    default: withCtx((_3, _push4, _parent4, _scopeId3) => {
+                      if (_push4) {
+                        _push4(ssrRenderComponent(_component_UInput, {
+                          modelValue: unref(state).data.modal.currentData.title,
+                          "onUpdate:modelValue": ($event) => unref(state).data.modal.currentData.title = $event,
+                          label: "標題",
+                          name: "title",
+                          ui: { root: "w-full" }
+                        }, null, _parent4, _scopeId3));
+                      } else {
+                        return [
+                          createVNode(_component_UInput, {
+                            modelValue: unref(state).data.modal.currentData.title,
+                            "onUpdate:modelValue": ($event) => unref(state).data.modal.currentData.title = $event,
+                            label: "標題",
+                            name: "title",
+                            ui: { root: "w-full" }
+                          }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                        ];
+                      }
+                    }),
+                    _: 1
+                  }, _parent3, _scopeId2));
+                } else {
+                  return [
+                    createVNode(_component_UFormField, {
+                      label: "標題",
+                      name: "title"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(_component_UInput, {
+                          modelValue: unref(state).data.modal.currentData.title,
+                          "onUpdate:modelValue": ($event) => unref(state).data.modal.currentData.title = $event,
+                          label: "標題",
+                          name: "title",
+                          ui: { root: "w-full" }
+                        }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                      ]),
+                      _: 1
+                    })
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_UForm, {
+                state: unref(state).data,
+                class: "space-y-4 flex flex-col gap-4"
+              }, {
+                default: withCtx(() => [
+                  createVNode(_component_UFormField, {
+                    label: "標題",
+                    name: "title"
+                  }, {
+                    default: withCtx(() => [
+                      createVNode(_component_UInput, {
+                        modelValue: unref(state).data.modal.currentData.title,
+                        "onUpdate:modelValue": ($event) => unref(state).data.modal.currentData.title = $event,
+                        label: "標題",
+                        name: "title",
+                        ui: { root: "w-full" }
+                      }, null, 8, ["modelValue", "onUpdate:modelValue"])
+                    ]),
+                    _: 1
+                  })
+                ]),
+                _: 1
+              }, 8, ["state"])
+            ];
+          }
+        }),
+        footer: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(unref(UButton), {
+              label: "取消",
+              color: "neutral",
+              variant: "outline",
+              onClick: ($event) => unref(state).feature.modal.open = false
+            }, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent(unref(UButton), {
+              label: "更新",
+              onClick: onSubmit
+            }, null, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(unref(UButton), {
+                label: "取消",
+                color: "neutral",
+                variant: "outline",
+                onClick: ($event) => unref(state).feature.modal.open = false
+              }, null, 8, ["onClick"]),
+              createVNode(unref(UButton), {
+                label: "更新",
+                onClick: onSubmit
+              })
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
       _push(`</div>`);
     };
   }

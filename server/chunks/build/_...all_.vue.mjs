@@ -1,6 +1,6 @@
 import { defineComponent, mergeProps, useSSRContext } from 'vue';
 import { ssrRenderAttrs } from 'vue/server-renderer';
-import { I as useRouter } from './server.mjs';
+import { w as useRouter } from './server.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';

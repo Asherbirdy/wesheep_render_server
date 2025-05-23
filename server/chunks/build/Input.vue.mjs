@@ -1,7 +1,7 @@
 import { defineComponent, useId, inject, provide, ref, readonly, computed, createVNode, resolveDynamicComponent, unref, mergeProps, withCtx, renderSlot, useSSRContext, useSlots, createTextVNode, toDisplayString, createBlock, createCommentVNode, openBlock, mergeModels, useModel } from 'vue';
 import { ssrRenderVNode, ssrRenderSlot, ssrRenderComponent, ssrRenderClass, ssrInterpolate, ssrRenderAttr, ssrRenderAttrs } from 'vue/server-renderer';
 import { a as useEventBus } from './index.mjs';
-import { A as formBusInjectionKey, B as formInputsInjectionKey, D as formLoadingInjectionKey, E as formOptionsInjectionKey, t as tv, e as _appConfig, F as inputIdInjectionKey, G as formFieldInjectionKey, g as useFormField, h as useButtonGroup, i as useComponentIcons, j as UIcon, k as UAvatar, H as looseToNumber } from './server.mjs';
+import { B as formBusInjectionKey, D as formInputsInjectionKey, E as formLoadingInjectionKey, F as formOptionsInjectionKey, t as tv, e as _appConfig, G as inputIdInjectionKey, H as formFieldInjectionKey, g as useFormField, h as useButtonGroup, i as useComponentIcons, j as UIcon, k as UAvatar, I as looseToNumber } from './server.mjs';
 import { Primitive, Label } from 'reka-ui';
 
 function isYupSchema(schema) {
@@ -320,7 +320,7 @@ _sfc_main$2.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Form.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const __nuxt_component_0 = Object.assign(_sfc_main$2, { __name: "UForm" });
+const __nuxt_component_6 = Object.assign(_sfc_main$2, { __name: "UForm" });
 
 const theme$1 = {
   "slots": {
@@ -558,7 +558,7 @@ _sfc_main$1.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/FormField.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
-const __nuxt_component_1 = Object.assign(_sfc_main$1, { __name: "UFormField" });
+const __nuxt_component_7 = Object.assign(_sfc_main$1, { __name: "UFormField" });
 
 const theme = {
   "slots": {
@@ -1052,7 +1052,7 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Input.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __nuxt_component_2 = Object.assign(_sfc_main, { __name: "UInput" });
+const __nuxt_component_8 = Object.assign(_sfc_main, { __name: "UInput" });
 
-export { __nuxt_component_0 as _, __nuxt_component_1 as a, __nuxt_component_2 as b };
+export { __nuxt_component_6 as _, __nuxt_component_7 as a, __nuxt_component_8 as b };
 //# sourceMappingURL=Input.vue.mjs.map
