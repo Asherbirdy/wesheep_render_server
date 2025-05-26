@@ -1,7 +1,7 @@
 import { defineComponent, useSlots, computed, unref, mergeProps, withCtx, createBlock, createCommentVNode, openBlock, renderSlot, useSSRContext, toRef, toHandlers, createTextVNode, toDisplayString, createVNode } from 'vue';
 import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot, ssrInterpolate } from 'vue/server-renderer';
 import { Primitive, useForwardPropsEmits, DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, VisuallyHidden, DialogTitle, DialogDescription, DialogClose } from 'reka-ui';
-import { t as tv, e as _appConfig, p as useLocale, f as useAppConfig, r as reactivePick, b as __nuxt_component_2 } from './server.mjs';
+import { t as tv, j as _appConfig, b as useLocale, c as useAppConfig, r as reactivePick, k as __nuxt_component_2 } from './server.mjs';
 
 const theme$1 = {
   "slots": {

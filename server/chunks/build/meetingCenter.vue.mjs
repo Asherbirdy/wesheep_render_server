@@ -1,8 +1,9 @@
-import { U as UserRequestUrl, b as __nuxt_component_2 } from './server.mjs';
+import { l as UserRequestUrl, n as useNuxtData, k as __nuxt_component_2 } from './server.mjs';
 import { _ as __nuxt_component_0 } from './Tabs.vue.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
 import { defineComponent, withAsyncContext, computed, unref, withCtx, createTextVNode, toDisplayString, createVNode, createBlock, openBlock, Fragment, renderList, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrInterpolate } from 'vue/server-renderer';
+import { R as Role } from './RoleEnum.mjs';
 import { u as useRequestApi } from './useRequestApi.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
@@ -46,6 +47,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   async setup(__props) {
     let __temp, __restore;
+    const {
+      data: UserInfoResponse
+    } = useNuxtData(UserRequestUrl.UserShowMe);
     const {
       data: MeetingCenterResponse,
       refresh: MeetingCenterRequest
@@ -118,6 +122,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       return "";
     };
     return (_ctx, _push, _parent, _attrs) => {
+      var _a, _b;
       const _component_UButton = __nuxt_component_2;
       const _component_UTabs = __nuxt_component_0;
       const _component_UBadge = UBadge;
@@ -126,6 +131,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         size: "sm",
         variant: "soft",
         loading: unref(MeetingCenterCreateStatus) === "pending",
+        disabled: !(((_a = unref(UserInfoResponse)) == null ? void 0 : _a.user.role) === unref(Role).admin || ((_b = unref(UserInfoResponse)) == null ? void 0 : _b.user.role) === unref(Role).dev),
         onClick: updateData
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -146,9 +152,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         ui: { trigger: "flex-1" }
       }, {
         join: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a, _b, _c, _d, _e, _f;
+          var _a2, _b2, _c, _d, _e, _f;
           if (_push2) {
-            _push2(`<div${_scopeId}>6/8 港湖集中主日 報名：${ssrInterpolate((_a = unref(data)) == null ? void 0 : _a.length)}位</div><div${_scopeId}>成人${ssrInterpolate((_b = unref(adultData)) == null ? void 0 : _b.length)}位,兒童${ssrInterpolate((_c = unref(kidData)) == null ? void 0 : _c.length)}位</div><p class="text-sm text-red-600"${_scopeId}> 請於5/27日前<br${_scopeId}>協助調查是否搭乘遊覽車～謝謝 </p><p${_scopeId}>一區</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            _push2(`<div${_scopeId}>6/8 港湖集中主日 報名：${ssrInterpolate((_a2 = unref(data)) == null ? void 0 : _a2.length)}位</div><div${_scopeId}>成人${ssrInterpolate((_b2 = unref(adultData)) == null ? void 0 : _b2.length)}位,兒童${ssrInterpolate((_c = unref(kidData)) == null ? void 0 : _c.length)}位</div><p class="text-sm text-red-600"${_scopeId}> 請於5/27日前<br${_scopeId}>協助調查是否搭乘遊覽車～謝謝 </p><p${_scopeId}>一區</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
             ssrRenderList(unref(districtOne), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
@@ -298,10 +304,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           }
         }),
         departure: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
+          var _a2, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
           if (_push2) {
             _push2(`<div${_scopeId}><p${_scopeId}>6/8 港湖集中主日 要搭遊覽車人位</p><p class="font-bold"${_scopeId}> 搭乘去程遊覽車(東湖-&gt;信基) </p><p${_scopeId}>一區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_a = unref(districtOne)) == null ? void 0 : _a.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+            ssrRenderList((_a2 = unref(districtOne)) == null ? void 0 : _a2.filter((item) => item.departure === "搭乘去程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -320,7 +326,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, _parent2, _scopeId));
             });
             _push2(`<!--]--></div><p${_scopeId}>二區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_b = unref(districtTwo)) == null ? void 0 : _b.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+            ssrRenderList((_b2 = unref(districtTwo)) == null ? void 0 : _b2.filter((item) => item.departure === "搭乘去程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -584,10 +590,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           }
         }),
         selfGo: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a, _b, _c, _d;
+          var _a2, _b2, _c, _d;
           if (_push2) {
             _push2(`<p${_scopeId}>自行前往(早):</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_a = unref(data)) == null ? void 0 : _a.filter((item) => item.departure === "自行前往"), (item, index) => {
+            ssrRenderList((_a2 = unref(data)) == null ? void 0 : _a2.filter((item) => item.departure === "自行前往"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -606,7 +612,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, _parent2, _scopeId));
             });
             _push2(`<!--]--></div><p${_scopeId}>不搭回程(午):</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_b = unref(data)) == null ? void 0 : _b.filter((item) => item.returnRide === "不搭回程"), (item, index) => {
+            ssrRenderList((_b2 = unref(data)) == null ? void 0 : _b2.filter((item) => item.returnRide === "不搭回程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -670,7 +676,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/C/meetingCenter.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/C/googleSheet/meetingCenter.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 

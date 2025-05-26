@@ -1,4 +1,4 @@
-import { b as __nuxt_component_2, o as refreshNuxtData, U as UserRequestUrl, p as useLocale, t as tv, q as reactiveOmit, e as _appConfig, P as PublicRoutes, s as navigateTo, C as ClientRoutes } from './server.mjs';
+import { n as useNuxtData, l as UserRequestUrl, k as __nuxt_component_2, o as refreshNuxtData, b as useLocale, t as tv, q as reactiveOmit, j as _appConfig, P as PublicRoutes, s as navigateTo, C as ClientRoutes } from './server.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
 import { defineComponent, ref, withAsyncContext, unref, withCtx, createVNode, mergeModels, useSlots, computed, useModel, mergeProps, createBlock, createCommentVNode, openBlock, renderSlot, createTextVNode, toDisplayString, Fragment, renderList, useSSRContext, useTemplateRef, h } from 'vue';
@@ -7,9 +7,10 @@ import { Primitive } from 'reka-ui';
 import { I as upperFirst } from '../nitro/nitro.mjs';
 import { useVueTable, getExpandedRowModel, getSortedRowModel, getFilteredRowModel, getCoreRowModel, FlexRender } from '@tanstack/vue-table';
 import { a as __nuxt_component_5, _ as __nuxt_component_4 } from './Modal.vue.mjs';
-import { _ as __nuxt_component_6, a as __nuxt_component_7, b as __nuxt_component_8 } from './Input.vue.mjs';
+import { a as __nuxt_component_6, b as __nuxt_component_7, _ as __nuxt_component_8 } from './Input.vue.mjs';
 import { u as useLandingPageApi } from './useLandingPageApi.mjs';
 import { u as useWindowSize } from './useWindowSize.mjs';
+import { L as LandingPageAccess } from './LandingPageAccess.mjs';
 import 'pinia';
 import 'vue-router';
 import 'tailwindcss/colors';
@@ -40,6 +41,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   async setup(__props) {
     let __temp, __restore;
+    const { data: UserInfoResponse } = useNuxtData(UserRequestUrl.UserShowMe);
     const state = ref({
       data: {
         title: ""
@@ -70,6 +72,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       _push(`<!--[-->`);
       _push(ssrRenderComponent(_component_UButton, {
         label: "新增頁面",
+        disabled: !unref(UserInfoResponse).user.landingPageAccess.includes(unref(LandingPageAccess).create),
         onClick: ($event) => unref(state).feature.modal.open = true
       }, null, _parent));
       _push(ssrRenderComponent(_component_UModal, {
@@ -752,6 +755,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }
     });
     const { isMdSize } = useWindowSize();
+    const { data: UserInfoResponse } = useNuxtData(UserRequestUrl.UserShowMe);
     const urlBase = computed(() => (void 0).location.origin);
     const openModal = (data) => {
       state.value.data.modal.currentData = data;
@@ -922,6 +926,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   variant: "soft",
                   size: "sm",
                   class: "sm:flex-none",
+                  disabled: !unref(UserInfoResponse).user.landingPageAccess.includes(unref(LandingPageAccess).edit_post),
                   onClick: ($event) => openModal(row)
                 }, {
                   default: withCtx((_2, _push3, _parent3, _scopeId2) => {
@@ -938,6 +943,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 _push2(ssrRenderComponent(unref(UButton), {
                   variant: "soft",
                   size: "sm",
+                  disabled: !unref(UserInfoResponse).user.landingPageAccess.includes(unref(LandingPageAccess).edit_post),
                   class: "sm:flex-none",
                   onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(ClientRoutes).LandingPageEditor}/${row._id}`)
                 }, {
@@ -983,16 +989,18 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       variant: "soft",
                       size: "sm",
                       class: "sm:flex-none",
+                      disabled: !unref(UserInfoResponse).user.landingPageAccess.includes(unref(LandingPageAccess).edit_post),
                       onClick: ($event) => openModal(row)
                     }, {
                       default: withCtx(() => [
                         createTextVNode(" 編輯標題 ")
                       ]),
                       _: 2
-                    }, 1032, ["onClick"]),
+                    }, 1032, ["disabled", "onClick"]),
                     createVNode(unref(UButton), {
                       variant: "soft",
                       size: "sm",
+                      disabled: !unref(UserInfoResponse).user.landingPageAccess.includes(unref(LandingPageAccess).edit_post),
                       class: "sm:flex-none",
                       onClick: ($event) => ("navigateTo" in _ctx ? _ctx.navigateTo : unref(navigateTo))(`${unref(ClientRoutes).LandingPageEditor}/${row._id}`)
                     }, {
@@ -1000,7 +1008,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                         createTextVNode(" 文字編輯器 ")
                       ]),
                       _: 2
-                    }, 1032, ["onClick"])
+                    }, 1032, ["disabled", "onClick"])
                   ])
                 ];
               }

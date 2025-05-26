@@ -1,0 +1,1 @@
+var t=(e=>(e.create="create",e.edit_post="edit_post",e.delete="delete",e))(t||{});const l=[{label:"允許新增",value:"create"},{label:"允許編輯",value:"edit_post"},{label:"允許刪除",value:"delete"}];export{t as L,l};

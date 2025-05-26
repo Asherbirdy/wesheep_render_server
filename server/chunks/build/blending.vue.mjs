@@ -1,8 +1,9 @@
-import { U as UserRequestUrl, b as __nuxt_component_2 } from './server.mjs';
+import { l as UserRequestUrl, n as useNuxtData, k as __nuxt_component_2 } from './server.mjs';
 import { _ as __nuxt_component_0 } from './Tabs.vue.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
 import { defineComponent, withAsyncContext, computed, unref, withCtx, createTextVNode, toDisplayString, createVNode, createBlock, openBlock, Fragment, renderList, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderList } from 'vue/server-renderer';
+import { R as Role } from './RoleEnum.mjs';
 import { u as useRequestApi } from './useRequestApi.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
@@ -64,6 +65,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       await CreateFromSheetRequest();
       await BlendingRequest();
     };
+    const {
+      data: UserInfoResponse
+    } = useNuxtData(UserRequestUrl.UserShowMe);
     const data = computed(() => {
       var _a;
       return (_a = BlendingResponse.value) == null ? void 0 : _a.response.filter((item) => item.name !== "");
@@ -122,6 +126,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       { label: "單日報名", slot: "oneDay" }
     ];
     return (_ctx, _push, _parent, _attrs) => {
+      var _a, _b;
       const _component_UButton = __nuxt_component_2;
       const _component_UTabs = __nuxt_component_0;
       const _component_UBadge = UBadge;
@@ -131,6 +136,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         variant: "soft",
         size: "sm",
         loading: unref(CreateFromSheetStatus) === "pending",
+        disabled: !(((_a = unref(UserInfoResponse)) == null ? void 0 : _a.user.role) === unref(Role).admin || ((_b = unref(UserInfoResponse)) == null ? void 0 : _b.user.role) === unref(Role).dev),
         onClick: handleUpdateData
       }, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
@@ -152,9 +158,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         ui: { trigger: "flex-1" }
       }, {
         join: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a, _b;
+          var _a2, _b2;
           if (_push2) {
-            _push2(`<p class="mb-4"${_scopeId}> 報名人數${ssrInterpolate((_a = unref(data)) == null ? void 0 : _a.length)}</p><!--[-->`);
+            _push2(`<p class="mb-4"${_scopeId}> 報名人數${ssrInterpolate((_a2 = unref(data)) == null ? void 0 : _a2.length)}</p><!--[-->`);
             ssrRenderList(unref(filterList), (nameSet) => {
               _push2(`<div class="mb-4"${_scopeId}><p${_scopeId}>${ssrInterpolate(nameSet.title)} (${ssrInterpolate(nameSet.data.length)}位):</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
               ssrRenderList(nameSet.data, (name) => {
@@ -180,7 +186,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _push2(`<!--]-->`);
           } else {
             return [
-              createVNode("p", { class: "mb-4" }, " 報名人數" + toDisplayString((_b = unref(data)) == null ? void 0 : _b.length), 1),
+              createVNode("p", { class: "mb-4" }, " 報名人數" + toDisplayString((_b2 = unref(data)) == null ? void 0 : _b2.length), 1),
               (openBlock(true), createBlock(Fragment, null, renderList(unref(filterList), (nameSet) => {
                 return openBlock(), createBlock("div", {
                   key: nameSet.title,
@@ -207,9 +213,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           }
         }),
         gospel: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a, _b;
+          var _a2, _b2;
           if (_push2) {
-            _push2(`<p${_scopeId}>福音朋友${ssrInterpolate((_a = unref(gospelFriends)) == null ? void 0 : _a.length)}位</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            _push2(`<p${_scopeId}>福音朋友${ssrInterpolate((_a2 = unref(gospelFriends)) == null ? void 0 : _a2.length)}位</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
             ssrRenderList(unref(gospelFriends), (nameData) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: nameData._id,
@@ -231,7 +237,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _push2(`<!--]--></div>`);
           } else {
             return [
-              createVNode("p", null, "福音朋友" + toDisplayString((_b = unref(gospelFriends)) == null ? void 0 : _b.length) + "位", 1),
+              createVNode("p", null, "福音朋友" + toDisplayString((_b2 = unref(gospelFriends)) == null ? void 0 : _b2.length) + "位", 1),
               createVNode("div", { class: "flex flex-wrap gap-2" }, [
                 (openBlock(true), createBlock(Fragment, null, renderList(unref(gospelFriends), (nameData) => {
                   return openBlock(), createBlock(_component_UBadge, {
@@ -250,9 +256,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           }
         }),
         oneDay: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a, _b, _c, _d;
+          var _a2, _b2, _c, _d;
           if (_push2) {
-            _push2(`<p${_scopeId}>週六單日報名${ssrInterpolate((_a = unref(filterOneDay)) == null ? void 0 : _a.length)}位</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            _push2(`<p${_scopeId}>週六單日報名${ssrInterpolate((_a2 = unref(filterOneDay)) == null ? void 0 : _a2.length)}位</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
             ssrRenderList(unref(filterOneDay), (nameData) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: nameData._id,
@@ -271,7 +277,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 _: 2
               }, _parent2, _scopeId));
             });
-            _push2(`<!--]--></div><p${_scopeId}>只前往主日${ssrInterpolate((_b = unref(filterSunday)) == null ? void 0 : _b.length)}位</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            _push2(`<!--]--></div><p${_scopeId}>只前往主日${ssrInterpolate((_b2 = unref(filterSunday)) == null ? void 0 : _b2.length)}位</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
             ssrRenderList(unref(filterSunday), (nameData) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: nameData._id,
@@ -336,7 +342,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/C/blending.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/C/googleSheet/blending.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 

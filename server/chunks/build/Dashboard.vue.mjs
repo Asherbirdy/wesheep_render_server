@@ -1,10 +1,13 @@
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
-import { r as reactivePick, t as tv, e as _appConfig, f as useAppConfig, k as UAvatar, j as UIcon, l as get, N as ULink, O as pickLinkProps, Q as ULinkBase, v as useRoute, R as useState, C as ClientRoutes, b as __nuxt_component_2$1 } from './server.mjs';
+import { r as reactivePick, t as tv, j as _appConfig, c as useAppConfig, i as UAvatar, U as UIcon, g as get, R as ULink, S as pickLinkProps, T as ULinkBase, v as useRoute, C as ClientRoutes, V as useState, z as useCookie, A as CookieEnums, L as clearNuxtState, K as clearNuxtData, s as navigateTo, P as PublicRoutes, k as __nuxt_component_2$1 } from './server.mjs';
 import { defineComponent, useSlots, unref, mergeProps, withCtx, renderSlot, createBlock, createCommentVNode, createVNode, openBlock, useSSRContext, computed, toRef, createTextVNode, toDisplayString, resolveDynamicComponent, createSlots, Fragment, renderList } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
 import { useForwardPropsEmits, CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuRoot, NavigationMenuList, NavigationMenuIndicator, NavigationMenuViewport, Primitive } from 'reka-ui';
 import { c as createReusableTemplate } from './index.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
+import { L as Logo } from './Logo.vue.mjs';
+import { R as Role } from './RoleEnum.mjs';
+import { u as useUserStore } from './useUserStore.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -28,6 +31,7 @@ import 'devalue';
 import '@iconify/vue';
 import '@iconify/utils/lib/css/icon';
 import 'tailwind-variants';
+import './_plugin-vue_export-helper.mjs';
 
 const theme$2 = {
   "slots": {
@@ -1824,42 +1828,72 @@ const __nuxt_component_3 = Object.assign(_sfc_main$1, { __name: "UContainer" });
 
 function useMenuStore() {
   const route = useRoute();
-  const menu = useState("menu", () => [
+  const userStore = useUserStore();
+  const { userInfo } = userStore;
+  const userRoute = [
     {
-      label: "Home",
-      icon: "i-lucide-home",
-      to: ClientRoutes.Home,
-      active: computed(() => route.path === ClientRoutes.Home)
-    },
-    {
-      label: "Serial Number",
-      icon: "i-lucide-barcode",
-      to: ClientRoutes.SerialNumber,
-      active: computed(() => route.path === ClientRoutes.SerialNumber)
-    },
-    {
-      label: "Landing Page",
+      label: "首頁編輯器",
       icon: "fluent-mdl2:page",
       to: ClientRoutes.LandingPage,
       active: computed(() => route.path.startsWith(ClientRoutes.LandingPage))
     },
     {
-      label: "Blending",
-      icon: "material-symbols-light:blender",
-      to: ClientRoutes.Blending,
-      active: computed(() => route.path === ClientRoutes.Blending)
-    },
-    // {
-    //   label: 'Sheet',
-    //   icon: 'i-lucide-file-spreadsheet',
-    //   to: ClientRoutes.Sheet,
-    //   active: computed(() => route.path === ClientRoutes.Sheet),
-    // },
+      label: "表單分析",
+      icon: "i-lucide-file-spreadsheet",
+      children: [
+        {
+          label: "相調",
+          icon: "material-symbols-light:blender",
+          to: ClientRoutes.Blending,
+          active: computed(() => route.path === ClientRoutes.Blending)
+        },
+        {
+          label: "港湖集中主日",
+          icon: "i-lucide-video",
+          to: ClientRoutes.MeetingCenter,
+          active: computed(() => route.path === ClientRoutes.MeetingCenter)
+        }
+      ]
+    }
+  ];
+  const adminRoute = [
     {
-      label: "港湖集中主日",
-      icon: "i-lucide-video",
-      to: ClientRoutes.MeetingCenter,
-      active: computed(() => route.path === ClientRoutes.MeetingCenter)
+      label: "帳號管理",
+      icon: "mingcute:group-3-line",
+      to: ClientRoutes.User,
+      active: computed(() => route.path === ClientRoutes.User)
+    },
+    {
+      label: "帳號序號申請",
+      icon: "i-lucide-barcode",
+      to: ClientRoutes.SerialNumber,
+      active: computed(() => route.path === ClientRoutes.SerialNumber)
+    }
+  ];
+  const menu = useState("menu", () => [
+    {
+      label: "個人資料",
+      icon: "i-lucide-user",
+      to: ClientRoutes.Home,
+      active: computed(() => route.path === ClientRoutes.Home)
+    },
+    ...[Role.admin, Role.dev].includes(userInfo.value.role) ? adminRoute : [],
+    ...userRoute,
+    {
+      label: "登出",
+      icon: "i-lucide-log-out",
+      active: computed(() => route.path === PublicRoutes.Login),
+      onSelect: async () => {
+        useCookie(CookieEnums.AccessToken, {
+          maxAge: 0
+        }).value = "";
+        useCookie(CookieEnums.RefreshToken, {
+          maxAge: 0
+        }).value = "";
+        clearNuxtState();
+        clearNuxtData();
+        navigateTo(PublicRoutes.Login);
+      }
     }
   ]);
   const getMenu = computed(() => menu.value);
@@ -1877,7 +1911,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UButton = __nuxt_component_2$1;
       const _component_UNavigationMenu = __nuxt_component_2;
       const _component_UContainer = __nuxt_component_3;
-      _push(`<div${ssrRenderAttrs(_attrs)}><header class="flex items-center justify-between bg-gray-100"><h1 class="p-5"> LOGO </h1><div class="md:hidden">`);
+      _push(`<div${ssrRenderAttrs(_attrs)}><header class="flex items-center justify-between">`);
+      _push(ssrRenderComponent(unref(Logo), null, null, _parent));
+      _push(`<div class="md:hidden">`);
       _push(ssrRenderComponent(_component_UDropdownMenu, {
         items: unref(getMenu),
         ui: {

@@ -1,7 +1,8 @@
-import { P as PublicRoutes, _ as __nuxt_component_0, b as __nuxt_component_2 } from './server.mjs';
+import { P as PublicRoutes, _ as __nuxt_component_0, k as __nuxt_component_2 } from './server.mjs';
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
-import { defineComponent, ref, mergeProps, withCtx, createTextVNode, toDisplayString, unref, createVNode, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrRenderList, ssrRenderComponent, ssrInterpolate, ssrRenderSlot } from 'vue/server-renderer';
+import { defineComponent, ref, mergeProps, unref, withCtx, createTextVNode, toDisplayString, createVNode, useSSRContext } from 'vue';
+import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrInterpolate, ssrRenderSlot } from 'vue/server-renderer';
+import { L as Logo } from './Logo.vue.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';
 import 'node:https';
@@ -27,6 +28,7 @@ import '@iconify/utils/lib/css/icon';
 import 'tailwind-variants';
 import 'reka-ui/namespaced';
 import './index.mjs';
+import './_plugin-vue_export-helper.mjs';
 
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "default",
@@ -80,7 +82,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_NuxtLink = __nuxt_component_0;
       const _component_UDropdownMenu = __nuxt_component_1;
       const _component_UButton = __nuxt_component_2;
-      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex flex-col min-h-screen" }, _attrs))}><header class="bg-gray-100 p-4 flex justify-between"><div>LOGO</div><div class="hidden md:block"><nav class="flex space-x-4"><!--[-->`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "flex flex-col min-h-screen" }, _attrs))}><header class="flex justify-between items-center">`);
+      _push(ssrRenderComponent(unref(Logo), null, null, _parent));
+      _push(`<div class="hidden md:block"><nav class="flex space-x-4"><!--[-->`);
       ssrRenderList(routes, (route) => {
         _push(ssrRenderComponent(_component_NuxtLink, {
           key: route.to,

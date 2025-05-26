@@ -1,10 +1,10 @@
 import { _ as __nuxt_component_4, a as __nuxt_component_5 } from './Modal.vue.mjs';
-import { U as UserRequestUrl, b as __nuxt_component_2 } from './server.mjs';
-import { _ as __nuxt_component_6, a as __nuxt_component_7, b as __nuxt_component_8 } from './Input.vue.mjs';
+import { k as __nuxt_component_2 } from './server.mjs';
+import { a as __nuxt_component_6, b as __nuxt_component_7, _ as __nuxt_component_8 } from './Input.vue.mjs';
 import { defineComponent, ref, withAsyncContext, watch, mergeProps, withCtx, unref, createVNode, toDisplayString, createBlock, createCommentVNode, openBlock, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate } from 'vue/server-renderer';
 import { u as useAuthApi } from './useAuthApi.mjs';
-import { u as useRequestApi } from './useRequestApi.mjs';
+import { u as useUserApi } from './useUserApi.mjs';
 import 'reka-ui';
 import '../nitro/nitro.mjs';
 import 'node:http';
@@ -29,16 +29,7 @@ import '@iconify/vue';
 import '@iconify/utils/lib/css/icon';
 import 'tailwind-variants';
 import './index.mjs';
-
-const useUserApi = {
-  showMe: async () => {
-    return useRequestApi(UserRequestUrl.UserShowMe, {
-      method: "GET",
-      server: false,
-      lazy: true
-    });
-  }
-};
+import './useRequestApi.mjs';
 
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "index",

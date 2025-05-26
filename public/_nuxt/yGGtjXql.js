@@ -1,0 +1,1 @@
+var a=(e=>(e.dev="dev",e.admin="admin",e.districtLeader="districtLeader",e.user="user",e))(a||{});const r=[{label:"管理者",value:"admin"},{label:"區負責",value:"districtLeader"},{label:"使用者",value:"user"}];export{a as R,r};

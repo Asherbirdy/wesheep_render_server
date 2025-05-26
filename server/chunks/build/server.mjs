@@ -415,7 +415,8 @@ function encodeURL(location2, isExternalHost = false) {
 }
 
 const __nuxt_page_meta$2 = {
-  layout: "dashboard"
+  layout: "dashboard",
+  middleware: ["auth"]
 };
 
 const __nuxt_page_meta$1 = {
@@ -437,6 +438,11 @@ const _routes = [
     component: () => import('./C.vue.mjs'),
     children: [
       {
+        name: "C-user",
+        path: "user",
+        component: () => import('./user.vue.mjs')
+      },
+      {
         name: "C",
         path: "",
         component: () => import('./index.vue.mjs')
@@ -447,19 +453,9 @@ const _routes = [
         component: () => import('./sheet.vue.mjs')
       },
       {
-        name: "C-blending",
-        path: "blending",
-        component: () => import('./blending.vue.mjs')
-      },
-      {
         name: "C-serialNumber",
         path: "serialNumber",
         component: () => import('./serialNumber.vue.mjs')
-      },
-      {
-        name: "C-meetingCenter",
-        path: "meetingCenter",
-        component: () => import('./meetingCenter.vue.mjs')
       },
       {
         name: "C-landingPage",
@@ -467,9 +463,19 @@ const _routes = [
         component: () => import('./index.vue2.mjs')
       },
       {
+        name: "C-googleSheet-blending",
+        path: "googleSheet/blending",
+        component: () => import('./blending.vue.mjs')
+      },
+      {
         name: "C-landingPage-editor-id",
         path: "landingPage/editor/:id()",
         component: () => import('./_id_.vue.mjs')
+      },
+      {
+        name: "C-googleSheet-meetingCenter",
+        path: "googleSheet/meetingCenter",
+        component: () => import('./meetingCenter.vue.mjs')
       }
     ]
   },
@@ -625,7 +631,9 @@ const globalMiddleware = [
   validate,
   manifest_45route_45rule
 ];
-const namedMiddleware = {};
+const namedMiddleware = {
+  auth: () => import('./auth.mjs')
+};
 
 const plugin$1 = defineNuxtPlugin({
   name: "nuxt:router",
@@ -1251,6 +1259,17 @@ function useState(...args) {
   }
   return state;
 }
+function clearNuxtState(keys) {
+  const nuxtApp = useNuxtApp();
+  const _allKeys = Object.keys(nuxtApp.payload.state).map((key) => key.substring(useStateKeyPrefix.length));
+  const _keys = _allKeys;
+  for (const _key of _keys) {
+    const key = useStateKeyPrefix + _key;
+    if (key in nuxtApp.payload.state) {
+      nuxtApp.payload.state[key] = void 0;
+    }
+  }
+}
 
 const plugin_server_LlmVocchW81w0V5SsaJLemsIvF2IHoteTyzHWZjumlg = defineNuxtPlugin((nuxtApp) => {
   var _a;
@@ -1411,6 +1430,8 @@ var UserRequestUrl = /* @__PURE__ */ ((UserRequestUrl2) => {
   UserRequestUrl2["SendOTP"] = "/auth/sendOTP";
   UserRequestUrl2["BindOTPEmail"] = "/auth/bindOTPEmail";
   UserRequestUrl2["UserShowMe"] = "/users/showMe";
+  UserRequestUrl2["UserGetUserList"] = "/users/getAllUsers";
+  UserRequestUrl2["UserChangeUserAccess"] = "/users/changeUserAccess";
   UserRequestUrl2["LandingPageCreate"] = "/landingPage/create";
   UserRequestUrl2["LandingPageSetUrlPath"] = "/landingPage/setUrlPath";
   UserRequestUrl2["LandingPageGetALL"] = "/landingPage/all";
@@ -1440,12 +1461,13 @@ var PublicRoutes = /* @__PURE__ */ ((PublicRoutes2) => {
 const ClientBase = "/C";
 var ClientRoutes = ((ClientRoutes2) => {
   ClientRoutes2["Home"] = `${ClientBase}/`;
+  ClientRoutes2["User"] = `${ClientBase}/user`;
   ClientRoutes2["LandingPage"] = `${ClientBase}/landingPage`;
   ClientRoutes2["LandingPageEditor"] = `${ClientBase}/landingPage/editor`;
-  ClientRoutes2["Blending"] = `${ClientBase}/blending`;
   ClientRoutes2["Sheet"] = `${ClientBase}/sheet`;
   ClientRoutes2["SerialNumber"] = `${ClientBase}/serialNumber`;
-  ClientRoutes2["MeetingCenter"] = `${ClientBase}/meetingCenter`;
+  ClientRoutes2["MeetingCenter"] = `${ClientBase}/googleSheet/meetingCenter`;
+  ClientRoutes2["Blending"] = `${ClientBase}/googleSheet/blending`;
   return ClientRoutes2;
 })(ClientRoutes || {});
 
@@ -1802,6 +1824,12 @@ function compare(value, currentValue, comparator) {
   }
   if (typeof value === "string") {
     return value === currentValue;
+  }
+  if (typeof comparator === "function") {
+    return comparator(value, currentValue);
+  }
+  if (typeof comparator === "string") {
+    return get(value, comparator) === get(currentValue, comparator);
   }
   return isEqual(value, currentValue);
 }
@@ -2422,6 +2450,14 @@ function useNuxtData(key) {
 async function refreshNuxtData(keys) {
   {
     return Promise.resolve();
+  }
+}
+function clearNuxtData(keys) {
+  const nuxtApp = useNuxtApp();
+  const _allKeys = Object.keys(nuxtApp.payload.data);
+  const _keys = _allKeys;
+  for (const key of _keys) {
+    clearNuxtDataByKey(nuxtApp, key);
   }
 }
 function clearNuxtDataByKey(nuxtApp, key) {
@@ -5251,5 +5287,5 @@ const server = /*#__PURE__*/Object.freeze({
   default: entry$1
 });
 
-export { injectLocal as $, CookieEnums as A, formBusInjectionKey as B, ClientRoutes as C, formInputsInjectionKey as D, formLoadingInjectionKey as E, formOptionsInjectionKey as F, inputIdInjectionKey as G, formFieldInjectionKey as H, looseToNumber as I, fetchDefaults as J, useAsyncData as K, useRequestFetch as L, useRuntimeConfig as M, ULink as N, pickLinkProps as O, PublicRoutes as P, ULinkBase as Q, useState as R, createSharedComposable as S, omit as T, UserRequestUrl as U, tryOnMounted as V, toArray as W, watchImmediate as X, tryOnScopeDispose as Y, pxValue as Z, __nuxt_component_0$1 as _, __nuxt_component_0 as a, isObject as a0, makeDestructurable as a1, camelize as a2, server as a3, __nuxt_component_2$1 as b, useNuxtApp as c, useAvatarGroup as d, _appConfig as e, useAppConfig as f, useFormField as g, useButtonGroup as h, useComponentIcons as i, UIcon as j, UAvatar as k, get as l, compare as m, useNuxtData as n, refreshNuxtData as o, useLocale as p, reactiveOmit as q, reactivePick as r, navigateTo as s, tv as t, useHead as u, useRoute as v, useRouter as w, PublicRequestUrl as x, useToast as y, useCookie as z };
+export { toArray as $, CookieEnums as A, formBusInjectionKey as B, ClientRoutes as C, formInputsInjectionKey as D, formLoadingInjectionKey as E, formOptionsInjectionKey as F, inputIdInjectionKey as G, formFieldInjectionKey as H, looseToNumber as I, defineNuxtRouteMiddleware as J, clearNuxtData as K, clearNuxtState as L, fetchDefaults as M, useAsyncData as N, useRequestFetch as O, PublicRoutes as P, useRuntimeConfig as Q, ULink as R, pickLinkProps as S, ULinkBase as T, UIcon as U, useState as V, createSharedComposable as W, omit as X, tryOnMounted as Y, makeDestructurable as Z, __nuxt_component_0$1 as _, __nuxt_component_0 as a, watchImmediate as a0, tryOnScopeDispose as a1, pxValue as a2, camelize as a3, injectLocal as a4, isObject as a5, server as a6, useLocale as b, useAppConfig as c, useFormField as d, useButtonGroup as e, useComponentIcons as f, get as g, compare as h, UAvatar as i, _appConfig as j, __nuxt_component_2$1 as k, UserRequestUrl as l, useNuxtApp as m, useNuxtData as n, refreshNuxtData as o, useAvatarGroup as p, reactiveOmit as q, reactivePick as r, navigateTo as s, tv as t, useHead as u, useRoute as v, useRouter as w, PublicRequestUrl as x, useToast as y, useCookie as z };
 //# sourceMappingURL=server.mjs.map
