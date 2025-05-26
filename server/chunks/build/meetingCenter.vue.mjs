@@ -1,7 +1,7 @@
 import { l as UserRequestUrl, n as useNuxtData, k as __nuxt_component_2 } from './server.mjs';
 import { _ as __nuxt_component_0 } from './Tabs.vue.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
-import { defineComponent, withAsyncContext, computed, unref, withCtx, createTextVNode, toDisplayString, createVNode, createBlock, openBlock, Fragment, renderList, useSSRContext } from 'vue';
+import { defineComponent, withAsyncContext, computed, mergeProps, unref, withCtx, createTextVNode, toDisplayString, createVNode, createBlock, openBlock, Fragment, renderList, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderList, ssrInterpolate } from 'vue/server-renderer';
 import { R as Role } from './RoleEnum.mjs';
 import { u as useRequestApi } from './useRequestApi.mjs';
@@ -126,7 +126,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_UButton = __nuxt_component_2;
       const _component_UTabs = __nuxt_component_0;
       const _component_UBadge = UBadge;
-      _push(`<div${ssrRenderAttrs(_attrs)}>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "pb-20" }, _attrs))}>`);
       _push(ssrRenderComponent(_component_UButton, {
         size: "sm",
         variant: "soft",
@@ -304,10 +304,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           }
         }),
         departure: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a2, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p;
+          var _a2, _b2, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t;
           if (_push2) {
-            _push2(`<div${_scopeId}><p${_scopeId}>6/8 港湖集中主日 要搭遊覽車人位</p><p class="font-bold"${_scopeId}> 搭乘去程遊覽車(東湖-&gt;信基) </p><p${_scopeId}>一區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_a2 = unref(districtOne)) == null ? void 0 : _a2.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+            _push2(`<div${_scopeId}><p${_scopeId}>6/8 港湖集中主日 要搭遊覽車人位</p><p class="font-bold"${_scopeId}> 搭乘去程遊覽車(東湖-&gt;信基)(${ssrInterpolate((_a2 = unref(data)) == null ? void 0 : _a2.filter((item) => item.departure === "搭乘去程").length)}人) </p><p${_scopeId}>一區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            ssrRenderList((_b2 = unref(districtOne)) == null ? void 0 : _b2.filter((item) => item.departure === "搭乘去程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -326,7 +326,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, _parent2, _scopeId));
             });
             _push2(`<!--]--></div><p${_scopeId}>二區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_b2 = unref(districtTwo)) == null ? void 0 : _b2.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+            ssrRenderList((_c = unref(districtTwo)) == null ? void 0 : _c.filter((item) => item.departure === "搭乘去程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -345,7 +345,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, _parent2, _scopeId));
             });
             _push2(`<!--]--></div><p${_scopeId}>三區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_c = unref(districtThree)) == null ? void 0 : _c.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+            ssrRenderList((_d = unref(districtThree)) == null ? void 0 : _d.filter((item) => item.departure === "搭乘去程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -364,7 +364,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, _parent2, _scopeId));
             });
             _push2(`<!--]--></div><p${_scopeId}>四區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_d = unref(districtFour)) == null ? void 0 : _d.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+            ssrRenderList((_e = unref(districtFour)) == null ? void 0 : _e.filter((item) => item.departure === "搭乘去程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -382,8 +382,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 _: 2
               }, _parent2, _scopeId));
             });
-            _push2(`<!--]--></div></div><p class="font-bold"${_scopeId}> 搭乘回程遊覽車(信基-&gt;東湖) </p><p${_scopeId}>一區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_e = unref(districtOne)) == null ? void 0 : _e.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
+            _push2(`<!--]--></div></div><p class="font-bold"${_scopeId}> 搭乘回程遊覽車(信基-&gt;東湖)(${ssrInterpolate((_f = unref(data)) == null ? void 0 : _f.filter((item) => item.returnRide === "搭乘回程").length)}人) </p><p${_scopeId}>一區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            ssrRenderList((_g = unref(districtOne)) == null ? void 0 : _g.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -402,7 +402,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, _parent2, _scopeId));
             });
             _push2(`<!--]--></div><p${_scopeId}>二區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_f = unref(districtTwo)) == null ? void 0 : _f.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
+            ssrRenderList((_h = unref(districtTwo)) == null ? void 0 : _h.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -421,7 +421,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, _parent2, _scopeId));
             });
             _push2(`<!--]--></div><p${_scopeId}>三區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_g = unref(districtThree)) == null ? void 0 : _g.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
+            ssrRenderList((_i = unref(districtThree)) == null ? void 0 : _i.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -440,7 +440,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               }, _parent2, _scopeId));
             });
             _push2(`<!--]--></div><p${_scopeId}>四區:</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList((_h = unref(districtFour)) == null ? void 0 : _h.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
+            ssrRenderList((_j = unref(districtFour)) == null ? void 0 : _j.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
                 color: "info",
@@ -463,10 +463,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             return [
               createVNode("div", null, [
                 createVNode("p", null, "6/8 港湖集中主日 要搭遊覽車人位"),
-                createVNode("p", { class: "font-bold" }, " 搭乘去程遊覽車(東湖->信基) "),
+                createVNode("p", { class: "font-bold" }, " 搭乘去程遊覽車(東湖->信基)(" + toDisplayString((_k = unref(data)) == null ? void 0 : _k.filter((item) => item.departure === "搭乘去程").length) + "人) ", 1),
                 createVNode("p", null, "一區:"),
                 createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList((_i = unref(districtOne)) == null ? void 0 : _i.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+                  (openBlock(true), createBlock(Fragment, null, renderList((_l = unref(districtOne)) == null ? void 0 : _l.filter((item) => item.departure === "搭乘去程"), (item, index) => {
                     return openBlock(), createBlock(_component_UBadge, {
                       key: index,
                       color: "info",
@@ -481,7 +481,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 ]),
                 createVNode("p", null, "二區:"),
                 createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList((_j = unref(districtTwo)) == null ? void 0 : _j.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+                  (openBlock(true), createBlock(Fragment, null, renderList((_m = unref(districtTwo)) == null ? void 0 : _m.filter((item) => item.departure === "搭乘去程"), (item, index) => {
                     return openBlock(), createBlock(_component_UBadge, {
                       key: index,
                       color: "info",
@@ -496,7 +496,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 ]),
                 createVNode("p", null, "三區:"),
                 createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList((_k = unref(districtThree)) == null ? void 0 : _k.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+                  (openBlock(true), createBlock(Fragment, null, renderList((_n = unref(districtThree)) == null ? void 0 : _n.filter((item) => item.departure === "搭乘去程"), (item, index) => {
                     return openBlock(), createBlock(_component_UBadge, {
                       key: index,
                       color: "info",
@@ -511,7 +511,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                 ]),
                 createVNode("p", null, "四區:"),
                 createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                  (openBlock(true), createBlock(Fragment, null, renderList((_l = unref(districtFour)) == null ? void 0 : _l.filter((item) => item.departure === "搭乘去程"), (item, index) => {
+                  (openBlock(true), createBlock(Fragment, null, renderList((_o = unref(districtFour)) == null ? void 0 : _o.filter((item) => item.departure === "搭乘去程"), (item, index) => {
                     return openBlock(), createBlock(_component_UBadge, {
                       key: index,
                       color: "info",
@@ -525,10 +525,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                   }), 128))
                 ])
               ]),
-              createVNode("p", { class: "font-bold" }, " 搭乘回程遊覽車(信基->東湖) "),
+              createVNode("p", { class: "font-bold" }, " 搭乘回程遊覽車(信基->東湖)(" + toDisplayString((_p = unref(data)) == null ? void 0 : _p.filter((item) => item.returnRide === "搭乘回程").length) + "人) ", 1),
               createVNode("p", null, "一區:"),
               createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                (openBlock(true), createBlock(Fragment, null, renderList((_m = unref(districtOne)) == null ? void 0 : _m.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
+                (openBlock(true), createBlock(Fragment, null, renderList((_q = unref(districtOne)) == null ? void 0 : _q.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
                   return openBlock(), createBlock(_component_UBadge, {
                     key: index,
                     color: "info",
@@ -543,7 +543,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ]),
               createVNode("p", null, "二區:"),
               createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                (openBlock(true), createBlock(Fragment, null, renderList((_n = unref(districtTwo)) == null ? void 0 : _n.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
+                (openBlock(true), createBlock(Fragment, null, renderList((_r = unref(districtTwo)) == null ? void 0 : _r.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
                   return openBlock(), createBlock(_component_UBadge, {
                     key: index,
                     color: "info",
@@ -558,7 +558,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ]),
               createVNode("p", null, "三區:"),
               createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                (openBlock(true), createBlock(Fragment, null, renderList((_o = unref(districtThree)) == null ? void 0 : _o.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
+                (openBlock(true), createBlock(Fragment, null, renderList((_s = unref(districtThree)) == null ? void 0 : _s.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
                   return openBlock(), createBlock(_component_UBadge, {
                     key: index,
                     color: "info",
@@ -573,7 +573,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               ]),
               createVNode("p", null, "四區:"),
               createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                (openBlock(true), createBlock(Fragment, null, renderList((_p = unref(districtFour)) == null ? void 0 : _p.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
+                (openBlock(true), createBlock(Fragment, null, renderList((_t = unref(districtFour)) == null ? void 0 : _t.filter((item) => item.returnRide === "搭乘回程"), (item, index) => {
                   return openBlock(), createBlock(_component_UBadge, {
                     key: index,
                     color: "info",
