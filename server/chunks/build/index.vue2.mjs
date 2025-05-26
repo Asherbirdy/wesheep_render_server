@@ -785,38 +785,34 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           color: row.getValue("isCustom") ? "info" : "neutral"
         }, () => row.getValue("isCustom") ? "客製化" : "公版")
       },
+      // {
+      //   accessorKey: 'urlPathId',
+      //   header: 'URL Path ID',
+      //   cell: ({ row }) => row.getValue('urlPathId'),
+      // },
       {
-        accessorKey: "urlPathId",
-        header: "URL Path ID",
-        cell: ({ row }) => row.getValue("urlPathId")
-      },
-      {
-        accessorKey: "updatedAt",
-        header: "Updated At",
-        cell: ({ row }) => row.getValue("updatedAt")
+        accessorKey: "_id",
+        header: "url",
+        cell: ({ row }) => `${urlBase.value}${PublicRoutes.LandingPage}/${row.getValue("_id")}`
       },
       {
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
+          const isEdit = UserInfoResponse.value.user.landingPageAccess.includes(LandingPageAccess.edit_post);
           const items = [
-            {
-              type: "label",
-              label: "Actions"
-            },
-            {
+            ...isEdit ? [{
               label: "文字編輯器",
               onSelect() {
                 navigateTo(`${ClientRoutes.LandingPageEditor}/${row.original._id}`);
               }
-            },
-            {
+            }, {
               label: "編輯標題",
               type: "Actions",
               onSelect: () => {
                 openModal(row.original);
               }
-            }
+            }] : []
           ];
           return h(
             "div",

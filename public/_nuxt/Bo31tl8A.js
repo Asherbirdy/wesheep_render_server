@@ -1,0 +1,1 @@
+import{_ as o}from"./DlAUqK2U.js";import{c as s,o as t,z as n}from"./CUmCUkJp.js";const r={},c={class:"mx-[5%]"};function a(e,_){return t(),s("main",c,[n(e.$slots,"default")])}const m=o(r,[["render",a]]);export{m as default};
