@@ -66,10 +66,6 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       var _a;
       return (_a = data.value) == null ? void 0 : _a.filter((item) => item.identity === "兒童");
     });
-    const adultData = computed(() => {
-      var _a;
-      return (_a = data.value) == null ? void 0 : _a.filter((item) => item.identity !== "兒童");
-    });
     const districtOne = computed(() => {
       var _a;
       return (_a = data.value) == null ? void 0 : _a.filter(
@@ -152,9 +148,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         ui: { trigger: "flex-1" }
       }, {
         join: withCtx((_, _push2, _parent2, _scopeId) => {
-          var _a2, _b2, _c, _d, _e, _f;
+          var _a2, _b2, _c, _d;
           if (_push2) {
-            _push2(`<div${_scopeId}>6/8 港湖集中主日 報名：${ssrInterpolate((_a2 = unref(data)) == null ? void 0 : _a2.length)}位</div><div${_scopeId}>成人${ssrInterpolate((_b2 = unref(adultData)) == null ? void 0 : _b2.length)}位,兒童${ssrInterpolate((_c = unref(kidData)) == null ? void 0 : _c.length)}位</div><p class="text-sm text-red-600"${_scopeId}> 請於5/27日前<br${_scopeId}>協助調查是否搭乘遊覽車～謝謝 </p><p${_scopeId}>一區</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
+            _push2(`<div${_scopeId}>6/8 港湖集中主日 報名：${ssrInterpolate((_a2 = unref(data)) == null ? void 0 : _a2.length)}位，其中兒童有${ssrInterpolate((_b2 = unref(kidData)) == null ? void 0 : _b2.length)}位</div><p${_scopeId}>一區</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
             ssrRenderList(unref(districtOne), (item, index) => {
               _push2(ssrRenderComponent(_component_UBadge, {
                 key: index,
@@ -233,13 +229,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _push2(`<!--]--></div>`);
           } else {
             return [
-              createVNode("div", null, "6/8 港湖集中主日 報名：" + toDisplayString((_d = unref(data)) == null ? void 0 : _d.length) + "位", 1),
-              createVNode("div", null, "成人" + toDisplayString((_e = unref(adultData)) == null ? void 0 : _e.length) + "位,兒童" + toDisplayString((_f = unref(kidData)) == null ? void 0 : _f.length) + "位", 1),
-              createVNode("p", { class: "text-sm text-red-600" }, [
-                createTextVNode(" 請於5/27日前"),
-                createVNode("br"),
-                createTextVNode("協助調查是否搭乘遊覽車～謝謝 ")
-              ]),
+              createVNode("div", null, "6/8 港湖集中主日 報名：" + toDisplayString((_c = unref(data)) == null ? void 0 : _c.length) + "位，其中兒童有" + toDisplayString((_d = unref(kidData)) == null ? void 0 : _d.length) + "位", 1),
               createVNode("p", null, "一區"),
               createVNode("div", { class: "flex flex-wrap gap-2" }, [
                 (openBlock(true), createBlock(Fragment, null, renderList(unref(districtOne), (item, index) => {
