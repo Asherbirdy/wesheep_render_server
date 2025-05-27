@@ -1,7 +1,7 @@
 import { defineComponent, withAsyncContext, unref, useSSRContext } from 'vue';
 import { ssrRenderAttrs } from 'vue/server-renderer';
 import { u as useLandingPageApi } from './useLandingPageApi.mjs';
-import { v as useRoute } from './server.mjs';
+import { w as useRoute } from './server.mjs';
 import './useRequestApi.mjs';
 import '../nitro/nitro.mjs';
 import 'node:http';

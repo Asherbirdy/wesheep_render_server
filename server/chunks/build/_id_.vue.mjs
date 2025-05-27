@@ -1,4 +1,4 @@
-import { v as useRoute, w as useRouter, k as __nuxt_component_2 } from './server.mjs';
+import { w as useRoute, x as useRouter, k as __nuxt_component_2 } from './server.mjs';
 import { defineComponent, ref, withAsyncContext, unref, withCtx, createTextVNode, createVNode, resolveDynamicComponent, nextTick, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderClass, ssrIncludeBooleanAttr, ssrRenderVNode } from 'vue/server-renderer';
 import { EditorContent } from '@tiptap/vue-3';

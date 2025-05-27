@@ -1,4 +1,4 @@
-import { l as UserRequestUrl, n as useNuxtData, k as __nuxt_component_2 } from './server.mjs';
+import { m as UserRequestUrl, o as useNuxtData, k as __nuxt_component_2 } from './server.mjs';
 import { _ as __nuxt_component_0 } from './Tabs.vue.mjs';
 import { U as UBadge } from './Badge.vue.mjs';
 import { defineComponent, withAsyncContext, computed, unref, withCtx, createTextVNode, toDisplayString, createVNode, createBlock, openBlock, Fragment, renderList, useSSRContext } from 'vue';

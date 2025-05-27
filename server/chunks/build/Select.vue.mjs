@@ -2,7 +2,7 @@ import { defineComponent, mergeModels, useModel, computed, unref, mergeProps, wi
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderList } from 'vue/server-renderer';
 import { Primitive, Slot, useForwardPropsEmits, SelectRoot, SelectTrigger, SelectPortal, SelectContent, SelectViewport, SelectGroup, SelectLabel, SelectSeparator, SelectItem, SelectItemText, SelectItemIndicator, SelectArrow } from 'reka-ui';
 import { l as defu } from '../nitro/nitro.mjs';
-import { p as useAvatarGroup, t as tv, j as _appConfig, c as useAppConfig, r as reactivePick, d as useFormField, e as useButtonGroup, f as useComponentIcons, U as UIcon, i as UAvatar, g as get, h as compare } from './server.mjs';
+import { q as useAvatarGroup, t as tv, j as _appConfig, c as useAppConfig, r as reactivePick, d as useFormField, e as useButtonGroup, f as useComponentIcons, U as UIcon, i as UAvatar, g as get, h as compare } from './server.mjs';
 
 const theme$1 = {
   "slots": {

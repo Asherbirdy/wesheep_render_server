@@ -1,5 +1,5 @@
 import { _ as __nuxt_component_4, a as __nuxt_component_5 } from './Modal.vue.mjs';
-import { k as __nuxt_component_2 } from './server.mjs';
+import { l as useToast, k as __nuxt_component_2 } from './server.mjs';
 import { a as __nuxt_component_6, b as __nuxt_component_7, _ as __nuxt_component_8 } from './Input.vue.mjs';
 import { defineComponent, ref, withAsyncContext, watch, mergeProps, withCtx, unref, createVNode, toDisplayString, createBlock, createCommentVNode, openBlock, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate } from 'vue/server-renderer';
@@ -36,10 +36,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   async setup(__props) {
     let __temp, __restore;
+    const toast = useToast();
     const state = ref({
       data: {
         emailVerifiedModal: {
-          otp: ""
+          OTP: ""
         }
       },
       feature: {
@@ -52,9 +53,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     });
     const { data: UserInfoResponse } = ([__temp, __restore] = withAsyncContext(() => useUserApi.showMe()), __temp = await __temp, __restore(), __temp);
     const { execute: executeEmailRequest } = ([__temp, __restore] = withAsyncContext(() => useAuthApi.sendOTP()), __temp = await __temp, __restore(), __temp);
-    const { execute: emailVerifyRequest } = ([__temp, __restore] = withAsyncContext(() => useAuthApi.bindOTPEmail({
-      OTP: state.value.data.emailVerifiedModal.otp
-    })), __temp = await __temp, __restore(), __temp);
+    const {
+      execute: emailVerifyRequest,
+      error: emailVerifyError,
+      status: emailVerifyStatus
+    } = ([__temp, __restore] = withAsyncContext(() => useAuthApi.bindOTPEmail(state.value.data.emailVerifiedModal)), __temp = await __temp, __restore(), __temp);
     const onEmailRequest = async () => {
       const { emailCountdown } = state.value.feature;
       await executeEmailRequest();
@@ -62,23 +65,53 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       emailCountdown.countdown = emailCountdown.time;
     };
     const onEmailVerify = async () => {
+      var _a, _b;
+      const { data } = state.value;
       await emailVerifyRequest();
+      if (((_a = emailVerifyError.value) == null ? void 0 : _a.data.error) === "INVALID_OTP") {
+        toast.add({
+          title: "不正確的驗證碼",
+          color: "error"
+        });
+        data.emailVerifiedModal.OTP = "";
+        return;
+      }
+      const errorList = [
+        "ACCOUNT_BLOCKED",
+        "OTP_EXPIRED",
+        "OTP_NOT_FOUND_OR_EXPIRED"
+      ];
+      if (errorList.includes(
+        (_b = emailVerifyError.value) == null ? void 0 : _b.data.error
+      )) {
+        toast.add({
+          title: "帳號已停用驗證，請聯絡管理員",
+          color: "error"
+        });
+        data.emailVerifiedModal.OTP = "";
+        return;
+      }
+      toast.add({
+        title: "驗證成功 | 5秒後請重新登入",
+        color: "success"
+      });
     };
     watch(state.value.feature.emailCountdown, (value) => {
+      const { feature } = state.value;
       if (value.countdown > 0) {
         setTimeout(() => {
-          state.value.feature.emailCountdown.countdown--;
+          feature.emailCountdown.countdown--;
         }, 1e3);
         return;
       }
-      state.value.feature.emailCountdown.status = false;
-      state.value.feature.emailCountdown.countdown = state.value.feature.emailCountdown.time;
+      feature.emailCountdown.status = false;
+      feature.emailCountdown.countdown = feature.emailCountdown.time;
     });
     const validate = (state2) => {
       const errors = [];
-      if (!state2.otp) {
+      if (!state2.OTP) {
         errors.push({
-          name: "otp",
+          name: "OTP",
           message: "驗證碼不能為空"
         });
       }
@@ -132,8 +165,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     default: withCtx((_3, _push4, _parent4, _scopeId3) => {
                       if (_push4) {
                         _push4(ssrRenderComponent(_component_UInput, {
-                          modelValue: unref(state).data.emailVerifiedModal.otp,
-                          "onUpdate:modelValue": ($event) => unref(state).data.emailVerifiedModal.otp = $event,
+                          modelValue: unref(state).data.emailVerifiedModal.OTP,
+                          "onUpdate:modelValue": ($event) => unref(state).data.emailVerifiedModal.OTP = $event,
                           label: "驗證碼",
                           class: "flex-1 w-[calc(100%-124px)] mr-1",
                           placeholder: "請輸入驗證碼"
@@ -148,8 +181,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       } else {
                         return [
                           createVNode(_component_UInput, {
-                            modelValue: unref(state).data.emailVerifiedModal.otp,
-                            "onUpdate:modelValue": ($event) => unref(state).data.emailVerifiedModal.otp = $event,
+                            modelValue: unref(state).data.emailVerifiedModal.OTP,
+                            "onUpdate:modelValue": ($event) => unref(state).data.emailVerifiedModal.OTP = $event,
                             label: "驗證碼",
                             class: "flex-1 w-[calc(100%-124px)] mr-1",
                             placeholder: "請輸入驗證碼"
@@ -177,8 +210,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                       }, {
                         default: withCtx(() => [
                           createVNode(_component_UInput, {
-                            modelValue: unref(state).data.emailVerifiedModal.otp,
-                            "onUpdate:modelValue": ($event) => unref(state).data.emailVerifiedModal.otp = $event,
+                            modelValue: unref(state).data.emailVerifiedModal.OTP,
+                            "onUpdate:modelValue": ($event) => unref(state).data.emailVerifiedModal.OTP = $event,
                             label: "驗證碼",
                             class: "flex-1 w-[calc(100%-124px)] mr-1",
                             placeholder: "請輸入驗證碼"
@@ -202,6 +235,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
             _push2(ssrRenderComponent(_component_UButton, {
               label: "驗證 Email",
               block: "",
+              disabled: unref(state).data.emailVerifiedModal.OTP.length < 4,
+              loading: unref(emailVerifyStatus) === "pending",
               onClick: onEmailVerify
             }, null, _parent2, _scopeId));
           } else {
@@ -219,8 +254,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
                     }, {
                       default: withCtx(() => [
                         createVNode(_component_UInput, {
-                          modelValue: unref(state).data.emailVerifiedModal.otp,
-                          "onUpdate:modelValue": ($event) => unref(state).data.emailVerifiedModal.otp = $event,
+                          modelValue: unref(state).data.emailVerifiedModal.OTP,
+                          "onUpdate:modelValue": ($event) => unref(state).data.emailVerifiedModal.OTP = $event,
                           label: "驗證碼",
                           class: "flex-1 w-[calc(100%-124px)] mr-1",
                           placeholder: "請輸入驗證碼"
@@ -242,8 +277,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               createVNode(_component_UButton, {
                 label: "驗證 Email",
                 block: "",
+                disabled: unref(state).data.emailVerifiedModal.OTP.length < 4,
+                loading: unref(emailVerifyStatus) === "pending",
                 onClick: onEmailVerify
-              })
+              }, null, 8, ["disabled", "loading"])
             ];
           }
         }),

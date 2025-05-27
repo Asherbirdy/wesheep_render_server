@@ -453,6 +453,11 @@ const _routes = [
         component: () => import('./sheet.vue.mjs')
       },
       {
+        name: "C-district",
+        path: "district",
+        component: () => import('./district.vue.mjs')
+      },
+      {
         name: "C-serialNumber",
         path: "serialNumber",
         component: () => import('./serialNumber.vue.mjs')
@@ -1468,6 +1473,7 @@ var ClientRoutes = ((ClientRoutes2) => {
   ClientRoutes2["SerialNumber"] = `${ClientBase}/serialNumber`;
   ClientRoutes2["MeetingCenter"] = `${ClientBase}/googleSheet/meetingCenter`;
   ClientRoutes2["Blending"] = `${ClientBase}/googleSheet/blending`;
+  ClientRoutes2["District"] = `${ClientBase}/district`;
   return ClientRoutes2;
 })(ClientRoutes || {});
 
@@ -5287,5 +5293,5 @@ const server = /*#__PURE__*/Object.freeze({
   default: entry$1
 });
 
-export { toArray as $, CookieEnums as A, formBusInjectionKey as B, ClientRoutes as C, formInputsInjectionKey as D, formLoadingInjectionKey as E, formOptionsInjectionKey as F, inputIdInjectionKey as G, formFieldInjectionKey as H, looseToNumber as I, defineNuxtRouteMiddleware as J, clearNuxtData as K, clearNuxtState as L, fetchDefaults as M, useAsyncData as N, useRequestFetch as O, PublicRoutes as P, useRuntimeConfig as Q, ULink as R, pickLinkProps as S, ULinkBase as T, UIcon as U, useState as V, createSharedComposable as W, omit as X, tryOnMounted as Y, makeDestructurable as Z, __nuxt_component_0$1 as _, __nuxt_component_0 as a, watchImmediate as a0, tryOnScopeDispose as a1, pxValue as a2, camelize as a3, injectLocal as a4, isObject as a5, server as a6, useLocale as b, useAppConfig as c, useFormField as d, useButtonGroup as e, useComponentIcons as f, get as g, compare as h, UAvatar as i, _appConfig as j, __nuxt_component_2$1 as k, UserRequestUrl as l, useNuxtApp as m, useNuxtData as n, refreshNuxtData as o, useAvatarGroup as p, reactiveOmit as q, reactivePick as r, navigateTo as s, tv as t, useHead as u, useRoute as v, useRouter as w, PublicRequestUrl as x, useToast as y, useCookie as z };
+export { toArray as $, CookieEnums as A, formBusInjectionKey as B, ClientRoutes as C, formInputsInjectionKey as D, formLoadingInjectionKey as E, formOptionsInjectionKey as F, inputIdInjectionKey as G, formFieldInjectionKey as H, looseToNumber as I, defineNuxtRouteMiddleware as J, clearNuxtData as K, clearNuxtState as L, fetchDefaults as M, useAsyncData as N, useRequestFetch as O, PublicRoutes as P, useRuntimeConfig as Q, ULink as R, pickLinkProps as S, ULinkBase as T, UIcon as U, useState as V, createSharedComposable as W, omit as X, tryOnMounted as Y, makeDestructurable as Z, __nuxt_component_0$1 as _, __nuxt_component_0 as a, watchImmediate as a0, tryOnScopeDispose as a1, pxValue as a2, camelize as a3, injectLocal as a4, isObject as a5, server as a6, useLocale as b, useAppConfig as c, useFormField as d, useButtonGroup as e, useComponentIcons as f, get as g, compare as h, UAvatar as i, _appConfig as j, __nuxt_component_2$1 as k, useToast as l, UserRequestUrl as m, useNuxtApp as n, useNuxtData as o, refreshNuxtData as p, useAvatarGroup as q, reactivePick as r, reactiveOmit as s, tv as t, useHead as u, navigateTo as v, useRoute as w, useRouter as x, PublicRequestUrl as y, useCookie as z };
 //# sourceMappingURL=server.mjs.map

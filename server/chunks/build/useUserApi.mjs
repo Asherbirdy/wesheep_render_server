@@ -1,5 +1,5 @@
 import { u as useRequestApi } from './useRequestApi.mjs';
-import { l as UserRequestUrl, m as useNuxtApp } from './server.mjs';
+import { m as UserRequestUrl, n as useNuxtApp } from './server.mjs';
 
 const useUserApi = {
   showMe: async () => {

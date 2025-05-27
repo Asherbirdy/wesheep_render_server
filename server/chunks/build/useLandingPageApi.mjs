@@ -1,5 +1,5 @@
 import { u as useRequestApi } from './useRequestApi.mjs';
-import { l as UserRequestUrl, x as PublicRequestUrl, m as useNuxtApp } from './server.mjs';
+import { m as UserRequestUrl, y as PublicRequestUrl, n as useNuxtApp } from './server.mjs';
 
 const useLandingPageApi = {
   /*

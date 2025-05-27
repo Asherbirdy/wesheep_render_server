@@ -1,5 +1,5 @@
 import { _ as __nuxt_component_1 } from './DropdownMenu.vue.mjs';
-import { r as reactivePick, t as tv, j as _appConfig, c as useAppConfig, i as UAvatar, U as UIcon, g as get, R as ULink, S as pickLinkProps, T as ULinkBase, v as useRoute, C as ClientRoutes, V as useState, z as useCookie, A as CookieEnums, L as clearNuxtState, K as clearNuxtData, s as navigateTo, P as PublicRoutes, k as __nuxt_component_2$1 } from './server.mjs';
+import { r as reactivePick, t as tv, j as _appConfig, c as useAppConfig, i as UAvatar, U as UIcon, g as get, R as ULink, S as pickLinkProps, T as ULinkBase, w as useRoute, C as ClientRoutes, V as useState, z as useCookie, A as CookieEnums, L as clearNuxtState, K as clearNuxtData, v as navigateTo, P as PublicRoutes, k as __nuxt_component_2$1 } from './server.mjs';
 import { defineComponent, useSlots, unref, mergeProps, withCtx, renderSlot, createBlock, createCommentVNode, createVNode, openBlock, useSSRContext, computed, toRef, createTextVNode, toDisplayString, resolveDynamicComponent, createSlots, Fragment, renderList } from 'vue';
 import { ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderList, ssrRenderAttrs } from 'vue/server-renderer';
 import { useForwardPropsEmits, CollapsibleRoot, CollapsibleTrigger, CollapsibleContent, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuRoot, NavigationMenuList, NavigationMenuIndicator, NavigationMenuViewport, Primitive } from 'reka-ui';
@@ -1868,6 +1868,12 @@ function useMenuStore() {
       icon: "i-lucide-barcode",
       to: ClientRoutes.SerialNumber,
       active: computed(() => route.path === ClientRoutes.SerialNumber)
+    },
+    {
+      label: "區",
+      icon: "pixelarticons:drop-area",
+      to: ClientRoutes.District,
+      active: computed(() => route.path === ClientRoutes.District)
     }
   ];
   const menu = useState("menu", () => [

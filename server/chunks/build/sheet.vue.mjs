@@ -1,5 +1,5 @@
 import { _ as __nuxt_component_4, a as __nuxt_component_5 } from './Modal.vue.mjs';
-import { l as UserRequestUrl, k as __nuxt_component_2 } from './server.mjs';
+import { m as UserRequestUrl, k as __nuxt_component_2 } from './server.mjs';
 import { defineComponent, withAsyncContext, ref, unref, withCtx, createVNode, toDisplayString, createTextVNode, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderList, ssrRenderComponent, ssrInterpolate } from 'vue/server-renderer';
 import { u as useRequestApi } from './useRequestApi.mjs';

@@ -1,5 +1,5 @@
 import { q as executeAsync } from '../nitro/nitro.mjs';
-import { J as defineNuxtRouteMiddleware, K as clearNuxtData, L as clearNuxtState, s as navigateTo, P as PublicRoutes } from './server.mjs';
+import { J as defineNuxtRouteMiddleware, K as clearNuxtData, L as clearNuxtState, v as navigateTo, P as PublicRoutes } from './server.mjs';
 import { u as useUserApi } from './useUserApi.mjs';
 import { u as useUserStore } from './useUserStore.mjs';
 import 'node:http';
