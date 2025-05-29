@@ -1,0 +1,1 @@
+import{_ as o}from"./CLJ_m_aw.js";import{_ as r}from"./DlAUqK2U.js";import{c,o as s}from"./Bvc7Ex_v.js";const t={},e={src:o,alt:"logo",class:"w-7 h-7 m-3 rounded"};function _(n,m){return s(),c("img",e)}const p=r(t,[["render",_]]);export{p as L};

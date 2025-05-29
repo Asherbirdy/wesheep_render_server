@@ -97,7 +97,7 @@ function useRequestApi(url, options) {
     ...options,
     // option.method 會報錯 所以用 any
     $fetch: useNuxtApp().$Fetch
-  }, "$CQeq4wZIpB");
+  }, "$YncPbSvaUu");
 }
 
 export { useRequestApi as u };

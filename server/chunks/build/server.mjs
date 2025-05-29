@@ -463,9 +463,19 @@ const _routes = [
         component: () => import('./serialNumber.vue.mjs')
       },
       {
+        name: "C-homeMeeting",
+        path: "homeMeeting",
+        component: () => import('./index.vue2.mjs')
+      },
+      {
+        name: "C-homeMeeting-sheep",
+        path: "homeMeeting/sheep",
+        component: () => import('./sheep.vue.mjs')
+      },
+      {
         name: "C-landingPage",
         path: "landingPage",
-        component: () => import('./index.vue2.mjs')
+        component: () => import('./index.vue3.mjs')
       },
       {
         name: "C-googleSheet-blending",
@@ -488,7 +498,7 @@ const _routes = [
     name: "index",
     path: "/",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./index.vue3.mjs')
+    component: () => import('./index.vue4.mjs')
   },
   {
     name: "login",
@@ -505,6 +515,11 @@ const _routes = [
     path: "/lands/:id()",
     meta: __nuxt_page_meta || {},
     component: () => import('./_id_.vue2.mjs')
+  },
+  {
+    name: "lineoa-register",
+    path: "/lineoa/register",
+    component: () => import('./register.vue.mjs')
   }
 ];
 
@@ -881,6 +896,11 @@ const cfg0 = defineAppConfig({
   ui: {
     colors: {
       primary: "blue"
+    },
+    button: {
+      variant: {
+        solid: "disabled:bg-gray-400"
+      }
     }
   }
 });
@@ -1153,7 +1173,7 @@ function generateShades(key, value) {
 function generateColor(key, shade) {
   return `--ui-${key}: var(--ui-color-${key}-${shade});`;
 }
-const colors_gH0y7Gvt11LW0oMp0VCGQPt2ChDLdbvfJT2t4z56_9M = defineNuxtPlugin(() => {
+const colors_NSxMmoUMidMsSHAtX0MISl_InYk7LgKBGlrYRAj1D7I = defineNuxtPlugin(() => {
   const appConfig = useAppConfig();
   useNuxtApp();
   const root = computed(() => {
@@ -1427,6 +1447,7 @@ var PublicRequestUrl = /* @__PURE__ */ ((PublicRequestUrl2) => {
   PublicRequestUrl2["Login"] = "/auth/login";
   PublicRequestUrl2["UserRegister"] = "/auth/userRegister";
   PublicRequestUrl2["LandingPageGetInfoById"] = "/landingPage/getLandingPageInfoById";
+  PublicRequestUrl2["AttendanceAccountActivate"] = "/attendanceAccount/activate";
   return PublicRequestUrl2;
 })(PublicRequestUrl || {});
 var UserRequestUrl = /* @__PURE__ */ ((UserRequestUrl2) => {
@@ -1454,6 +1475,14 @@ var UserRequestUrl = /* @__PURE__ */ ((UserRequestUrl2) => {
   UserRequestUrl2["SerialNumberDelete"] = "/userSerialNumber/delete";
   UserRequestUrl2["District"] = "/district";
   UserRequestUrl2["MeetingCenter"] = "/meetingCenter/";
+  UserRequestUrl2["AttendanceAccount"] = "/attendanceAccount/getAll";
+  UserRequestUrl2["AttendanceAccountCreate"] = "/attendanceAccount/create";
+  UserRequestUrl2["AttendanceAccountEdit"] = "/attendanceAccount/edit";
+  UserRequestUrl2["AttendanceAccountDelete"] = "/attendanceAccount/delete";
+  UserRequestUrl2["SheepCreate"] = "/sheep/create";
+  UserRequestUrl2["SheepList"] = "/sheep/list";
+  UserRequestUrl2["SheepEdit"] = "/sheep/edit";
+  UserRequestUrl2["SheepDelete"] = "/sheep/delete";
   return UserRequestUrl2;
 })(UserRequestUrl || {});
 
@@ -1461,6 +1490,8 @@ var PublicRoutes = /* @__PURE__ */ ((PublicRoutes2) => {
   PublicRoutes2["Home"] = "/";
   PublicRoutes2["Login"] = "/login";
   PublicRoutes2["LandingPage"] = "/lands";
+  PublicRoutes2["LineOa"] = "/lineoa";
+  PublicRoutes2["LineOaRegister"] = "/lineoa/register";
   return PublicRoutes2;
 })(PublicRoutes || {});
 const ClientBase = "/C";
@@ -1474,6 +1505,8 @@ var ClientRoutes = ((ClientRoutes2) => {
   ClientRoutes2["MeetingCenter"] = `${ClientBase}/googleSheet/meetingCenter`;
   ClientRoutes2["Blending"] = `${ClientBase}/googleSheet/blending`;
   ClientRoutes2["District"] = `${ClientBase}/district`;
+  ClientRoutes2["HomeMeeting"] = `${ClientBase}/homeMeeting`;
+  ClientRoutes2["HomeMeetingSheep"] = `${ClientBase}/homeMeeting/sheep`;
   return ClientRoutes2;
 })(ClientRoutes || {});
 
@@ -1570,7 +1603,7 @@ const plugins = [
   revive_payload_server_TeP94Xh9kWlM_Iq0SbKIR_6voYdZ5_epjdBve4Uosrk,
   plugin,
   components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8,
-  colors_gH0y7Gvt11LW0oMp0VCGQPt2ChDLdbvfJT2t4z56_9M,
+  colors_NSxMmoUMidMsSHAtX0MISl_InYk7LgKBGlrYRAj1D7I,
   plugin_xrL_NJYDIf86z_D10PJ7xlYb5vDs9BseY0nWWhv8N5g,
   pwa_icons_plugin_OtOZ6CGly_Vz5_PCGGLA9qHLz2Y5_d5czYAX7q_3Lug,
   plugin_server_LlmVocchW81w0V5SsaJLemsIvF2IHoteTyzHWZjumlg,
@@ -2607,7 +2640,7 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
 const _sfc_setup$a = _sfc_main$b.setup;
 _sfc_main$b.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Icon.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/Icon.vue");
   return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
 const UIcon = Object.assign(_sfc_main$b, { __name: "UIcon" });
@@ -2787,7 +2820,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
 const _sfc_setup$9 = _sfc_main$a.setup;
 _sfc_main$a.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Avatar.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/Avatar.vue");
   return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
 const UAvatar = Object.assign(_sfc_main$a, { __name: "UAvatar" });
@@ -3234,7 +3267,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$8 = _sfc_main$9.setup;
 _sfc_main$9.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/LinkBase.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/LinkBase.vue");
   return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
 const ULinkBase = Object.assign(_sfc_main$9, { __name: "ULinkBase" });
@@ -3434,7 +3467,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$7 = _sfc_main$8.setup;
 _sfc_main$8.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Link.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/Link.vue");
   return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
 const ULink = Object.assign(_sfc_main$8, { __name: "ULink" });
@@ -4046,7 +4079,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$6 = _sfc_main$7.setup;
 _sfc_main$7.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Button.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/Button.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
 const __nuxt_component_2$1 = Object.assign(_sfc_main$7, { __name: "UButton" });
@@ -4530,7 +4563,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$5 = _sfc_main$6.setup;
 _sfc_main$6.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Toast.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/Toast.vue");
   return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
 const UToast = Object.assign(_sfc_main$6, { __name: "UToast" });
@@ -4804,7 +4837,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$4 = _sfc_main$5.setup;
 _sfc_main$5.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Toaster.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/Toaster.vue");
   return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
 };
 const UToaster = Object.assign(_sfc_main$5, { __name: "UToaster" });
@@ -4913,7 +4946,7 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$3 = _sfc_main$4.setup;
 _sfc_main$4.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/OverlayProvider.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/OverlayProvider.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
 const UOverlayProvider = Object.assign(_sfc_main$4, { __name: "UOverlayProvider" });
@@ -5007,7 +5040,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$2 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/App.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/App.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const __nuxt_component_2 = Object.assign(_sfc_main$3, { __name: "UApp" });

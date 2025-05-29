@@ -1,9 +1,9 @@
-import { _ as __nuxt_component_0 } from './Tabs.vue.mjs';
-import { l as useToast, k as __nuxt_component_2, z as useCookie, v as navigateTo, C as ClientRoutes, A as CookieEnums } from './server.mjs';
+import { _ as __nuxt_component_0$1 } from './Tabs.vue.mjs';
+import { l as useToast, k as __nuxt_component_2$1, z as useCookie, v as navigateTo, C as ClientRoutes, A as CookieEnums } from './server.mjs';
 import { defineComponent, useModel, mergeProps, withCtx, createVNode, ref, withAsyncContext, unref, useSSRContext } from 'vue';
 import { ssrRenderComponent } from 'vue/server-renderer';
 import { u as useAuthApi } from './useAuthApi.mjs';
-import { a as __nuxt_component_6, b as __nuxt_component_7, _ as __nuxt_component_8 } from './Input.vue.mjs';
+import { a as __nuxt_component_0, b as __nuxt_component_1, _ as __nuxt_component_2 } from './Input.vue.mjs';
 import 'reka-ui';
 import '../nitro/nitro.mjs';
 import 'node:http';
@@ -67,9 +67,9 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       return errors;
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_UForm = __nuxt_component_6;
-      const _component_UFormField = __nuxt_component_7;
-      const _component_UInput = __nuxt_component_8;
+      const _component_UForm = __nuxt_component_0;
+      const _component_UFormField = __nuxt_component_1;
+      const _component_UInput = __nuxt_component_2;
       _push(ssrRenderComponent(_component_UForm, mergeProps({
         state: modelValue.value,
         validate,
@@ -221,9 +221,9 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       return errors;
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_UForm = __nuxt_component_6;
-      const _component_UFormField = __nuxt_component_7;
-      const _component_UInput = __nuxt_component_8;
+      const _component_UForm = __nuxt_component_0;
+      const _component_UFormField = __nuxt_component_1;
+      const _component_UInput = __nuxt_component_2;
       _push(ssrRenderComponent(_component_UForm, mergeProps({
         state: modelValue.value,
         validate,
@@ -524,8 +524,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       navigateTo(ClientRoutes.Home);
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_UTabs = __nuxt_component_0;
-      const _component_UButton = __nuxt_component_2;
+      const _component_UTabs = __nuxt_component_0$1;
+      const _component_UButton = __nuxt_component_2$1;
       _push(ssrRenderComponent(_component_UTabs, mergeProps({
         items: tabs,
         class: "gap-4 w-full",

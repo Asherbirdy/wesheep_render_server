@@ -131,7 +131,7 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Collapsible.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/Collapsible.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
 const UCollapsible = Object.assign(_sfc_main$3, { __name: "UCollapsible" });
@@ -1777,7 +1777,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/NavigationMenu.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/NavigationMenu.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const __nuxt_component_2 = Object.assign(_sfc_main$2, { __name: "UNavigationMenu" });
@@ -1821,7 +1821,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_change-case@5.4.4_db0@0.3.1_embla-carousel@8.5.2_i_ef4954551e9ae83c6fa0c5b36063b32e/node_modules/@nuxt/ui/dist/runtime/components/Container.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/.pnpm/@nuxt+ui@3.0.1_@babel+parser@7.26.10_axios@1.9.0_change-case@5.4.4_db0@0.3.1_embla-caro_cd16108f3abcb555fd1f591dadf3f3ab/node_modules/@nuxt/ui/dist/runtime/components/Container.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
 const __nuxt_component_3 = Object.assign(_sfc_main$1, { __name: "UContainer" });
@@ -1876,6 +1876,26 @@ function useMenuStore() {
       active: computed(() => route.path === ClientRoutes.District)
     }
   ];
+  const diistrictLeaderRoute = [
+    {
+      label: "家聚會點名",
+      icon: "solar:pen-line-duotone",
+      children: [
+        {
+          label: "點名者管理",
+          icon: "material-symbols-light:blender",
+          to: ClientRoutes.HomeMeeting,
+          active: computed(() => route.path === ClientRoutes.HomeMeeting)
+        },
+        {
+          label: "人位",
+          icon: "material-symbols:person-outline-rounded",
+          to: ClientRoutes.HomeMeetingSheep,
+          active: computed(() => route.path === ClientRoutes.HomeMeetingSheep)
+        }
+      ]
+    }
+  ];
   const menu = useState("menu", () => [
     {
       label: "個人資料",
@@ -1883,19 +1903,19 @@ function useMenuStore() {
       to: ClientRoutes.Home,
       active: computed(() => route.path === ClientRoutes.Home)
     },
+    // 管理者
     ...[Role.admin, Role.dev].includes(userInfo.value.role) ? adminRoute : [],
+    // 區負責人
+    ...[Role.admin, Role.dev, Role.districtLeader].includes(userInfo.value.role) ? diistrictLeaderRoute : [],
+    // 使用者
     ...userRoute,
     {
       label: "登出",
       icon: "i-lucide-log-out",
       active: computed(() => route.path === PublicRoutes.Login),
       onSelect: async () => {
-        useCookie(CookieEnums.AccessToken, {
-          maxAge: 0
-        }).value = "";
-        useCookie(CookieEnums.RefreshToken, {
-          maxAge: 0
-        }).value = "";
+        useCookie(CookieEnums.AccessToken, { maxAge: 0 }).value = "";
+        useCookie(CookieEnums.RefreshToken, { maxAge: 0 }).value = "";
         clearNuxtState();
         clearNuxtData();
         navigateTo(PublicRoutes.Login);
