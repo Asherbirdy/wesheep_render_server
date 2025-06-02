@@ -1,4 +1,4 @@
-import { w as useRoute, x as useRouter, k as __nuxt_component_2 } from './server.mjs';
+import { l as useToast, w as useRoute, x as useRouter, k as __nuxt_component_2 } from './server.mjs';
 import { defineComponent, ref, withAsyncContext, unref, withCtx, createTextVNode, createVNode, resolveDynamicComponent, nextTick, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderClass, ssrIncludeBooleanAttr, ssrRenderVNode } from 'vue/server-renderer';
 import { EditorContent } from '@tiptap/vue-3';
@@ -36,20 +36,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   async setup(__props) {
     let __temp, __restore;
+    const toast = useToast();
     const route = useRoute();
     const router = useRouter();
     const editor = ref();
     const { isMdSize } = useWindowSize();
     const state = ref({
       data: {
-        title: "",
-        description: "",
-        isCustom: false,
-        isCustomId: "",
-        isActive: false,
-        updatedBy: "",
-        lastEditVisited: "",
         html: ""
+      },
+      feature: {
+        edit: {
+          isLoading: false
+        }
       }
     });
     const {
@@ -61,28 +60,35 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       },
       ssr: false
     })), __temp = await __temp, __restore(), __temp);
-    const {
-      execute: EditRequest,
-      status: EditStatus
-    } = ([__temp, __restore] = withAsyncContext(() => useLandingPageApi.editInfoById({
-      query: {
-        landingPageId: route.params.id
-      },
-      body: state.value.data
-    })), __temp = await __temp, __restore(), __temp);
     const onSave = async () => {
-      var _a;
-      state.value.data.html = (_a = editor == null ? void 0 : editor.value) == null ? void 0 : _a.getHTML();
+      var _a, _b;
+      const { data, feature: feature2 } = state.value;
+      const {
+        execute: EditRequest,
+        status: EditStatus
+      } = await useLandingPageApi.editHtmlById({
+        landingPageId: route.params.id,
+        html: (_a = editor == null ? void 0 : editor.value) == null ? void 0 : _a.getHTML()
+      });
+      data.html = (_b = editor == null ? void 0 : editor.value) == null ? void 0 : _b.getHTML();
       await nextTick(() => {
+        feature2.edit.isLoading = true;
         EditRequest();
         landingPageRequset();
+        feature2.edit.isLoading = false;
       });
       if (EditStatus.value === "success") {
-        alert("保存成功");
+        toast.add({
+          title: "保存成功",
+          color: "success"
+        });
         return;
       }
       if (EditStatus.value === "error") {
-        alert("保存失败");
+        toast.add({
+          title: "保存失败",
+          color: "error"
+        });
       }
     };
     const feature = [
@@ -334,7 +340,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         onClick: ($event) => unref(router).back()
       }, null, _parent));
       _push(ssrRenderComponent(_component_UButton, {
-        loading: unref(EditStatus) === "pending",
+        loading: unref(state).feature.edit.isLoading,
         size: "sm",
         onClick: onSave
       }, {

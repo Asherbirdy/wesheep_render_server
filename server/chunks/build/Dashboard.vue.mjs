@@ -1876,7 +1876,7 @@ function useMenuStore() {
       active: computed(() => route.path === ClientRoutes.District)
     }
   ];
-  const diistrictLeaderRoute = [
+  const devRoute = [
     {
       label: "家聚會點名",
       icon: "solar:pen-line-duotone",
@@ -1906,7 +1906,12 @@ function useMenuStore() {
     // 管理者
     ...[Role.admin, Role.dev].includes(userInfo.value.role) ? adminRoute : [],
     // 區負責人
-    ...[Role.admin, Role.dev, Role.districtLeader].includes(userInfo.value.role) ? diistrictLeaderRoute : [],
+    // ...(
+    //   [Role.admin, Role.dev, Role.districtLeader].includes(userInfo.value.role)
+    //     ? diistrictLeaderRoute
+    //     : []),
+    // 開發者
+    ...[Role.dev].includes(userInfo.value.role) ? devRoute : [],
     // 使用者
     ...userRoute,
     {

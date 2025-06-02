@@ -54,7 +54,15 @@ const useLandingPageApi = {
     * EDIT
   */
   editHtmlById: async (payload) => await useRequestApi(
-    `${UserRequestUrl.LandingPageEditHtmlById}/?landingPageId=${payload.query.landingPageId}`
+    `${UserRequestUrl.LandingPageEditHtmlById}`,
+    {
+      method: "PUT",
+      server: false,
+      lazy: true,
+      immediate: false,
+      watch: false,
+      body: payload
+    }
   ),
   /*
     * DELETE

@@ -1,0 +1,1 @@
+import{R as r}from"./yGGtjXql.js";import{bb as o,h as a}from"./HxJPijIE.js";function f(){const e=o("user",()=>({_id:"",name:"",email:"",emailVerified:!1,role:r.user,district:{_id:"",name:"",active:!1,__v:0},leaderOfGroupIds:[],groups:[],landingPageAccess:[]}));return{userInfo:a(()=>e.value),setUserInfo:s=>e.value=s}}export{f as u};
